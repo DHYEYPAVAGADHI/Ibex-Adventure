@@ -1,0 +1,285 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Package {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  category         String
+  categorySlug     String
+  overview         String
+  description      String
+  shortDescription String?
+  highlights       String // JSON string
+  itinerary        String? // JSON string
+  inclusions       String? // JSON string
+  exclusions       String? // JSON string
+  faqs             String? // JSON string
+  map              String? // JSON string or url
+  duration         String?
+  difficulty       String?
+  ageGroupMin      Int?
+  ageGroupMax      Int?
+  maxGroupSize     Int?
+  altitude         String?
+  season           String?
+  location         String?
+  country          String?
+  state            String?
+  meetingPoint     String?
+  price            String?
+  discount         String?
+  additionalNotes  String?
+  images           String // JSON string
+  gallery          String? // JSON string
+  thumbnail        String?
+  banner           String?
+  activities       String? // JSON string
+  tags             String? // JSON string
+  seoTitle         String?
+  seoDescription   String?
+  seoKeywords      String?
+  isFeatured       Boolean  @default(false)
+  displayOrder     Int      @default(0)
+  publishStatus    String   @default("Published") // "Draft", "Published"
+  status           String   @default("active")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model AdventureCategory {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  description  String
+  image        String
+  imageAlt     String
+  icon         String
+  displayOrder Int
+  isFeatured   Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  linkType     String   @default("internal")
+  activitySlug String?
+  customUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ------------------------------------------------------
+// WEBSITE CONTENT (CMS Models)
+// ------------------------------------------------------
+
+model HomepageAdventureCard {
+  id           String   @id @default(cuid())
+  title        String
+  subtitle     String?
+  description  String
+  coverImage   String
+  iconType     String   @default("lucide") // lucide, svg, image
+  icon         String
+  buttonText   String
+  buttonLink   String
+  displayOrder Int
+  isFeatured   Boolean  @default(false)
+  status       String   @default("Published") // Draft, Published, Archived
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model HeroSection {
+  id               String   @id @default(cuid())
+  variant          String   @default("home") // home, category
+  backgroundImages String // JSON array of image URLs
+  headline         String
+  subtitle         String?
+  description      String?
+  buttonText       String?
+  buttonLink       String?
+  displayOrder     Int      @default(0)
+  status           String   @default("Published")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ContactInformation {
+  id               String   @id @default(cuid())
+  address          String
+  phone            String
+  whatsapp         String?
+  email            String
+  googleMapsUrl    String?
+  socialLinks      String? // JSON string
+  businessHours    String? // JSON string
+  emergencyContact String?
+  status           String   @default("Published")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Destination {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  subtitle         String?
+  shortDescription String?
+  fullDescription  String?
+  heroImage        String?
+  heroVideo        String?
+  gallery          String   @default("[]") // JSON array of image URLs
+  state            String?
+  country          String   @default("India")
+  latitude         String?
+  longitude        String?
+  googleMap        String? // embed URL
+  rating           Float    @default(0)
+  reviewCount      Int      @default(0)
+  duration         String?
+  difficulty       String?
+  altitude         String?
+  bestSeason       String?
+  weather          String?
+  temperature      String?
+  thingsToDo       String   @default("[]") // JSON array: [{title, description, icon}]
+  highlights       String   @default("[]") // JSON array: [string]
+  includedPackages String   @default("[]") // JSON array of package IDs or slugs
+  nearbyPlaces     String   @default("[]") // JSON array: [{name, distance, slug}]
+  faq              String   @default("[]") // JSON array: [{question, answer}]
+  howToReach       String? // JSON: {flight, train, bus, car}
+  travelTips       String   @default("[]") // JSON array of tip strings
+  seoTitle         String?
+  seoDescription   String?
+  seoKeywords      String?
+  featured         Boolean  @default(false)
+  published        Boolean  @default(true)
+  displayOrder     Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Attraction {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  category       String   @default("Natural")
+  heroImage      String?
+  gallery        String   @default("[]") // JSON array of image URLs
+  description    String?
+  history        String?
+  activities     String   @default("[]") // JSON array of activity strings
+  location       String?
+  state          String?
+  bestTime       String?
+  entryFee       String?
+  timings        String?
+  travelTips     String   @default("[]") // JSON array of tip strings
+  nearbyHotels   String   @default("[]") // JSON array: [{name, distance, priceRange}]
+  restaurants    String   @default("[]") // JSON array: [{name, cuisine, distance}]
+  packages       String   @default("[]") // JSON array of related package slugs
+  faqs           String   @default("[]") // JSON array: [{question, answer}]
+  featured       Boolean  @default(false)
+  published      Boolean  @default(true)
+  displayOrder   Int      @default(0)
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  image       String?
+  icon        String?
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Memory {
+  id           String    @id @default(cuid())
+  url          String
+  caption      String?
+  date         DateTime?
+  tags         String? // JSON string
+  categories   String? // JSON string
+  displayOrder Int       @default(0)
+  visibility   String    @default("Published")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model WebsiteSetting {
+  id             String   @id @default(cuid())
+  websiteName    String   @default("Ibex Adventure")
+  logoUrl        String?
+  faviconUrl     String?
+  footerText     String?
+  copyrightText  String?
+  socialLinks    String? // JSON string
+  analyticsCode  String?
+  globalSeoTitle String?
+  globalSeoDesc  String?
+  metaTags       String? // JSON string
+  themeColors    String? // JSON string
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ------------------------------------------------------
+// MEDIA MANAGEMENT
+// ------------------------------------------------------
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  fileName  String
+  url       String
+  fileType  String
+  width     Int?
+  height    Int?
+  sizeBytes Int?
+  folder    String   @default("Uncategorized")
+  source    String   @default("local") // local, s3, gdrive
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ------------------------------------------------------
+// SYSTEM
+// ------------------------------------------------------
+
+model ContentVersion {
+  id        String   @id @default(cuid())
+  modelName String // e.g., "HomepageAdventureCard"
+  recordId  String // the ID of the record
+  data      String // JSON payload of the state
+  editor    String   @default("System")
+  createdAt DateTime @default(now())
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  subject   String?
+  message   String
+  status    String   @default("New") // New, In Progress, Closed
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

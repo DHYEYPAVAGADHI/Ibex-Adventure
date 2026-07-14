@@ -1,0 +1,13 @@
+
+> ibex-adventure@1.0.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 39103, using available port 3001 instead.
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://10.99.211.113:3001
+- Environments: .env.local, .env
+✓ Ready in 335ms
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+[?25h

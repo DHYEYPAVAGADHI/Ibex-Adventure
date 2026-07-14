@@ -1,0 +1,108 @@
+
+> ibex-adventure@1.0.0 start
+> next start
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:3000
+- Network:       http://10.99.211.113:3000
+✓ Ready in 104ms
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1616480838189-d9d15c71d600?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1560179406-1c6c60e0d5db?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1616480838189-d9d15c71d600?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1560179406-1c6c60e0d5db?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1560179406-1c6c60e0d5db?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1616480838189-d9d15c71d600?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1616480838189-d9d15c71d600?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1560179406-1c6c60e0d5db?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1504173010664-32509107de11?auto=format&fit=crop&w=1200&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1504173010664-32509107de11?auto=format&fit=crop&w=1200&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1504173010664-32509107de11?auto=format&fit=crop&w=1200&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1504173010664-32509107de11?auto=format&fit=crop&w=1200&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1472791467098-18b9eac6c4ab?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1601821324888-5d9e7f7a4f1e?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1586087753748-1ec5b5a1ad60?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1549366021-9f761d040a10?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1605649487212-4dcb81615024?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1565073624497-7144969e7f33?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1564507592208-028f8045fbc5?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1560965384-984bb3583d7f?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1564507592208-028f8045fbc5?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ The requested resource isn't a valid image for /uploads/upload-1783325246184-559388800.png received null
+⨯ The requested resource isn't a valid image for /uploads/upload-1783325256304-261942056.png received null
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ The requested resource isn't a valid image for /uploads/upload-1783325290544-22006010.png received null
+⨯ The requested resource isn't a valid image for /uploads/upload-1783325301498-400900736.png received null
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1564507592208-028f8045fbc5?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1472791467098-18b9eac6c4ab?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1601821324888-5d9e7f7a4f1e?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1601821324888-5d9e7f7a4f1e?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1472791467098-18b9eac6c4ab?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1472791467098-18b9eac6c4ab?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1601821324888-5d9e7f7a4f1e?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1601821324888-5d9e7f7a4f1e?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1472791467098-18b9eac6c4ab?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
+Failed to create tour: SyntaxError: Expected ',' or '}' after property value in JSON at position 53 (line 3 column 26)
+    at JSON.parse (<anonymous>)
+Failed to create tour: SyntaxError: Expected ',' or '}' after property value in JSON at position 57 (line 3 column 28)
+    at JSON.parse (<anonymous>)
+⨯ upstream image response failed for https://images.unsplash.com/photo-1599388874136-2ee960d37e6b?auto=format&fit=crop&w=800&q=80 404
