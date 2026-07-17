@@ -5,9 +5,10 @@
   "description": "Premium adventure tourism website for Ibex Adventure.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "keywords": [
     "nextjs",
