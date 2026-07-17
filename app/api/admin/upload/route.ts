@@ -1,9 +1,12 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
 import sharp from "sharp";
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,16 +37,7 @@ export async function POST(req: NextRequest) {
 
     // Create unique filename
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `upload-${uniqueSuffix}.webp`; // Always convert to WebP
-
-    // Ensure uploads directory exists
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-      console.info(`[UPLOAD_INIT] Created uploads directory: ${uploadsDir}`);
-    }
-
-    const filepath = path.join(uploadsDir, filename);
+    const filename = `admin-upload-${uniqueSuffix}.webp`; // Always convert to WebP
 
     // Optimize image using sharp
     console.info(`[UPLOAD_OPTIMIZE] Compressing and converting to WebP...`);
@@ -52,13 +46,28 @@ export async function POST(req: NextRequest) {
       .webp({ quality: 85 })
       .toBuffer();
 
-    await writeFile(filepath, optimizedBuffer);
-    console.info(`[UPLOAD_SUCCESS] Saved optimized image to: ${filepath}`);
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from('uploads')
+      .upload(filename, optimizedBuffer, {
+        contentType: 'image/webp',
+        upsert: true,
+      });
 
-    const fileUrl = `/uploads/${filename}`;
+    if (error) {
+      console.error('Supabase upload error:', error);
+      throw new Error(`Failed to upload to Supabase: ${error.message}`);
+    }
+
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from('uploads')
+      .getPublicUrl(filename);
+
+    console.info(`[UPLOAD_SUCCESS] Saved optimized image to: ${publicUrl}`);
 
     revalidatePath('/', 'layout');
-    return NextResponse.json({ url: fileUrl }, { status: 201 });
+    return NextResponse.json({ url: publicUrl }, { status: 201 });
   } catch (error: any) {
     console.error("[UPLOAD_ERROR] Failed to process upload:", error.message);
     return NextResponse.json({ error: "Failed to upload and optimize file" }, { status: 500 });
