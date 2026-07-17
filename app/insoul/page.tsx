@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export default async function InsoulPage() {
   const allTours = await getTours();
-  const tours = allTours.filter((t) => t.category === "insoul" && t.status === "active");
+  const tours = allTours.filter((t: any) => t.category === "insoul" && t.status === "active");
 
   const fallbackPrograms = [
     { title: "For Schools", desc: "Curriculum-integrated learning.", icon: BookOpen },
@@ -44,7 +44,7 @@ export default async function InsoulPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-               {tours.length > 0 ? tours.map((prog, i) => (
+               {tours.length > 0 ? tours.map((prog: any, i: number) => (
                  <div key={i} className="p-8 text-center rounded-3xl bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors">
                     <div className="mb-6 flex justify-center text-amber-400">
                       {prog.image ? <Image src={typeof prog.image === 'string' && prog.image.trim() !== "" ? prog.image : "/placeholder.svg"} width={64} height={64} alt="icon" className="rounded-full" /> : <BookOpen className="w-16 h-16 stroke-[1.5]" />}
@@ -53,7 +53,7 @@ export default async function InsoulPage() {
                     <p className="text-white/70 mb-8">{prog.description}</p>
                     <a href={`/programs/tour/${prog.slug}`} className="inline-block text-amber-400 font-medium hover:text-amber-300 border border-amber-400/30 px-6 py-2 rounded-full w-full">Learn More</a>
                  </div>
-               )) : fallbackPrograms.map((prog, i) => (
+               )) : fallbackPrograms.map((prog: any, i: number) => (
                  <div key={i} className="p-8 text-center rounded-3xl bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors">
                     <div className="mb-6 flex justify-center text-amber-400">
                       <prog.icon className="w-16 h-16 stroke-[1.5]" />

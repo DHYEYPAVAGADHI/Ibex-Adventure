@@ -3,8 +3,16 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   try {
-    const categories = await prisma.adventureCategory.findMany({
-      where: { isActive: true },
+    const { searchParams } = new URL(req.url);
+    const featured = searchParams.get("featured") === "true";
+
+    const whereClause: any = { isActive: true };
+    if (featured) {
+      whereClause.isFeatured = true;
+    }
+
+    const categories = await prisma.activity.findMany({
+      where: whereClause,
       orderBy: { displayOrder: "asc" },
     });
     return Response.json(categories, {

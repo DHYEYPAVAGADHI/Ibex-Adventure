@@ -31,7 +31,7 @@ export async function getTours() {
     where: { status: "active" },
   });
   
-  return packages.map(pkg => {
+  return packages.map((pkg: any) => {
     let images = [];
     try { images = JSON.parse(pkg.images || "[]"); } catch (e) {}
     let gallery = [];

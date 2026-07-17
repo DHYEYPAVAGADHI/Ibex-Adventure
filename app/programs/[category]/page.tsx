@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
-  const categoryData = await prisma.adventureCategory.findUnique({
+  const categoryData = await prisma.activity.findUnique({
     where: { slug: category }
   });
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
 
-  const categoryData = await prisma.adventureCategory.findUnique({
+  const categoryData = await prisma.activity.findUnique({
     where: { slug: category }
   });
 
@@ -74,7 +74,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
         {packages && packages.length > 0 ? (
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {packages.map((place) => {
+            {packages.map((place: any) => {
               let images = [];
               try {
                 if (place.images) images = JSON.parse(place.images);

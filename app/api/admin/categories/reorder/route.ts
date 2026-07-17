@@ -24,7 +24,7 @@ export async function PUT(req: NextRequest) {
     // Update all in a transaction
     await prisma.$transaction(
       data.items.map((item: { id: string; displayOrder: number }) =>
-        prisma.adventureCategory.update({
+        prisma.activity.update({
           where: { id: item.id },
           data: { displayOrder: item.displayOrder },
         })

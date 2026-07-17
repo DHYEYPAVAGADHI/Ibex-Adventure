@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function SummerCampsPage() {
   const allTours = await getTours();
-  const camps = allTours.filter((t) => t.category === "summer-camps" && t.status === "active");
+  const camps = allTours.filter((t: any) => t.category === "summer-camps" && t.status === "active");
 
   return (
     <main>
@@ -37,7 +37,7 @@ export default async function SummerCampsPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {camps.map((camp, i) => (
+               {camps.map((camp: any, i: number) => (
                  <div key={i} className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-amber-500/50">
                     <div className="relative h-64 overflow-hidden">
                       <Image src={camp.image || "https://images.unsplash.com/photo-1533580556157-19eb7db6b78e?auto=format&fit=crop&w=800&q=80"} alt={camp.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />

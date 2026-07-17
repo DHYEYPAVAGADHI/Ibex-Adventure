@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 export default async function EditCategoryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const category = await prisma.adventureCategory.findUnique({
+  const category = await prisma.activity.findUnique({
     where: { id },
   });
 
@@ -13,9 +13,17 @@ export default async function EditCategoryPage({ params }: { params: Promise<{ i
     notFound();
   }
 
+  const formattedCategory = {
+    ...category,
+    description: category.description || "",
+    image: category.image || "",
+    imageAlt: category.imageAlt || "",
+    icon: category.icon || "",
+  };
+
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      <AdventureCategoryForm initialData={category} />
+      <AdventureCategoryForm initialData={formattedCategory} />
     </div>
   );
 }

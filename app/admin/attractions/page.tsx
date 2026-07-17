@@ -59,7 +59,7 @@ export default async function AttractionsAdmin() {
                 </td>
               </tr>
             )}
-            {attractions.map((attr) => (
+            {attractions.map((attr: any) => (
               <tr key={attr.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="p-4 font-medium text-white">{attr.title}</td>
                 <td className="p-4">

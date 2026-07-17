@@ -59,7 +59,7 @@ export default async function DestinationsAdmin() {
                 </td>
               </tr>
             )}
-            {destinations.map((dest) => (
+            {destinations.map((dest: any) => (
               <tr key={dest.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="p-4 font-medium text-admin-heading">{dest.title}</td>
                 <td className="p-4 text-admin-muted text-sm">

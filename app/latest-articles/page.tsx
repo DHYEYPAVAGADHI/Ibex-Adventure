@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default function LatestArticlesPage() {
   const allHighlights = readData<Highlight[]>("highlights.json");
-  const articles = allHighlights.filter((h) => h.active);
+  const articles = allHighlights.filter((h: any) => h.active);
 
   return (
     <main>
@@ -37,7 +37,7 @@ export default function LatestArticlesPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {articles.map((article, i) => (
+               {articles.map((article: any, i: number) => (
                  <div key={i} className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-amber-500/50 transition-all">
                     <div className="relative h-48 overflow-hidden">
                       <Image src={article.thumbnail || "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />

@@ -5,10 +5,13 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [totalTours, totalCategories, totalMemories] = await Promise.all([
+  const [totalTours, totalCategories, totalMemories, totalDestinations, totalAttractions, totalEnquiries] = await Promise.all([
     prisma.package.count(),
-    prisma.adventureCategory.count(),
+    prisma.activity.count(),
     prisma.memory.count(),
+    prisma.destination.count(),
+    prisma.attraction.count(),
+    prisma.enquiry.count(),
   ]);
 
   const publishedTours = await prisma.package.count({ where: { status: "active" } });
@@ -33,6 +36,15 @@ export default async function AdminDashboard() {
       border: "border-blue-200",
     },
     {
+      label: "Destinations & Attractions",
+      value: totalDestinations + totalAttractions,
+      sub: `${totalDestinations} Dest, ${totalAttractions} Attr`,
+      icon: Mountain,
+      bg: "bg-purple-50",
+      text: "text-purple-600",
+      border: "border-purple-200",
+    },
+    {
       label: "Memories",
       value: totalMemories,
       sub: "Gallery photos",
@@ -42,13 +54,13 @@ export default async function AdminDashboard() {
       border: "border-emerald-200",
     },
     {
-      label: "Site Status",
-      value: "Live",
-      sub: "Production ready",
+      label: "Enquiries",
+      value: totalEnquiries,
+      sub: "Contact form submissions",
       icon: Settings,
-      bg: "bg-purple-50",
-      text: "text-purple-600",
-      border: "border-purple-200",
+      bg: "bg-orange-50",
+      text: "text-orange-600",
+      border: "border-orange-200",
     },
   ];
 

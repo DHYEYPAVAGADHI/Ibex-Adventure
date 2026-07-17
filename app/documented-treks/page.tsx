@@ -38,7 +38,7 @@ export default function DocumentedTreksPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell max-w-4xl">
             <div className="space-y-4">
-               {docs.map((doc, i) => (
+               {docs.map((doc: any, i: number) => (
                  <div key={i} className="group flex items-center justify-between p-6 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-400 transition-all cursor-pointer">
                     <div className="flex items-center gap-4">
                       <div className="text-amber-400">

@@ -43,7 +43,7 @@ export default async function ToursAdmin() {
                 </td>
               </tr>
             )}
-            {tours.map((tour) => (
+            {tours.map((tour: any) => (
               <tr key={tour.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
                 <td className="p-4 font-medium text-slate-800">{tour.title}</td>
                 <td className="p-4">

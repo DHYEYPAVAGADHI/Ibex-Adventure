@@ -30,14 +30,23 @@ export async function POST(req: NextRequest) {
     }
 
     let finalCategorySlug = "adventure";
+    let finalActivityId: string | undefined = undefined;
     if (data.category) {
-      const cat = await prisma.adventureCategory.findFirst({
+      const cat = await prisma.activity.findFirst({
         where: { title: data.category }
       });
       if (cat) {
         finalCategorySlug = cat.slug;
+        finalActivityId = cat.id;
       } else {
         finalCategorySlug = data.category.toLowerCase().replace(/\s+/g, "-");
+      }
+    }
+
+    if (data.slug) {
+      const existing = await prisma.package.findUnique({ where: { slug: data.slug } });
+      if (existing) {
+        return NextResponse.json({ error: "A tour with this slug already exists." }, { status: 400 });
       }
     }
 
@@ -47,6 +56,7 @@ export async function POST(req: NextRequest) {
         slug: data.slug || "",
         category: data.category || "Adventure",
         categorySlug: finalCategorySlug,
+        activityId: finalActivityId,
         activities: data.activity,
         location: data.location || data.destination,
         overview: data.overview || "",
@@ -55,9 +65,9 @@ export async function POST(req: NextRequest) {
         thumbnail: data.thumbnail,
         difficulty: data.difficulty,
         duration: data.duration,
-        ageGroupMin: typeof data.ageGroupMin === 'number' ? data.ageGroupMin : undefined,
-        ageGroupMax: typeof data.ageGroupMax === 'number' ? data.ageGroupMax : undefined,
-        maxGroupSize: typeof data.maxGroupSize === 'number' ? data.maxGroupSize : undefined,
+        ageGroupMin: typeof data.ageGroupMin === 'number' ? data.ageGroupMin : null,
+        ageGroupMax: typeof data.ageGroupMax === 'number' ? data.ageGroupMax : null,
+        maxGroupSize: typeof data.maxGroupSize === 'number' ? data.maxGroupSize : null,
         season: data.season,
         status: data.status,
         isFeatured: data.isFeatured,

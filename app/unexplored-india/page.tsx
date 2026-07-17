@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function UnexploredIndiaPage() {
   const allTours = await getTours();
-  const places = allTours.filter((t) => t.category === "unexplored-india" && t.status === "active");
+  const places = allTours.filter((t: any) => t.category === "unexplored-india" && t.status === "active");
 
   return (
     <main>
@@ -37,7 +37,7 @@ export default async function UnexploredIndiaPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell">
             <div className="space-y-12">
-               {places.map((place, i) => (
+               {places.map((place: any, i: number) => (
                  <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
                     <div className="w-full md:w-1/2 relative h-80 rounded-3xl overflow-hidden">
                       <Image src={place.image || "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80"} alt={place.title} fill className="object-cover" />

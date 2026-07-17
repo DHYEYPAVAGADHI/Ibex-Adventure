@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   try {
-    const categories = await prisma.adventureCategory.findMany({
+    const categories = await prisma.activity.findMany({
       orderBy: { displayOrder: "asc" },
     });
     revalidatePath('/', 'layout');
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if slug exists
-    const existing = await prisma.adventureCategory.findUnique({
+    const existing = await prisma.activity.findUnique({
       where: { slug: data.slug },
     });
 
@@ -47,13 +47,13 @@ export async function POST(req: NextRequest) {
     // Determine next display order if not provided
     let displayOrder = data.displayOrder;
     if (typeof displayOrder !== "number") {
-      const lastCategory = await prisma.adventureCategory.findFirst({
+      const lastCategory = await prisma.activity.findFirst({
         orderBy: { displayOrder: "desc" },
       });
       displayOrder = lastCategory ? lastCategory.displayOrder + 1 : 0;
     }
 
-    const category = await prisma.adventureCategory.create({
+    const category = await prisma.activity.create({
       data: {
         title: data.title,
         slug: data.slug,

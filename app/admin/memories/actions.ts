@@ -1,29 +1,39 @@
 "use server";
 
-import { readData, writeData, generateId } from "@/lib/data-store";
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import type { Memory, MemoryStats } from "@/components/destination-memories-client";
-
-const MEMORIES_FILE = "memories.json";
-const STATS_FILE = "memory-stats.json";
 
 // --- MEMORY STATS ACTIONS ---
 
 export async function getMemoryStats(): Promise<MemoryStats> {
   try {
-    return readData<MemoryStats>(STATS_FILE);
-  } catch {
-    return {
-      travelers: "5000+",
-      expeditions: "150+",
-      destinations: "50+",
-      satisfaction: "98%"
-    };
+    const statRecord = await prisma.contentVersion.findFirst({
+      where: { modelName: "MemoryStats" },
+      orderBy: { createdAt: "desc" }
+    });
+    if (statRecord) {
+      return JSON.parse(statRecord.data);
+    }
+  } catch (e) {
+    console.error(e);
   }
+  return {
+    travelers: "5000+",
+    expeditions: "150+",
+    destinations: "50+",
+    satisfaction: "98%"
+  };
 }
 
 export async function saveMemoryStats(data: MemoryStats) {
-  writeData(STATS_FILE, data);
+  await prisma.contentVersion.create({
+    data: {
+      modelName: "MemoryStats",
+      recordId: "global",
+      data: JSON.stringify(data),
+    }
+  });
   revalidatePath("/", "layout");
   return true;
 }
@@ -32,55 +42,68 @@ export async function saveMemoryStats(data: MemoryStats) {
 
 export async function getMemories(): Promise<Memory[]> {
   try {
-    return readData<Memory[]>(MEMORIES_FILE);
+    const records = await prisma.memory.findMany({
+      orderBy: { displayOrder: "asc" }
+    });
+    return records.map(r => ({
+      id: r.id,
+      image: r.url,
+      caption: r.caption || "",
+      category: r.categories || "adventure",
+      destination: r.tags || "manali", // mapped to tags
+      displayOrder: r.displayOrder,
+      active: r.visibility === "Published",
+    }));
   } catch {
     return [];
   }
 }
 
 export async function saveMemory(data: Partial<Memory> & { id?: string }) {
-  const memories = await getMemories();
-
-  if (data.id) {
-    const idx = memories.findIndex((m) => m.id === data.id);
-    if (idx !== -1) {
-      memories[idx] = { ...memories[idx], ...data } as Memory;
-    }
+  if (data.id && data.id !== "new") {
+    await prisma.memory.update({
+      where: { id: data.id },
+      data: {
+        url: data.image,
+        caption: data.caption,
+        categories: data.category,
+        tags: data.destination,
+        displayOrder: data.displayOrder,
+        visibility: data.active === false ? "Hidden" : "Published",
+      }
+    });
   } else {
-    memories.push({
-      id: generateId(),
-      image: data.image || "",
-      caption: data.caption || "",
-      category: data.category || "adventure",
-      destination: data.destination || "manali",
-      displayOrder: memories.length,
-      active: data.active ?? true,
+    const count = await prisma.memory.count();
+    await prisma.memory.create({
+      data: {
+        url: data.image || "",
+        caption: data.caption || "",
+        categories: data.category || "adventure",
+        tags: data.destination || "manali",
+        displayOrder: data.displayOrder ?? count,
+        visibility: data.active === false ? "Hidden" : "Published",
+      }
     });
   }
 
-  writeData(MEMORIES_FILE, memories);
   revalidatePath("/", "layout");
   return true;
 }
 
 export async function deleteMemory(id: string) {
-  let memories = await getMemories();
-  memories = memories.filter((m) => m.id !== id);
-  writeData(MEMORIES_FILE, memories);
+  await prisma.memory.delete({ where: { id } });
   revalidatePath("/", "layout");
   return true;
 }
 
 export async function reorderMemories(orderedIds: string[]) {
-  const memories = await getMemories();
-  orderedIds.forEach((id, idx) => {
-    const memory = memories.find((m) => m.id === id);
-    if (memory) {
-      memory.displayOrder = idx;
-    }
-  });
-  memories.sort((a, b) => a.displayOrder - b.displayOrder);
-  writeData(MEMORIES_FILE, memories);
+  // Simple ordered loop
+  for (let i = 0; i < orderedIds.length; i++) {
+    await prisma.memory.update({
+      where: { id: orderedIds[i] },
+      data: { displayOrder: i }
+    });
+  }
   revalidatePath("/", "layout");
   return true;
 }

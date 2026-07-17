@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function UpcomingTreksPage() {
   const allTours = await getTours();
-  const treks = allTours.filter((t) => t.category === "upcoming-treks" && t.status === "active");
+  const treks = allTours.filter((t: any) => t.category === "upcoming-treks" && t.status === "active");
 
   return (
     <main>
@@ -37,7 +37,7 @@ export default async function UpcomingTreksPage() {
       <section className="section-spacing bg-slate-950 relative">
          <div className="container-shell">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {treks.map((trek, i) => (
+               {treks.map((trek: any, i: number) => (
                  <div key={i} className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-amber-500/50">
                     <div className="relative h-64 overflow-hidden">
                       <Image src={trek.image || "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"} alt={trek.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />

@@ -10,3 +10,13 @@ Library
 .npm
 
 /lib/generated/prisma
+
+dev.db
+prisma/dev.db
+*.db
+*.db-journal
+test-prisma.js
+seed-activities.js
+seed-categories.js
+seed.sql
+implementation_plan.md

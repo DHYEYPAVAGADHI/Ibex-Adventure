@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const category = await prisma.adventureCategory.findUnique({
+    const category = await prisma.activity.findUnique({
       where: { id },
     });
 
@@ -45,7 +45,7 @@ export async function PUT(
 
     // Check if slug exists for another category
     if (data.slug) {
-      const existing = await prisma.adventureCategory.findUnique({
+      const existing = await prisma.activity.findUnique({
         where: { slug: data.slug },
       });
 
@@ -54,7 +54,7 @@ export async function PUT(
       }
     }
 
-    const category = await prisma.adventureCategory.update({
+    const category = await prisma.activity.update({
       where: { id },
       data: {
         title: data.title,
@@ -96,7 +96,7 @@ export async function DELETE(
 
     const { id } = await params;
 
-    await prisma.adventureCategory.delete({
+    await prisma.activity.delete({
       where: { id },
     });
 
