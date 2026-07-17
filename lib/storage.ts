@@ -1,13 +1,16 @@
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Lazy initialization
+const getSupabase = () => {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+  return createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseKey || 'placeholder');
+};
 
 export const storage = {
   async uploadFile(file: File, folder: string = "Uncategorized") {
+    const supabase = getSupabase();
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 

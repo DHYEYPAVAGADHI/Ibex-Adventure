@@ -3,13 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Lazy initialization
+const getSupabase = () => {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+  return createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseKey || 'placeholder');
+};
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     // Verify session
     const session = req.cookies.get("admin_session");
     if (!session || session.value !== "authenticated") {
