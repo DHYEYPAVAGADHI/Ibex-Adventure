@@ -55,15 +55,15 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: i * 0.07 }}
-      className="border border-white/10 rounded-2xl overflow-hidden"
+      className="border border-[#C2C8C2] overflow-hidden" style={{ borderRadius: "2px" }}
     >
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left hover:bg-white/5 transition-colors"
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[#F4EFE3] transition-colors"
       >
-        <span className="font-medium text-white text-sm leading-relaxed">{q}</span>
-        {open ? <ChevronUp className="h-5 w-5 text-amber-400 flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-white/40 flex-shrink-0" />}
+        <span className="font-medium text-[#1C1C18] text-sm leading-relaxed">{q}</span>
+        {open ? <ChevronUp className="h-5 w-5 text-[#172C21] flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-[#424844]/40 flex-shrink-0" />}
       </button>
       <AnimatePresence>
         {open && (
@@ -74,7 +74,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <p className="px-6 pb-5 text-sm text-white/65 leading-relaxed">{a}</p>
+            <p className="px-6 pb-5 text-sm text-[#424844] leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -123,7 +123,7 @@ export function AttractionDetailClient({ attraction }: Props) {
   const catColor = categoryColors[attraction.category] || "text-amber-400 border-amber-400/30 bg-amber-400/10";
 
   return (
-    <main className="min-h-screen bg-[#08132B] text-white selection:bg-amber-500/30">
+    <main className="min-h-screen" style={{ backgroundColor: "#FCF9F2" }}>
       <Navbar />
 
       {/* ── HERO ──────────────────────────────────────── */}
@@ -142,8 +142,8 @@ export function AttractionDetailClient({ attraction }: Props) {
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08132B] via-[#08132B]/40 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08132B]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/55 to-transparent" />
 
         <motion.div
           style={{ opacity: heroOpacity }}
@@ -155,7 +155,7 @@ export function AttractionDetailClient({ attraction }: Props) {
             <span className="text-white/30">/</span>
             <Link href="/#attractions" className="text-white/50 hover:text-white transition-colors">Attractions</Link>
             <span className="text-white/30">/</span>
-            <span className="text-amber-400">{attraction.title}</span>
+            <span className="text-[#D4AF37]">{attraction.title}</span>
           </nav>
 
           <div className="max-w-4xl">
@@ -200,7 +200,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                 href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 font-semibold text-slate-900 transition-all hover:bg-amber-400 hover:scale-105 shadow-lg shadow-amber-500/20"
+                className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-3.5 font-semibold text-[#172C21] transition-all hover:bg-[#FED65B] hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
               >
                 <BookOpen className="h-5 w-5" /> Plan a Visit
               </a>
@@ -208,7 +208,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                 href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-green-500/50 bg-green-500/10 px-8 py-3.5 font-semibold text-green-400 transition-all hover:bg-green-500/20 backdrop-blur-md"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-3.5 font-semibold text-white transition-all hover:bg-white/20 backdrop-blur-md"
               >
                 <MessageCircle className="h-5 w-5" /> WhatsApp
               </a>
@@ -242,40 +242,40 @@ export function AttractionDetailClient({ attraction }: Props) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-xl p-8"
+            className="mx-auto max-w-6xl border border-[#C2C8C2] bg-[#FCF9F2] p-8" style={{ borderRadius: "2px" }}
           >
-            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-amber-400/70">Visitor Info</h2>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]/50">Visitor Info</h2>
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {attraction.location && (
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-white/40 text-xs uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-[#424844]/50 text-xs uppercase tracking-wider">
                     <MapPin className="h-3.5 w-3.5" /> Location
                   </div>
-                  <p className="font-semibold text-white text-sm">{attraction.location}</p>
+                  <p className="font-semibold text-[#1C1C18] text-sm">{attraction.location}</p>
                 </div>
               )}
               {attraction.bestTime && (
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-white/40 text-xs uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-[#424844]/50 text-xs uppercase tracking-wider">
                     <Calendar className="h-3.5 w-3.5" /> Best Time
                   </div>
-                  <p className="font-semibold text-white text-sm">{attraction.bestTime}</p>
+                  <p className="font-semibold text-[#1C1C18] text-sm">{attraction.bestTime}</p>
                 </div>
               )}
               {attraction.timings && (
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-white/40 text-xs uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-[#424844]/50 text-xs uppercase tracking-wider">
                     <Clock className="h-3.5 w-3.5" /> Timings
                   </div>
-                  <p className="font-semibold text-white text-sm">{attraction.timings}</p>
+                  <p className="font-semibold text-[#1C1C18] text-sm">{attraction.timings}</p>
                 </div>
               )}
               {attraction.entryFee && (
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-white/40 text-xs uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-[#424844]/50 text-xs uppercase tracking-wider">
                     <Ticket className="h-3.5 w-3.5" /> Entry Fee
                   </div>
-                  <p className="font-semibold text-white text-sm">{attraction.entryFee}</p>
+                  <p className="font-semibold text-[#1C1C18] text-sm">{attraction.entryFee}</p>
                 </div>
               )}
             </div>
@@ -285,7 +285,7 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── ABOUT ─────────────────────────────────────── */}
       {attraction.description && (
-        <section className="section-spacing px-6 lg:px-16">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -294,9 +294,9 @@ export function AttractionDetailClient({ attraction }: Props) {
               className="grid gap-12 lg:grid-cols-[1fr_360px] items-start"
             >
               <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">About</p>
-                <h2 className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl">{attraction.title}</h2>
-                <div className="text-white/65 leading-relaxed space-y-4">
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">About</p>
+                <h2 className="mb-6 font-serif text-4xl font-bold text-[#1C1C18] md:text-5xl">{attraction.title}</h2>
+                <div className="text-[#424844]/80 leading-relaxed space-y-4">
                   {attraction.description.split("\n\n").map((para, i) => (
                     <p key={i}>{para}</p>
                   ))}
@@ -304,10 +304,10 @@ export function AttractionDetailClient({ attraction }: Props) {
 
                 {attraction.history && (
                   <div className="mt-8">
-                    <h3 className="mb-4 text-lg font-semibold text-white flex items-center gap-2">
-                      <Info className="h-5 w-5 text-amber-400" /> History & Background
+                    <h3 className="mb-4 text-lg font-semibold text-[#1C1C18] flex items-center gap-2">
+                      <Info className="h-5 w-5 text-[#D4AF37]" /> History & Background
                     </h3>
-                    <div className="text-white/60 leading-relaxed space-y-4 border-l-2 border-amber-500/30 pl-6">
+                    <div className="text-[#424844]/70 leading-relaxed space-y-4 border-l-2 border-[#D4AF37]/40 pl-6">
                       {attraction.history.split("\n\n").map((para, i) => (
                         <p key={i}>{para}</p>
                       ))}
@@ -317,25 +317,25 @@ export function AttractionDetailClient({ attraction }: Props) {
               </div>
 
               {/* Side card */}
-              <div className="rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-6 space-y-5">
+              <div className="border border-[#C2C8C2] p-6 space-y-5" style={{ borderRadius: "2px" }}>
                 {activities.length > 0 && (
                   <div>
-                    <p className="text-xs text-white/40 uppercase tracking-wider mb-3">Activities</p>
+                    <p className="text-xs text-[#424844]/50 uppercase tracking-wider mb-3">Activities</p>
                     <div className="flex flex-wrap gap-2">
                       {activities.map((act, i) => (
-                        <span key={i} className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs text-amber-300">
+                        <span key={i} className="inline-flex items-center gap-1 rounded-full bg-[#172C21]/10 border border-[#172C21]/20 px-3 py-1 text-xs text-[#172C21]">
                           <Check className="h-3 w-3" /> {act}
                         </span>
                       ))}
                     </div>
                   </div>
                 )}
-                <div className="border-t border-white/10 pt-4">
+                <div className="border-t border-[#C2C8C2] pt-4">
                   <a
                     href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-3 font-semibold text-slate-900 text-sm transition-all hover:bg-amber-400"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[#172C21] py-3 font-semibold text-white text-sm transition-all hover:bg-[#2D4236]"
                   >
                     Plan Visit <ArrowRight className="h-4 w-4" />
                   </a>
@@ -348,11 +348,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── GALLERY ───────────────────────────────────── */}
       {gallery.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16 bg-slate-950/50">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Gallery</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Visual Journey</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Gallery</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Visual Journey</h2>
             </motion.div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {gallery.slice(0, 9).map((img, i) => (
@@ -434,11 +434,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── ACTIVITIES ────────────────────────────────── */}
       {activities.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Experiences</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Activities</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Experiences</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Activities</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {activities.map((act, i) => (
@@ -448,10 +448,10 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-slate-900/40 px-4 py-3 hover:border-amber-500/30 transition-colors"
+                  className="flex items-center gap-3 border border-[#C2C8C2] px-4 py-3 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
                 >
-                  <span className="text-amber-400">✦</span>
-                  <span className="text-sm text-white/80 font-medium">{act}</span>
+                  <span className="text-[#172C21]">✦</span>
+                  <span className="text-sm text-[#1C1C18] font-medium">{act}</span>
                 </motion.div>
               ))}
             </div>
@@ -461,11 +461,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── TRAVEL TIPS ───────────────────────────────── */}
       {travelTips.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16 bg-slate-950/50">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Useful Tips</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Travel Tips</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Useful Tips</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Travel Tips</h2>
             </motion.div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {travelTips.map((tip, i) => (
@@ -475,10 +475,10 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-3 rounded-xl border border-white/8 bg-slate-900/30 px-4 py-4"
+                  className="flex items-start gap-3 border border-[#C2C8C2] px-4 py-4" style={{ borderRadius: "2px" }}
                 >
                   <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">💡</span>
-                  <p className="text-sm text-white/70 leading-relaxed">{tip}</p>
+                  <p className="text-sm text-[#424844] leading-relaxed">{tip}</p>
                 </motion.div>
               ))}
             </div>
@@ -488,11 +488,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── NEARBY HOTELS ─────────────────────────────── */}
       {nearbyHotels.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Stay</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Nearby Hotels</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Stay</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Nearby Hotels</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {nearbyHotels.map((hotel, i) => (
@@ -502,14 +502,14 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="rounded-2xl border border-white/10 bg-slate-900/40 p-5 hover:border-amber-500/20 transition-colors"
+                  className="border border-[#C2C8C2] p-5 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <Star className="h-4 w-4 text-amber-400 fill-amber-400 flex-shrink-0" />
-                    <h3 className="font-semibold text-white text-sm">{hotel.name}</h3>
+                    <h3 className="font-semibold text-[#1C1C18] text-sm">{hotel.name}</h3>
                   </div>
-                  {hotel.distance && <p className="text-xs text-white/40 mb-1"><MapPin className="inline h-3 w-3 mr-1" />{hotel.distance}</p>}
-                  {hotel.priceRange && <p className="text-xs text-amber-300/70">{hotel.priceRange}</p>}
+                  {hotel.distance && <p className="text-xs text-[#424844]/50 mb-1"><MapPin className="inline h-3 w-3 mr-1" />{hotel.distance}</p>}
+                  {hotel.priceRange && <p className="text-xs text-[#172C21]/70">{hotel.priceRange}</p>}
                 </motion.div>
               ))}
             </div>
@@ -519,11 +519,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── RESTAURANTS ───────────────────────────────── */}
       {restaurants.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16 bg-slate-950/50">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Dining</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Where to Eat</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Dining</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Where to Eat</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {restaurants.map((rest, i) => (
@@ -533,11 +533,11 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="rounded-2xl border border-white/10 bg-slate-900/40 p-5 hover:border-amber-500/20 transition-colors"
+                  className="border border-[#C2C8C2] p-5 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
                 >
-                  <h3 className="font-semibold text-white text-sm mb-1">{rest.name}</h3>
-                  {rest.cuisine && <p className="text-xs text-amber-300/70 mb-1">{rest.cuisine}</p>}
-                  {rest.distance && <p className="text-xs text-white/40"><MapPin className="inline h-3 w-3 mr-1" />{rest.distance}</p>}
+                  <h3 className="font-semibold text-[#1C1C18] text-sm mb-1">{rest.name}</h3>
+                  {rest.cuisine && <p className="text-xs text-[#172C21]/60 mb-1">{rest.cuisine}</p>}
+                  {rest.distance && <p className="text-xs text-[#424844]/50"><MapPin className="inline h-3 w-3 mr-1" />{rest.distance}</p>}
                 </motion.div>
               ))}
             </div>
@@ -547,11 +547,11 @@ export function AttractionDetailClient({ attraction }: Props) {
 
       {/* ── FAQs ──────────────────────────────────────── */}
       {faqs.length > 0 && (
-        <section className="section-spacing px-6 lg:px-16">
+        <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-400">Questions</p>
-              <h2 className="font-serif text-4xl font-bold text-white">Frequently Asked</h2>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Questions</p>
+              <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Frequently Asked</h2>
             </motion.div>
             <div className="space-y-3">
               {faqs.map((faq, i) => (
@@ -563,18 +563,18 @@ export function AttractionDetailClient({ attraction }: Props) {
       )}
 
       {/* ── STICKY CTA ─────────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-slate-950/95 backdrop-blur-xl px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#C2C8C2] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div className="hidden sm:block">
-            <p className="font-semibold text-white">{attraction.title}</p>
+            <p className="font-semibold text-[#1C1C18]">{attraction.title}</p>
             {attraction.location && (
-              <p className="text-xs text-white/50"><MapPin className="inline h-3 w-3 mr-1" />{attraction.location}</p>
+              <p className="text-xs text-[#424844]/60"><MapPin className="inline h-3 w-3 mr-1" />{attraction.location}</p>
             )}
           </div>
           <div className="flex flex-wrap gap-3 ml-auto">
             <a
               href={buildTelLink(phone)}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
             >
               <Phone className="h-4 w-4" /> Call
             </a>
@@ -582,7 +582,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-green-500/40 bg-green-500/10 px-4 py-2.5 text-sm font-medium text-green-400 hover:bg-green-500/20 transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#172C21] hover:bg-[#F4EFE3] transition-all"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
@@ -590,7 +590,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/20"
+              className="inline-flex items-center gap-2 rounded-full bg-[#172C21] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2D4236] transition-all shadow-lg shadow-[#172C21]/20"
             >
               <BookOpen className="h-4 w-4" /> Plan Visit
             </a>

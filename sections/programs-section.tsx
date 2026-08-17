@@ -1,105 +1,182 @@
 "use client";
 
 import Image from "next/image";
-import { useContact } from "@/components/providers/contact-provider";
-import { buildTelLink } from "@/lib/contact";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-
-import { AnimatedSection, slideUpVariant } from "@/components/animated-section";
-import { SectionHeading } from "@/components/section-heading";
+import { ArrowRight } from "lucide-react";
+import { useContact } from "@/components/providers/contact-provider";
 import { buildProgramInquiry } from "@/lib/contact";
 
+interface Category {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  icon: string;
+  displayOrder: number;
+}
+
 export function ProgramsSection() {
-  const { phone, whatsapp, email } = useContact();
+  const { phone } = useContact();
   const router = useRouter();
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    fetch('/api/categories?featured=true')
-      .then(res => res.json())
-      .then(data => setCategories(data))
+    fetch("/api/categories?featured=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setCategories(data);
+      })
       .catch(console.error);
   }, []);
 
+  if (categories.length === 0) return null;
+
+  /* Editorial layout:
+     - First category spans full width as a hero card
+     - Remaining are in a 2/3-col grid
+  */
+  const [featured, ...rest] = categories;
+
   return (
-    <>
-      <AnimatedSection id="programs" className="section-spacing bg-slate-950">
-        <div className="container-shell">
-          <SectionHeading
-            eyebrow="Our Experiences"
-            title="Transformative Programs"
-            description="Explore our meticulously crafted programs. Each journey is designed to challenge, inspire, and deeply connect you with nature."
-          />
+    <section
+      id="programs"
+      className="section-spacing"
+      style={{ backgroundColor: "#F4EFE3" }}
+    >
+      <div className="container-shell">
+        {/* Section header */}
+        <div className="mb-16 grid md:grid-cols-[1fr_auto] md:items-end gap-8">
+          <div>
+            <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+              Transformative Programs
+            </p>
+            <h2 className="font-serif text-5xl leading-[1.08] tracking-tight text-[#1C1C18] sm:text-6xl md:text-[4.5rem]">
+              Adventure by
+              <br />
+              <em>Design.</em>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm font-light leading-7 text-[#424844] md:text-base">
+            Each journey is meticulously designed to challenge, inspire, and deeply 
+            connect you with India&apos;s most extraordinary landscapes.
+          </p>
+        </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {categories.map((category) => {
-              const href = `/programs/${category.slug}`;
-              const displayImage = category.image || "/placeholder.svg";
+        <div className="h-px bg-[#C2C8C2] mb-16" />
 
-              return (
-                <motion.article
-                  variants={slideUpVariant}
-                  key={category.id}
-                  className="group cursor-pointer overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/50 transition-all duration-[800ms] hover:-translate-y-2 hover:border-white/30 hover:bg-slate-900/80 hover:shadow-2xl hover:shadow-amber-900/20"
-                  onClick={() => router.push(href)}
+        {/* Featured large card */}
+        {featured && (
+          <div
+            className="group relative mb-6 cursor-pointer overflow-hidden"
+            style={{ height: "clamp(320px, 45vw, 520px)", borderRadius: "2px" }}
+            onClick={() => router.push(`/programs/${featured.slug}`)}
+          >
+            <Image
+              src={
+                featured.image && featured.image.trim()
+                  ? featured.image
+                  : "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80"
+              }
+              alt={featured.imageAlt || featured.title}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 100vw, 1280px"
+              priority
+            />
+
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/50 to-transparent" />
+
+            {/* Content overlay */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+              <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#D4AF37]">
+                Featured Program
+              </p>
+              <h3 className="mb-4 font-serif text-4xl font-normal text-white md:text-5xl lg:text-6xl">
+                {featured.title}
+              </h3>
+              <p className="mb-6 max-w-lg text-sm font-light text-white/80 leading-6 line-clamp-2">
+                {featured.description}
+              </p>
+              <div className="flex gap-4">
+                <Link
+                  href={`/programs/${featured.slug}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-[#172C21] transition-all hover:bg-[#FED65B]"
                 >
-                  <div className="relative h-80 overflow-hidden">
-                    <Image
-                      src={displayImage}
-                      alt={category.title}
+                  Explore <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <a
+                  href={buildProgramInquiry(phone, featured.title)}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
+                >
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Rest — editorial grid */}
+        {rest.length > 0 && (
+          <div className={`grid gap-6 ${rest.length >= 3 ? "sm:grid-cols-2 lg:grid-cols-3" : rest.length === 2 ? "sm:grid-cols-2" : "grid-cols-1"}`}>
+            {rest.map((category) => {
+              const href = `/programs/${category.slug}`;
+              return (
+                <Link
+                  key={category.id}
+                  href={href}
+                  className="group relative block overflow-hidden"
+                  style={{ height: "clamp(260px, 30vw, 360px)", borderRadius: "2px" }}
+                >
+                  <Image
+                    src={
+                      category.image && category.image.trim()
+                        ? category.image
+                        : "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
+                    }
+                    alt={category.imageAlt || category.title}
                     fill
-                    className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.08]"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-[#08132B]/40 transition-colors duration-[800ms] ease-out group-hover:bg-[#08132B]/20" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#08132B]/90 via-[#08132B]/40 to-transparent opacity-90" />
-                  
-                  {/* Title overlays image now to mimic Incredible India */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 transform transition-transform duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] translate-y-0 group-hover:-translate-y-1">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#FFD700] drop-shadow-md">
-                      Category
-                    </p>
-                    <h3 className="font-serif text-3xl font-medium tracking-wide text-white drop-shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/75 via-[#172C21]/10 to-transparent" />
+
+                  {/* Content */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
+                    <h3 className="font-serif text-2xl font-normal text-white md:text-3xl">
                       {category.title}
                     </h3>
-                    {/* Gold accent line appears on hover */}
-                    <div className="h-0.5 w-0 bg-[#FFD700] transition-all duration-[800ms] ease-out group-hover:w-12 mt-3 shadow-[0_0_8px_rgba(255,215,0,0.6)]" />
+                    <p className="mt-2 text-sm text-white/70 line-clamp-2 leading-6 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                      {category.description}
+                    </p>
+                    {/* Gold underline */}
+                    <div className="mt-4 h-px w-0 bg-[#D4AF37] group-hover:w-10 transition-all duration-500" />
                   </div>
-                </div>
-                
-                <div className="space-y-5 p-6 pt-5">
-                  <p className="text-sm leading-relaxed text-white/70 line-clamp-3">
-                    {category.description}
-                  </p>
-                  <div className="flex gap-4 pt-2">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(href);
-                      }}
-                      className="flex-1 rounded-full border border-white/30 px-4 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:border-white hover:bg-white/10"
-                    >
-                      View Programs
-                    </button>
-                    <a
-                      href={buildProgramInquiry(phone, category.title)}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex-1 inline-flex items-center justify-center rounded-xl border-none bg-[#FFD700] px-4 py-3 text-sm font-bold tracking-wide text-slate-950 transition-all duration-300 hover:scale-105 hover:bg-[#FF8C00] hover:shadow-xl hover:shadow-[#FF8C00]/30"
-                    >
-                      Enquire
-                    </a>
-                  </div>
-                </div>
-              </motion.article>
-            )})}
+                </Link>
+              );
+            })}
           </div>
+        )}
+
+        {/* All programs CTA */}
+        <div className="mt-12 text-center md:text-left">
+          <Link
+            href="/programs"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#172C21] underline underline-offset-4 hover:text-[#2D4236] transition-colors"
+          >
+            View all programs <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
-      </AnimatedSection>
-    </>
+      </div>
+    </section>
   );
 }

@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: NextRequest) {
   try {
     const hero = await prisma.heroSection.findFirst();
-    revalidatePath('/', 'layout');
     return NextResponse.json(hero || {});
   } catch (error) {
     console.error("Error fetching hero section:", error);
@@ -21,51 +20,43 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await req.json();
-    
-    // Sanitize empty strings to null for image fields
-    ['image', 'heroImage', 'cardImage', 'banner', 'thumbnail', 'coverImage', 'icon'].forEach(key => {
-      if (data[key] === "") data[key] = null;
-    });
 
     if (!data.headline || !data.backgroundImages) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Ensure backgroundImages is a valid stringified JSON array if passed
+    // Ensure backgroundImages is a valid stringified JSON array
     let backgroundImages = data.backgroundImages;
     if (Array.isArray(backgroundImages)) {
       backgroundImages = JSON.stringify(backgroundImages);
     }
 
+    // Handle scrollWords — store as JSON string
+    let scrollWords: string | null = null;
+    if (Array.isArray(data.scrollWords) && data.scrollWords.length > 0) {
+      scrollWords = JSON.stringify(data.scrollWords.filter((w: string) => w.trim() !== ""));
+    }
+
+    const payload = {
+      headline: data.headline,
+      headlinePrefix: data.headlinePrefix?.trim() || null,
+      scrollWords,
+      subtitle: data.subtitle || null,
+      description: data.description || null,
+      backgroundImages,
+      buttonText: data.buttonText || null,
+      buttonLink: data.buttonLink || null,
+    };
+
     let hero = await prisma.heroSection.findFirst();
 
     if (hero) {
-      hero = await prisma.heroSection.update({
-        where: { id: hero.id },
-        data: {
-          headline: data.headline,
-          subtitle: data.subtitle || null,
-          description: data.description || null,
-          backgroundImages: backgroundImages,
-          buttonText: data.buttonText || null,
-          buttonLink: data.buttonLink || null,
-        },
-      });
+      hero = await prisma.heroSection.update({ where: { id: hero.id }, data: payload });
     } else {
-      hero = await prisma.heroSection.create({
-        data: {
-          headline: data.headline,
-          subtitle: data.subtitle || null,
-          description: data.description || null,
-          backgroundImages: backgroundImages,
-          buttonText: data.buttonText || null,
-          buttonLink: data.buttonLink || null,
-        },
-      });
+      hero = await prisma.heroSection.create({ data: payload });
     }
 
     revalidatePath("/", "layout");
-    revalidatePath('/', 'layout');
     return NextResponse.json(hero);
   } catch (error) {
     console.error("Error updating hero section:", error);

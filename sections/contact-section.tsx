@@ -2,12 +2,8 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { useContact } from "@/components/providers/contact-provider";
-import { buildTelLink } from "@/lib/contact";
-
-import { AnimatedSection } from "@/components/animated-section";
-import { SectionHeading } from "@/components/section-heading";
 import { buildContactInquiry } from "@/lib/contact";
-import { PrimaryButton } from "@/components/primary-button";
+import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 
 type ContactForm = {
   name: string;
@@ -17,158 +13,205 @@ type ContactForm = {
 
 type FormErrors = Partial<Record<keyof ContactForm, string>>;
 
-const initialForm: ContactForm = {
-  name: "",
-  phone: "",
-  message: "",
-};
+const initialForm: ContactForm = { name: "", phone: "", message: "" };
 
 export function ContactSection() {
-  const { phone, whatsapp, email } = useContact();
+  const { phone, email, address } = useContact();
   const [form, setForm] = useState<ContactForm>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
 
-  const whatsappHref = useMemo(() => buildContactInquiry(phone, { name: form.name, userPhone: form.phone, message: form.message }), [phone, form]);
+  const whatsappHref = useMemo(
+    () =>
+      buildContactInquiry(phone, {
+        name: form.name,
+        userPhone: form.phone,
+        message: form.message,
+      }),
+    [phone, form]
+  );
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-
-    if (!form.name.trim()) {
-      newErrors.name = "Name is required";
-    } else if (form.name.trim().length < 2) {
-      newErrors.name = "Name must be at least 2 characters";
-    }
-
-    if (!form.phone.trim()) {
-      newErrors.phone = "Phone number is required";
-    } else if (!/^\d{10}$/.test(form.phone.replace(/\D/g, ""))) {
+    if (!form.name.trim()) newErrors.name = "Name is required";
+    else if (form.name.trim().length < 2) newErrors.name = "Name must be at least 2 characters";
+    if (!form.phone.trim()) newErrors.phone = "Phone number is required";
+    else if (!/^\d{10}$/.test(form.phone.replace(/\D/g, "")))
       newErrors.phone = "Phone number must be 10 digits";
-    }
-
-    if (!form.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (form.message.trim().length < 10) {
+    if (!form.message.trim()) newErrors.message = "Message is required";
+    else if (form.message.trim().length < 10)
       newErrors.message = "Message must be at least 10 characters";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (field: keyof ContactForm, value: string) => {
-    setForm((current) => ({ ...current, [field]: value }));
-    // Clear error for this field when user starts typing
-    if (errors[field]) {
-      setErrors((current) => {
-        const newErrors = { ...current };
-        delete newErrors[field];
-        return newErrors;
-      });
-    }
+    setForm((c) => ({ ...c, [field]: value }));
+    if (errors[field]) setErrors((c) => { const n = { ...c }; delete n[field]; return n; });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!validateForm()) return;
     setSubmitted(true);
-    // Open WhatsApp after a brief delay for UX feedback
     setTimeout(() => {
       window.open(whatsappHref, "_blank", "noopener,noreferrer");
-      // Reset form after submission
       setForm(initialForm);
       setSubmitted(false);
     }, 500);
   };
 
-  return (
-    <AnimatedSection id="contact" className="section-spacing">
-      <div className="container-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Ready to start your adventure?"
-          description="Share your details and we'll connect with you on WhatsApp to discuss your perfect program."
-        />
+  const inputBase =
+    "w-full rounded-sm border bg-transparent px-4 py-3.5 text-sm font-light text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition-colors focus:border-[#172C21]";
 
+  return (
+    <section
+      id="contact"
+      className="section-spacing"
+      style={{ backgroundColor: "#FCF9F2" }}
+    >
+      <div className="container-shell grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+        {/* Left — editorial statement + contact info */}
+        <div>
+          <p className="mb-6 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+            Contact
+          </p>
+          <h2 className="font-serif text-5xl font-normal leading-[1.1] text-[#1C1C18] sm:text-6xl md:text-7xl">
+            Let&apos;s plan
+            <br />
+            <em>your journey.</em>
+          </h2>
+
+          <div className="mt-12 h-px bg-[#C2C8C2]" />
+
+          <div className="mt-8 space-y-6">
+            {address && (
+              <div className="flex items-start gap-4">
+                <div className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[#C2C8C2]">
+                  <MapPin className="h-3.5 w-3.5 text-[#172C21]" />
+                </div>
+                <div>
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-[#172C21]/50 mb-1">
+                    Address
+                  </p>
+                  <p className="text-sm font-light text-[#424844] leading-6 max-w-xs">{address}</p>
+                </div>
+              </div>
+            )}
+            {phone && (
+              <div className="flex items-center gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[#C2C8C2]">
+                  <Phone className="h-3.5 w-3.5 text-[#172C21]" />
+                </div>
+                <div>
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-[#172C21]/50 mb-1">
+                    Phone
+                  </p>
+                  <a href={`tel:${phone}`} className="text-sm font-medium text-[#1C1C18] hover:text-[#172C21] transition-colors">
+                    {phone}
+                  </a>
+                </div>
+              </div>
+            )}
+            {email && (
+              <div className="flex items-center gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[#C2C8C2]">
+                  <Mail className="h-3.5 w-3.5 text-[#172C21]" />
+                </div>
+                <div>
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-[#172C21]/50 mb-1">
+                    Email
+                  </p>
+                  <a href={`mailto:${email}`} className="text-sm font-medium text-[#1C1C18] hover:text-[#172C21] transition-colors">
+                    {email}
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right — editorial form */}
         <form
           onSubmit={handleSubmit}
-          className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
+          className="border border-[#C2C8C2] p-8 md:p-10"
+          style={{ borderRadius: "2px" }}
         >
-          <div className="grid gap-5">
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-white/80">Name</span>
+          <h3 className="font-serif text-2xl text-[#1C1C18] mb-8">Send an enquiry</h3>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">
+                Your Name
+              </label>
               <input
                 required
                 type="text"
                 value={form.name}
-                onChange={(event) => handleChange("name", event.target.value)}
-                className={`rounded-2xl border px-4 py-3 text-white outline-none transition ${
-                  errors.name
-                    ? "border-red-500/50 bg-red-500/10 focus:border-red-500/80"
-                    : "border-white/10 bg-slate-950/60 focus:border-amber-300/50"
+                onChange={(e) => handleChange("name", e.target.value)}
+                className={`${inputBase} ${
+                  errors.name ? "border-red-400" : "border-[#C2C8C2]"
                 }`}
-                placeholder="Your name"
+                placeholder="John Doe"
               />
-              {errors.name && <p className="text-xs text-red-400">{errors.name}</p>}
-            </label>
+              {errors.name && (
+                <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+              )}
+            </div>
 
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-white/80">Phone Number</span>
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">
+                Phone Number
+              </label>
               <input
                 required
                 type="tel"
                 value={form.phone}
-                onChange={(event) => {
-                  const value = event.target.value.replace(/\D/g, "").slice(0, 10);
-                  handleChange("phone", value);
-                }}
-                className={`rounded-2xl border px-4 py-3 text-white outline-none transition ${
-                  errors.phone
-                    ? "border-red-500/50 bg-red-500/10 focus:border-red-500/80"
-                    : "border-white/10 bg-slate-950/60 focus:border-amber-300/50"
+                onChange={(e) => handleChange("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
+                className={`${inputBase} ${
+                  errors.phone ? "border-red-400" : "border-[#C2C8C2]"
                 }`}
-                placeholder="10-digit mobile number"
+                placeholder="10-digit mobile"
                 maxLength={10}
               />
-              {errors.phone && <p className="text-xs text-red-400">{errors.phone}</p>}
-            </label>
+              {errors.phone && (
+                <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+              )}
+            </div>
 
-            <label className="grid gap-2">
-              <span className="text-sm font-medium text-white/80">Message</span>
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">
+                Message
+              </label>
               <textarea
                 required
                 value={form.message}
-                onChange={(event) => handleChange("message", event.target.value)}
-                className={`min-h-36 rounded-2xl border px-4 py-3 text-white outline-none transition ${
-                  errors.message
-                    ? "border-red-500/50 bg-red-500/10 focus:border-red-500/80"
-                    : "border-white/10 bg-slate-950/60 focus:border-amber-300/50"
+                onChange={(e) => handleChange("message", e.target.value)}
+                className={`${inputBase} min-h-[120px] resize-none ${
+                  errors.message ? "border-red-400" : "border-[#C2C8C2]"
                 }`}
-                placeholder="Tell us which program or destination interests you..."
+                placeholder="Which program or destination interests you?"
               />
-              {errors.message && <p className="text-xs text-red-400">{errors.message}</p>}
-            </label>
+              {errors.message && (
+                <p className="mt-1 text-xs text-red-500">{errors.message}</p>
+              )}
+            </div>
           </div>
 
-          <PrimaryButton
+          <button
             type="submit"
             disabled={submitted}
-            className={`mt-6 w-full ${
-              submitted ? "cursor-wait opacity-80" : ""
-            }`}
+            className="mt-8 w-full inline-flex items-center justify-center gap-2.5 rounded-full bg-[#172C21] px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-[#2D4236] hover:shadow-lg hover:shadow-[#172C21]/25 disabled:opacity-60 disabled:cursor-wait"
           >
-            {submitted ? "Opening WhatsApp..." : "Enquire on WhatsApp"}
-          </PrimaryButton>
+            {submitted ? "Opening WhatsApp…" : "Enquire on WhatsApp"}
+            {!submitted && <ArrowRight className="h-4 w-4" />}
+          </button>
 
-          <p className="mt-4 text-center text-xs text-white/50">
-            We&apos;ll respond to your enquiry within 2 hours on WhatsApp.
+          <p className="mt-4 text-center text-xs text-[#424844]/50">
+            We respond to all enquiries within 2 hours on WhatsApp.
           </p>
         </form>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

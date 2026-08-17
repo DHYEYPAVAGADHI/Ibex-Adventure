@@ -1,28 +1,40 @@
-import { AnimatedSection } from "@/components/animated-section";
-import { SectionHeading } from "@/components/section-heading";
 import { programDetails } from "@/lib/static-data";
 
 export function ProgramDetailsSection() {
   return (
-    <AnimatedSection className="section-spacing">
+    <section
+      className="section-spacing"
+      style={{ backgroundColor: "#FCF9F2" }}
+    >
       <div className="container-shell">
-        <SectionHeading
-          eyebrow="Program Details"
-          title="Quick logistics for fast decision-making."
-        />
+        <div className="mb-12">
+          <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+            Program Details
+          </p>
+          <h2 className="font-serif text-4xl leading-tight text-[#1C1C18] sm:text-5xl">
+            Quick logistics for
+            <em> fast planning.</em>
+          </h2>
+        </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {programDetails.map((detail) => (
+        <div className="h-px bg-[#C2C8C2] mb-12" />
+
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+          {programDetails.map((detail, i) => (
             <div
               key={detail.label}
-              className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6"
+              className="border-t-2 border-[#172C21]/15 pt-6"
             >
-              <p className="text-xs uppercase tracking-[0.3em] text-white/45">{detail.label}</p>
-              <p className="mt-4 text-xl font-semibold text-white">{detail.value}</p>
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]/40 mb-3">
+                {String(i + 1).padStart(2, "0")} — {detail.label}
+              </p>
+              <p className="font-serif text-2xl text-[#1C1C18]">
+                {detail.value}
+              </p>
             </div>
           ))}
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

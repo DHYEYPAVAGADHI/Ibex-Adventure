@@ -20,6 +20,8 @@ export default function MemoriesAdmin() {
   const [editingStats, setEditingStats] = useState(false);
   const [statsData, setStatsData] = useState<MemoryStats>({ travelers: "", expeditions: "", destinations: "", satisfaction: "" });
 
+  const [isSaving, setIsSaving] = useState(false);
+
   const loadData = async () => {
     setLoading(true);
     const mData = await getMemories();
@@ -35,10 +37,16 @@ export default function MemoriesAdmin() {
   }, []);
 
   const handleSaveMemory = async () => {
-    await saveMemory(formData);
-    setEditingId(null);
-    setFormData({});
-    await loadData();
+    if (isSaving) return;
+    setIsSaving(true);
+    try {
+      await saveMemory(formData);
+      setEditingId(null);
+      setFormData({});
+      await loadData();
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDeleteMemory = async (id: string) => {
@@ -183,7 +191,7 @@ export default function MemoriesAdmin() {
                       <input 
                         type="text" 
                         value={formData.destination || ""}
-                        onChange={e => setFormData({...formData, destination: e.target.value.toLowerCase().replace(/\\s+/g, "-")})}
+                        onChange={e => setFormData({...formData, destination: e.target.value.toLowerCase().replace(/\s+/g, "-")})}
                         placeholder="e.g. manali"
                         className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none font-mono text-sm"
                       />
@@ -216,8 +224,8 @@ export default function MemoriesAdmin() {
 
               <div className="mt-8 flex justify-end gap-3 pt-6 border-t border-slate-100">
                 <button onClick={() => { setEditingId(null); setFormData({}); }} className="px-5 py-2.5 font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
-                <button onClick={handleSaveMemory} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-admin-heading px-8 py-2.5 rounded-lg font-medium transition-colors">
-                  <Save className="w-4 h-4" /> Save Memory
+                <button onClick={handleSaveMemory} disabled={isSaving} className={`flex items-center gap-2 ${isSaving ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-admin-heading px-8 py-2.5 rounded-lg font-medium transition-colors`}>
+                  <Save className="w-4 h-4" /> {isSaving ? "Saving..." : "Save Memory"}
                 </button>
               </div>
             </div>

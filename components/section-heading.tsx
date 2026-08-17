@@ -8,6 +8,12 @@ type SectionHeadingProps = {
   title: string;
   description?: string;
   align?: "left" | "center";
+  /** Override eyebrow color — defaults to forest green */
+  eyebrowColor?: string;
+  /** Override title color — defaults to #1C1C18 */
+  titleColor?: string;
+  /** Override description color — defaults to #424844 */
+  descriptionColor?: string;
 };
 
 export function SectionHeading({
@@ -15,21 +21,23 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  eyebrowColor,
+  titleColor,
+  descriptionColor,
 }: SectionHeadingProps) {
-  const alignment = align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl";
+  const alignment =
+    align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl";
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
@@ -48,21 +56,26 @@ export function SectionHeading({
       {eyebrow ? (
         <motion.p
           variants={itemVariants}
-          className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-amber-300/80"
+          className="mb-4 text-xs font-semibold uppercase tracking-[0.18em]"
+          style={{ color: eyebrowColor ?? "#172C21" }}
         >
           {eyebrow}
         </motion.p>
       ) : null}
+
       <motion.h2
         variants={itemVariants}
-        className="text-4xl font-serif tracking-tight text-white sm:text-5xl md:text-6xl"
+        className="font-serif text-4xl leading-[1.1] tracking-tight sm:text-5xl md:text-6xl"
+        style={{ color: titleColor ?? "#1C1C18" }}
       >
         {title}
       </motion.h2>
+
       {description ? (
         <motion.p
           variants={itemVariants}
-          className="mt-6 text-sm leading-7 text-white/70 sm:text-base md:text-lg font-light"
+          className="mt-6 text-base leading-7 font-light sm:text-lg"
+          style={{ color: descriptionColor ?? "#424844" }}
         >
           {description}
         </motion.p>

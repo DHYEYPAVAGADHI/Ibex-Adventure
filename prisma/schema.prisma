@@ -105,6 +105,8 @@ model HeroSection {
   variant          String   @default("home") // home, category
   backgroundImages String // JSON array of image URLs
   headline         String
+  headlinePrefix   String?  // Static part e.g. "Incredible" — if set, animates the rest
+  scrollWords      String?  // JSON array of rotating words e.g. ["Adventures","Journeys","Experiences"]
   subtitle         String?
   description      String?
   buttonText       String?

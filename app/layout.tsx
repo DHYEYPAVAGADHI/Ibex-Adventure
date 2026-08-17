@@ -1,40 +1,95 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Great_Vibes } from "next/font/google";
+import { EB_Garamond, Hanken_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({
+const garamond = EB_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-garamond",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
-const playfair = Playfair_Display({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-playfair",
-});
-
-const scriptFont = Great_Vibes({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-script",
+  variable: "--font-hanken",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ibexadventure.in"),
-  title: "Ibex Adventure | Beyond Adventure. Towards Transformation.",
+  title: {
+    default: "Ibex Adventure | Best Adventure Tours & Trekking in India",
+    template: "%s | Ibex Adventure",
+  },
   description:
-    "Premium adventure programs, trekking expeditions, student immersion tours, and WhatsApp-led enquiries by Ibex Adventure.",
+    "Ibex Adventure offers premium trekking expeditions, adventure tours, student immersion programs & outdoor journeys across India's most breathtaking destinations. Book your adventure today!",
+  keywords: [
+    "adventure tours India",
+    "trekking in India",
+    "Himalayan trekking",
+    "adventure travel India",
+    "student adventure programs",
+    "outdoor expeditions India",
+    "best trekking company India",
+    "Manali trekking",
+    "Spiti Valley tour",
+    "adventure tourism",
+    "adventure programs for students",
+    "ibex adventure",
+    "outdoor journey India",
+    "Leh Ladakh trek",
+    "mountain expeditions India",
+  ],
+  authors: [{ name: "Ibex Adventure", url: "https://ibexadventure.in" }],
+  creator: "Ibex Adventure",
+  publisher: "Ibex Adventure",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://ibexadventure.in",
+  },
   openGraph: {
-    title: "Ibex Adventure",
-    description:
-      "Immersive outdoor programs that blend adventure, education, and transformation.",
+    type: "website",
+    locale: "en_IN",
     url: "https://ibexadventure.in",
     siteName: "Ibex Adventure",
-    type: "website",
+    title: "Ibex Adventure | Best Adventure Tours & Trekking in India",
+    description:
+      "Premium adventure programs, trekking expeditions, student immersion tours and outdoor journeys across India's most breathtaking destinations.",
+    images: [
+      {
+        url: "https://ibexadventure.in/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ibex Adventure — Beyond Adventure. Towards Transformation.",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ibex Adventure | Best Adventure Tours & Trekking in India",
+    description:
+      "Premium trekking expeditions, adventure tours & student programs across India.",
+    images: ["https://ibexadventure.in/og-image.jpg"],
+    creator: "@ibexadventure",
+    site: "@ibexadventure",
+  },
+  verification: {
+    google: "ibex-adventure-google-verification",
+  },
+  category: "Travel & Adventure",
 };
 
 import { Footer } from "@/components/footer";
@@ -54,7 +109,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${playfair.variable} ${scriptFont.variable} font-sans bg-slate-950 text-white antialiased`}>
+      <body
+        className={`${garamond.variable} ${hanken.variable} font-sans antialiased`}
+        style={{ backgroundColor: "#FCF9F2", color: "#1C1C18" }}
+      >
         <SettingsProvider initialSettings={{ logoUrl: settings?.logoUrl || null }}>
           <ContactProvider initialContactInfo={contactInfo}>
             {children}

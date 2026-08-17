@@ -5,6 +5,8 @@ const DEFAULT_HERO_IMAGES = [
   "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80",
 ];
 
+const DEFAULT_SCROLL_WORDS = ["Adventures", "Journeys", "Experiences", "Expeditions", "Treks"];
+
 interface HeroSectionProps {
   variant?: "home" | "category";
   title?: string;
@@ -32,21 +34,45 @@ export async function HeroSection({
     }
   }
 
-  const finalHeadline = variant === "category" ? (title || "Ibex Adventure") : (heroData?.headline || "Incredible Adventures");
-  const finalSubtitle = variant === "category" ? subtitle : (heroData?.subtitle || "INSPIRED OUTDOOR JOURNEYS");
-  const finalDescription = heroData?.description || "Discover the world's most breathtaking landscapes and immerse yourself in unforgettable experiences with Ibex Adventure.";
+  let scrollWords: string[] = DEFAULT_SCROLL_WORDS;
+  if (heroData?.scrollWords) {
+    try {
+      const parsed = JSON.parse(heroData.scrollWords);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        scrollWords = parsed;
+      }
+    } catch {
+      // fallback
+    }
+  }
+
+  const finalHeadline =
+    variant === "category"
+      ? title || "Ibex Adventure"
+      : heroData?.headline || "Incredible Adventures";
+
+  const finalPrefix =
+    variant === "category" ? undefined : (heroData?.headlinePrefix ?? "Incredible");
+
+  const finalSubtitle =
+    variant === "category" ? subtitle : heroData?.subtitle || "INSPIRED OUTDOOR JOURNEYS";
+  const finalDescription =
+    heroData?.description ||
+    "Discover the world's most breathtaking landscapes and immerse yourself in unforgettable experiences with Ibex Adventure.";
   const finalButtonText = heroData?.buttonText || "Explore Programs";
   const finalButtonLink = heroData?.buttonLink || "#programs";
 
   return (
-    <HeroSectionClient 
-      variant={variant} 
-      headline={finalHeadline} 
-      subtitle={finalSubtitle} 
-      description={finalDescription} 
-      buttonText={finalButtonText} 
-      buttonLink={finalButtonLink} 
-      images={parsedImages} 
+    <HeroSectionClient
+      variant={variant}
+      headline={finalHeadline}
+      headlinePrefix={finalPrefix}
+      scrollWords={variant === "home" ? scrollWords : undefined}
+      subtitle={finalSubtitle}
+      description={finalDescription}
+      buttonText={finalButtonText}
+      buttonLink={finalButtonLink}
+      images={parsedImages}
     />
   );
 }

@@ -1,35 +1,50 @@
-import { AnimatedSection } from "@/components/animated-section";
-import { SectionHeading } from "@/components/section-heading";
 import { studentGains } from "@/lib/static-data";
 
 export function StudentGainsSection() {
   return (
-    <AnimatedSection className="section-spacing">
+    <section
+      className="section-spacing"
+      style={{ backgroundColor: "#F4EFE3" }}
+    >
       <div className="container-shell">
-        <SectionHeading
-          eyebrow="What Students Gain"
-          title="Minimal value messaging, clear outcome-led trust."
-          description="A compact benefit layer that reinforces the educational and personal value behind every journey."
-        />
+        {/* Header */}
+        <div className="mb-16">
+          <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+            What Students Gain
+          </p>
+          <h2 className="font-serif text-5xl leading-[1.08] tracking-tight text-[#1C1C18] sm:text-6xl max-w-2xl">
+            Growth measured in
+            <em> experiences.</em>
+          </h2>
+        </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {studentGains.map((item) => {
+        <div className="h-px bg-[#C2C8C2] mb-16" />
+
+        {/* Editorial numbered list */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {studentGains.map((item, index) => {
             const Icon = item.icon;
-
             return (
               <div
                 key={item.title}
-                className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                className="group border-t border-[#C2C8C2] pt-6 hover:border-[#172C21] transition-colors duration-300"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-300/15 text-amber-200">
-                  <Icon className="h-6 w-6" />
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#172C21]/8 text-[#172C21] group-hover:bg-[#172C21] group-hover:text-white transition-colors duration-300">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]/30">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-white">{item.title}</h3>
+                <h3 className="text-base font-semibold text-[#1C1C18] leading-tight">
+                  {item.title}
+                </h3>
               </div>
             );
           })}
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

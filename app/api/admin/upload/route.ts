@@ -1,18 +1,61 @@
-import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import sharp from "sharp";
-import { createClient } from '@supabase/supabase-js';
 
-// Lazy initialization
-const getSupabase = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-  return createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseKey || 'placeholder');
-};
+export const maxDuration = 30;
+export const dynamic = "force-dynamic";
+
+// Helper to check if we can write to local filesystem
+async function tryLocalUpload(buffer: Buffer, filename: string): Promise<string | null> {
+  try {
+    // Dynamic imports to avoid issues on edge/serverless
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const { existsSync } = await import("fs");
+
+    const uploadsDir = path.join(process.cwd(), "public", "uploads");
+    if (!existsSync(uploadsDir)) {
+      await fs.mkdir(uploadsDir, { recursive: true });
+    }
+    const filePath = path.join(uploadsDir, filename);
+    await fs.writeFile(filePath, buffer);
+    return `/uploads/${filename}`;
+  } catch {
+    return null;
+  }
+}
+
+// Helper to try Supabase upload
+async function trySupabaseUpload(buffer: Buffer, filename: string, mimeType: string): Promise<string | null> {
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+    if (!supabaseUrl || supabaseUrl.includes("placeholder") || supabaseUrl === "") {
+      return null;
+    }
+
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const { error } = await supabase.storage.from("uploads").upload(filename, buffer, {
+      contentType: mimeType,
+      upsert: true,
+    });
+
+    if (error) {
+      console.error("[UPLOAD] Supabase error:", error.message);
+      return null;
+    }
+
+    const { data } = supabase.storage.from("uploads").getPublicUrl(filename);
+    return data.publicUrl;
+  } catch (e) {
+    console.error("[UPLOAD] Supabase exception:", e);
+    return null;
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = getSupabase();
     // Verify session
     const session = req.cookies.get("admin_session");
     if (!session || session.value !== "authenticated") {
@@ -23,56 +66,47 @@ export async function POST(req: NextRequest) {
     const file = formData.get("file") as File;
 
     if (!file) {
-      console.warn(`[UPLOAD_FAILED] No file provided in payload`);
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    console.info(`[UPLOAD_START] Received file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
-
-    // Check size limit (50MB) manually in case standard Next.js body limits are bypassed
-    if (file.size > 50 * 1024 * 1024) {
-      console.warn(`[UPLOAD_FAILED] File exceeds 50MB limit: ${file.size} bytes`);
-      return NextResponse.json({ error: "File exceeds 50MB limit" }, { status: 413 });
+    // 10MB limit for base64 safety
+    const MAX_SIZE = 10 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json({ error: "File too large. Maximum size is 10MB." }, { status: 413 });
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-
-    // Create unique filename
+    const mimeType = file.type || "image/jpeg";
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `admin-upload-${uniqueSuffix}.webp`; // Always convert to WebP
+    const filename = `upload-${uniqueSuffix}.${ext}`;
 
-    // Optimize image using sharp
-    console.info(`[UPLOAD_OPTIMIZE] Compressing and converting to WebP...`);
-    const optimizedBuffer = await sharp(buffer)
-      .resize({ width: 2000, withoutEnlargement: true }) // Max width 2000px
-      .webp({ quality: 85 })
-      .toBuffer();
+    console.info(`[UPLOAD] Processing: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
 
-    // Upload to Supabase Storage
-    const { data, error } = await supabase.storage
-      .from('uploads')
-      .upload(filename, optimizedBuffer, {
-        contentType: 'image/webp',
-        upsert: true,
-      });
-
-    if (error) {
-      console.error('Supabase upload error:', error);
-      throw new Error(`Failed to upload to Supabase: ${error.message}`);
+    // Strategy 1: Try Supabase (cloud storage - best for Vercel)
+    const supabaseUrl = await trySupabaseUpload(buffer, filename, mimeType);
+    if (supabaseUrl) {
+      console.info("[UPLOAD] ✅ Supabase storage success");
+      return NextResponse.json({ url: supabaseUrl }, { status: 201 });
     }
 
-    // Get public URL
-    const { data: { publicUrl } } = supabase.storage
-      .from('uploads')
-      .getPublicUrl(filename);
+    // Strategy 2: Try local filesystem (works on VPS/self-hosted)
+    const localUrl = await tryLocalUpload(buffer, filename);
+    if (localUrl) {
+      console.info("[UPLOAD] ✅ Local filesystem success");
+      return NextResponse.json({ url: localUrl }, { status: 201 });
+    }
 
-    console.info(`[UPLOAD_SUCCESS] Saved optimized image to: ${publicUrl}`);
+    // Strategy 3: Base64 data URI (works EVERYWHERE - no external deps)
+    // This is the nuclear option that ALWAYS works
+    const base64 = buffer.toString("base64");
+    const dataUri = `data:${mimeType};base64,${base64}`;
+    console.info("[UPLOAD] ✅ Base64 data URI fallback success");
+    return NextResponse.json({ url: dataUri }, { status: 201 });
 
-    revalidatePath('/', 'layout');
-    return NextResponse.json({ url: publicUrl }, { status: 201 });
   } catch (error: any) {
-    console.error("[UPLOAD_ERROR] Failed to process upload:", error.message);
-    return NextResponse.json({ error: "Failed to upload and optimize file" }, { status: 500 });
+    console.error("[UPLOAD] Fatal error:", error?.message || error);
+    return NextResponse.json({ error: `Upload failed: ${error?.message || "Unknown error"}` }, { status: 500 });
   }
 }
