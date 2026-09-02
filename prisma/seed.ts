@@ -34,17 +34,19 @@ const S = (v: unknown) => JSON.stringify(v);
 /* -------------------------------------------------------------------------- */
 /*  Experience categories (drives /experiences grid + nav)                    */
 /* -------------------------------------------------------------------------- */
+// The ten homepage "How many will you experience?" cards — each is a real
+// category page at /experiences/<slug> with its own set of places below.
 const EXPERIENCE_CATEGORIES = [
-  ["Adventure", "adventure", "Trek, raft, climb, camp and challenge your limits.", "Mountain", IMG.mountains],
-  ["Nature & Wildlife", "wildlife", "Explore national parks, wildlife and rich biodiversity.", "PawPrint", IMG.wildlife],
-  ["Heritage & History", "heritage", "Walk through centuries of history and timeless architecture.", "Landmark", IMG.taj],
-  ["Art & Culture", "culture", "Immerse in art, music, dance and cultural traditions.", "Music", IMG.craft],
-  ["Food & Local Life", "food", "Eat like a local and discover the stories behind the food.", "Utensils", IMG.food],
-  ["Wellness", "wellness", "Rejuvenate your mind, body and soul in serene places.", "Heart", IMG.lake],
-  ["Rural Experiences", "rural", "Live in villages and experience the simplicity of rural India.", "Home", IMG.village],
-  ["Community Experiences", "community", "Engage, interact and create impactful connections.", "Users", IMG.student],
-  ["Photography", "photography", "Capture landscapes, people and moments that inspire.", "Camera", IMG.meadow],
-  ["Sustainability", "sustainability", "Travel responsibly and support people and the planet.", "Leaf", IMG.forest],
+  ["Walk the Himalayas", "walk-the-himalayas", "Discover resilience. High passes, alpine meadows and the quiet of the world's youngest mountains.", "Mountain", IMG.mountains],
+  ["Eat Like a Local", "eat-like-a-local", "Discover culture. Home kitchens, street corners and thali traditions across India's regions.", "Utensils", IMG.food],
+  ["Meet the Makers", "meet-the-makers", "Discover livelihoods. Weavers, potters, block-printers and bell-makers, hands-on in their workshops.", "Hammer", IMG.craft],
+  ["Live Rural India", "live-rural-india", "Discover community. Homestays and farm days in villages where life moves at its own pace.", "Home", IMG.village],
+  ["Follow the Rivers", "follow-the-rivers", "Discover civilisation. The Ganga, the Zanskar and the backwaters — India's stories are written on water.", "Waves", IMG.rafting],
+  ["Enter the Wild", "enter-the-wild", "Discover biodiversity. Tigers, one-horned rhinos, elephants and the forests that hold them.", "PawPrint", IMG.wildlife],
+  ["Walk Through Living History", "living-history", "Discover the past. Forts that never fell, stepwells, and cities layered a thousand years deep.", "Landmark", IMG.taj],
+  ["Understand India's Spirituality", "indias-spirituality", "Discover belief & tradition. Aartis, monasteries, dargahs and the everyday sacred.", "Sparkles", IMG.forest],
+  ["Learn an Indian Art", "learn-an-indian-art", "Discover creativity. Sit with a master of miniature painting, Kathak, madhubani or the sitar.", "Palette", IMG.craft],
+  ["Listen to India's Stories", "indias-stories", "Discover people. Oral epics, puppet theatre and the storytellers who keep them alive.", "MessageCircle", IMG.student],
 ] as const;
 
 /* -------------------------------------------------------------------------- */
@@ -308,16 +310,16 @@ const HERO_JOURNEYS = [
 /*  "India has 1.4 billion stories" homepage grid                             */
 /* -------------------------------------------------------------------------- */
 const HOMEPAGE_CARDS = [
-  ["Walk the Himalayas", "Discover resilience", "Mountain", "/journeys/treks", IMG.mountains],
-  ["Eat Like a Local", "Discover culture", "Utensils", "/experiences/food", IMG.food],
-  ["Meet the Makers", "Discover livelihoods", "Hammer", "/journeys/experiential/kutch", IMG.craft],
-  ["Live Rural India", "Discover community", "Home", "/experiences/rural", IMG.village],
-  ["Follow the Rivers", "Discover civilisation", "Waves", "/journeys/experiential/rishikesh", IMG.rafting],
-  ["Enter the Wild", "Discover biodiversity", "PawPrint", "/experiences/wildlife", IMG.wildlife],
-  ["Walk Through Living History", "Discover the past", "Landmark", "/journeys/experiential/rajasthan", IMG.rajasthan],
-  ["Understand India's Spirituality", "Discover belief & tradition", "Sparkles", "/experiences/ganga-aarti-rishikesh", IMG.forest],
-  ["Learn an Indian Art", "Discover creativity", "Palette", "/experiences/culture", IMG.craft],
-  ["Listen to India's Stories", "Discover people", "MessageCircle", "/stories", IMG.student],
+  ["Walk the Himalayas", "Discover resilience", "Mountain", "/experiences/walk-the-himalayas", IMG.mountains],
+  ["Eat Like a Local", "Discover culture", "Utensils", "/experiences/eat-like-a-local", IMG.food],
+  ["Meet the Makers", "Discover livelihoods", "Hammer", "/experiences/meet-the-makers", IMG.craft],
+  ["Live Rural India", "Discover community", "Home", "/experiences/live-rural-india", IMG.village],
+  ["Follow the Rivers", "Discover civilisation", "Waves", "/experiences/follow-the-rivers", IMG.rafting],
+  ["Enter the Wild", "Discover biodiversity", "PawPrint", "/experiences/enter-the-wild", IMG.wildlife],
+  ["Walk Through Living History", "Discover the past", "Landmark", "/experiences/living-history", IMG.rajasthan],
+  ["Understand India's Spirituality", "Discover belief & tradition", "Sparkles", "/experiences/indias-spirituality", IMG.forest],
+  ["Learn an Indian Art", "Discover creativity", "Palette", "/experiences/learn-an-indian-art", IMG.craft],
+  ["Listen to India's Stories", "Discover people", "MessageCircle", "/experiences/indias-stories", IMG.student],
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -432,86 +434,241 @@ const DESTINATIONS = [
 /* -------------------------------------------------------------------------- */
 /*  Attractions / experiences detail                                          */
 /* -------------------------------------------------------------------------- */
-const ATTRACTIONS = [
-  {
-    slug: "taj-mahal", title: "Taj Mahal", category: "Heritage",
-    description: "The white-marble mausoleum on the Yamuna — a Mughal love letter and a UNESCO World Heritage Site.",
-    history: "Commissioned by Shah Jahan in 1631 for Mumtaz Mahal; completed in 1653 by around 20,000 artisans.",
-    heroImage: IMG.taj, gallery: S([IMG.taj]),
-    activities: S(["Sunrise photography", "Marble-inlay workshop in Agra", "Mehtab Bagh sunset view"]),
-    location: "Agra", state: "Uttar Pradesh", bestTime: "October – March, at sunrise",
-    entryFee: "₹1,100 (foreign) / ₹50 (Indian) + ₹200 main mausoleum", timings: "Sunrise to sunset, closed Fridays",
-    travelTips: S(["Enter from the East Gate to skip queues.", "Fridays are closed for prayers.", "No tripods or large bags."]),
-    packages: S(["rajasthan"]),
-    faqs: S([{ question: "How long to spend?", answer: "2–3 hours including security and the gardens." }]),
-    published: true, featured: true, displayOrder: 1,
-  },
-  {
-    slug: "jim-corbett", title: "Jim Corbett National Park", category: "Wildlife",
-    description: "India's oldest national park and the birthplace of Project Tiger, in the Himalayan foothills.",
-    history: "Established in 1936 as Hailey National Park; renamed in 1956 after the hunter-turned-conservationist Jim Corbett.",
-    heroImage: "/images/wildlife/jim-corbett.png", gallery: S(["/images/wildlife/jim-corbett.png", IMG.wildlife]),
-    activities: S(["Dhikala zone jeep safari", "Canter safari", "Birdwatching on the Ramganga", "Corbett museum, Kaladhungi"]),
-    location: "Ramnagar", state: "Uttarakhand", bestTime: "November – June (Dhikala mid-Nov to mid-Jun)",
-    entryFee: "Safari ₹4,500–6,000 per jeep (zone dependent)", timings: "Morning & afternoon safari slots",
-    travelTips: S(["Book Dhikala zone 45 days ahead.", "Carry ID — it's checked at the gate.", "Wear muted colours on safari."]),
-    packages: S([]),
-    faqs: S([{ question: "Best zone for tigers?", answer: "Dhikala and Bijrani have the highest sighting rates." }]),
-    published: true, featured: true, displayOrder: 2,
-  },
-  {
-    slug: "ganga-aarti-rishikesh", title: "Ganga Aarti, Rishikesh", category: "Spiritual",
-    description: "The nightly fire ceremony on the ghats at Parmarth Niketan and Triveni Ghat.",
-    history: "A Vedic ritual of light offered to the river; Rishikesh's version is led by ashram students each evening.",
-    heroImage: IMG.forest, gallery: S([IMG.forest, IMG.rishikesh]),
-    activities: S(["Attend the evening Aarti", "Sunrise yoga on the sand", "Beatles Ashram street art"]),
-    location: "Rishikesh", state: "Uttarakhand", bestTime: "Year-round, arrive 45 min early",
-    entryFee: "Free", timings: "Around sunset (≈18:00 summer, ≈17:30 winter)",
-    travelTips: S(["Sit on the Parmarth Niketan steps for the best view.", "Remove shoes before the ghat.", "Photography is fine but be respectful."]),
-    packages: S(["rishikesh"]),
-    faqs: S([{ question: "Which ghat is better?", answer: "Parmarth Niketan is more organised; Triveni Ghat is more local." }]),
-    published: true, featured: false, displayOrder: 3,
-  },
-  {
-    slug: "rann-of-kutch", title: "Rann of Kutch", category: "Natural",
-    description: "A seasonal salt marsh the size of a small country that dries into a blinding white plain each winter.",
-    history: "Once a shallow arm of the Arabian Sea; the 1819 earthquake raised the 'Allah Bund' and cut it off.",
-    heroImage: IMG.kutch, gallery: S([IMG.kutch, IMG.village]),
-    activities: S(["Full-moon walk on the salt flats", "Kalo Dungar viewpoint", "Rann Utsav tent city (Nov–Feb)"]),
-    location: "Dhordo", state: "Gujarat", bestTime: "November – February, near a full moon",
-    entryFee: "Rann permit ≈ ₹100 per person", timings: "Best at sunset and moonrise",
-    travelTips: S(["Base yourself in Bhuj or the Rann Utsav tent city.", "Nights are cold — carry a jacket.", "The permit checkpost closes by 22:00."]),
-    packages: S(["kutch"]),
-    faqs: S([{ question: "Can you drive onto the salt?", answer: "Only to the marked viewing area; the rest is protected." }]),
-    published: true, featured: false, displayOrder: 4,
-  },
-  {
-    slug: "key-monastery", title: "Key Monastery", category: "Heritage",
-    description: "Spiti's largest gompa, stacked like a fort on a hill above the Spiti River at 4,166 m.",
-    history: "Founded in the 11th century; rebuilt many times after Mongol raids, fires and earthquakes.",
-    heroImage: IMG.spiti2, gallery: S([IMG.spiti2, IMG.spiti, IMG.mountains]),
-    activities: S(["Morning prayers with the monks", "Stay overnight in the guest rooms", "Photograph it from the Kaza road"]),
-    location: "Kaza", state: "Himachal Pradesh", bestTime: "June – September",
-    entryFee: "Donation-based", timings: "06:00 – 18:00",
-    travelTips: S(["Attend the 07:00 prayer if you stay over.", "It's a 12 km detour from Kaza.", "Altitude is real here — go slow."]),
-    packages: S(["spiti-valley"]),
-    faqs: S([{ question: "Can tourists stay?", answer: "Yes, simple rooms with meals for a donation." }]),
-    published: true, featured: false, displayOrder: 5,
-  },
-  {
-    slug: "munnar-tea-estates", title: "Munnar Tea Estates", category: "Natural",
-    description: "Rolling green tea gardens at 1,600 m in the Western Ghats, planted by the British from the 1880s.",
-    history: "The Kannan Devan Hills were leased in 1877; Tata Tea and KDHP still run the estates today.",
-    heroImage: IMG.kerala, gallery: S([IMG.kerala, IMG.forest]),
-    activities: S(["Tea Museum & tasting", "Kolukkumalai sunrise (highest estate)", "Eravikulam NP for the Nilgiri tahr"]),
-    location: "Munnar", state: "Kerala", bestTime: "September – March",
-    entryFee: "Tea Museum ₹20; Eravikulam ₹125", timings: "Museum 09:00 – 16:00, closed Mondays",
-    travelTips: S(["Neelakurinji blooms once every 12 years (next ~2030).", "Mornings are clearest before the mist.", "Book Eravikulam tickets online."]),
-    packages: S(["kerala"]),
-    faqs: S([{ question: "How far from Kochi?", answer: "About 4 hours by road, climbing through spice country." }]),
-    published: true, featured: false, displayOrder: 6,
-  },
+const U2 = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=80`;
+
+type ARaw = {
+  cat: string;
+  slug: string;
+  title: string;
+  location: string;
+  state: string;
+  desc: string;
+  img: string;
+  history?: string;
+  activities: string[];
+  bestTime: string;
+  entryFee?: string;
+  timings?: string;
+  tips: string[];
+  packages?: string[];
+  faqs?: { question: string; answer: string }[];
+};
+
+const ATTRACTION_DATA: ARaw[] = [
+  /* ── Walk the Himalayas ─────────────────────────────────────────────── */
+  { cat: "walk-the-himalayas", slug: "hampta-pass-crossover", title: "Hampta Pass Crossover", location: "Manali", state: "Himachal Pradesh",
+    desc: "A four-day walk that starts in the green Kullu Valley and drops you into the moonscape of Lahaul on the far side of a 14,000 ft pass.",
+    img: U2("1483921020237-2ff51e8e4b22"), activities: ["Cross the pass at 14,100 ft", "Camp at Balu ka Ghera & Shea Goru", "Side trip to Chandratal Lake", "Wildflower meadows in Jul–Aug"],
+    bestTime: "June – September", entryFee: "Forest fee ≈ ₹200", tips: ["Two dry pairs of socks minimum.", "The river crossing on day 3 is cold and early.", "Acclimatise a night in Manali first."], packages: ["hampta-pass-trek"] },
+  { cat: "walk-the-himalayas", slug: "triund-ridge-walk", title: "Triund Ridge Walk", location: "McLeod Ganj", state: "Himachal Pradesh",
+    desc: "A short, steep climb to a grassy ridge with the whole Dhauladhar range filling the sky — doable as a day hike or an overnight.",
+    img: U2("1454496522488-7a8e488e8606"), activities: ["9 km round trip from Dharamkot", "Sunset over the Kangra Valley", "Overnight in a tent or the forest hut", "Continue to Snowline Café / Laka Glacier"],
+    bestTime: "March – June, September – November", entryFee: "Free", tips: ["Carry water — the last shop is at Magic View Café.", "Nights are cold year-round on the ridge.", "Start by 8 am in summer for shade."] },
+  { cat: "walk-the-himalayas", slug: "chopta-chandrashila", title: "Chopta & Chandrashila Summit", location: "Chopta", state: "Uttarakhand",
+    desc: "A meadow hamlet often called 'mini Switzerland', and a dawn climb to Tungnath — the highest Shiva temple in the world — and the Chandrashila peak above it.",
+    img: U2("1470071459604-3b5ec3a7fe05"), activities: ["Pre-dawn climb to Chandrashila (4,000 m)", "Tungnath, highest of the Panch Kedar", "Deoria Tal lake reflection walk", "Rhododendron forest in April"],
+    bestTime: "March – June, September – November", entryFee: "Free", tips: ["Leave camp by 4 am for the summit sunrise.", "The temple closes in winter; the trail stays open with snow.", "Chopta has only basic dhaba stays."] },
+  { cat: "walk-the-himalayas", slug: "kheerganga-hot-springs", title: "Kheerganga Hot Springs", location: "Parvati Valley", state: "Himachal Pradesh",
+    desc: "A half-day forest climb along the Parvati river to a natural hot spring at 3,000 m, with a temple pool and wide valley views.",
+    img: U2("1441974231531-c6227db76b6e"), activities: ["12 km round-trip hike from Barshaini", "Soak in the sulphur hot spring", "Waterfalls and pine forest en route", "Camp or stay in a stone guesthouse"],
+    bestTime: "April – November", entryFee: "Free", tips: ["Start from Barshaini, not Kalga, for the gentler trail.", "Carry a torch — the descent takes longer than you think.", "Respect the separate men's and women's bathing times."] },
+
+  /* ── Eat Like a Local ───────────────────────────────────────────────── */
+  { cat: "eat-like-a-local", slug: "old-delhi-food-walk", title: "Old Delhi Food Walk", location: "Chandni Chowk, Delhi", state: "Delhi",
+    desc: "A three-hour graze through the lanes of Shahjahanabad — parathe wali gali, century-old jalebi, kachoris and the kebabs of Matia Mahal.",
+    img: U2("1585937421612-70a008356fbe"), activities: ["Paranthe Wali Gali breakfast", "Old Famous Jalebi Wala", "Karim's & Matia Mahal kebabs", "Spice market at Khari Baoli"],
+    bestTime: "October – March, mornings or evenings", entryFee: "Walk from ₹1,500 pp incl. tastings", timings: "Shops open ~9 am; kebab lane best after sunset", tips: ["Come hungry and pace yourself across 6–8 stops.", "Carry cash in small notes.", "Fridays are busy near Jama Masjid."] },
+  { cat: "eat-like-a-local", slug: "amritsar-langar-and-kulcha", title: "Amritsar Langar & Kulcha", location: "Amritsar", state: "Punjab",
+    desc: "Roll chapatis in the world's largest free kitchen at the Golden Temple, then eat amritsari kulcha and lassi where locals do.",
+    img: U2("1516026672322-bc52d61a55d5"), activities: ["Volunteer (seva) in the Golden Temple langar", "Amritsari kulcha at Kulcha Land", "Kesar da Dhaba for dal", "Jallianwala Bagh next door"],
+    bestTime: "October – March", entryFee: "Free (langar & temple)", timings: "Langar runs 24 hours", tips: ["Cover your head; scarves are provided at the entrance.", "Seva slots are informal — just join a station.", "Early morning is calmest for the temple."] },
+  { cat: "eat-like-a-local", slug: "mumbai-street-food-crawl", title: "Mumbai Street-Food Crawl", location: "Mumbai", state: "Maharashtra",
+    desc: "Vada pav at a station stall, bhel on Chowpatty, and a bun-maska with chai in a fading Irani café — the city eaten standing up.",
+    img: U2("1585937421612-70a008356fbe"), activities: ["Vada pav & misal pav", "Bhelpuri on Girgaon Chowpatty", "Irani café bun-maska & chai", "Mohammed Ali Road in Ramzan"],
+    bestTime: "November – February; evenings", entryFee: "Guided crawl from ₹1,800 pp", timings: "Beach stalls best 5–9 pm", tips: ["Pick busy stalls with high turnover.", "Ask for less spice if you're unsure.", "Local trains between stops are part of the fun off-peak."] },
+  { cat: "eat-like-a-local", slug: "kerala-sadya-cooking-class", title: "Kerala Sadya Cooking Class", location: "Fort Kochi", state: "Kerala",
+    desc: "Cook a full vegetarian feast — avial, thoran, sambar, olan and payasam — with a home cook, then eat it off a banana leaf.",
+    img: U2("1602216056096-3b40cc0c9944"), activities: ["Market visit for coconut & curry leaves", "Grinding a fresh masala", "Plating a banana-leaf sadya", "Payasam and filter coffee to finish"],
+    bestTime: "September – March", entryFee: "Class from ₹2,000 pp", timings: "Half-day, morning or afternoon", tips: ["Come on an empty stomach.", "Vegan and Jain versions are easy to arrange.", "You'll leave with the recipe card."], packages: ["kerala"] },
+
+  /* ── Meet the Makers ────────────────────────────────────────────────── */
+  { cat: "meet-the-makers", slug: "nirona-copper-bells", title: "Nirona Copper Bells", location: "Nirona, Kutch", state: "Gujarat",
+    desc: "The Luhar family has tuned copper-coated iron bells by ear for seven generations. Spend a morning at the forge and take home one you helped shape.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Watch a bell hand-forged and tuned", "Try the coating and firing yourself", "Rogan art demo next door", "Lacquer-turning in the same village"],
+    bestTime: "November – February", entryFee: "Workshop ≈ ₹500 pp", timings: "9 am – 5 pm", tips: ["Nirona is 40 km from Bhuj — pair it with Ajrakhpur.", "Bells are graded by pitch, not size.", "Cash only in the village."], packages: ["kutch"] },
+  { cat: "meet-the-makers", slug: "bhujodi-handloom-weaving", title: "Bhujodi Handloom Weaving", location: "Bhujodi, Kutch", state: "Gujarat",
+    desc: "A weavers' village where Vankar families work pit looms in their courtyards. Sit at a loom, throw a few shuttles, and understand why a shawl takes days.",
+    img: U2("1524492412937-b28074a5d7da"), activities: ["Try weaving on a pit loom", "Natural-dye demonstration", "Vankar Vishram Valji's studio & museum", "Bhirandiyara for mawa on the way"],
+    bestTime: "November – February", entryFee: "Studio visit free; workshop ≈ ₹800", timings: "10 am – 6 pm", tips: ["Ask before photographing inside homes.", "Buy directly from the weaver, not the highway shops.", "The Kala Raksha museum is nearby."], packages: ["kutch"] },
+  { cat: "meet-the-makers", slug: "blue-pottery-jaipur", title: "Blue Pottery Studio, Jaipur", location: "Jaipur", state: "Rajasthan",
+    desc: "A Persian craft that reached Jaipur via Kashmir and Delhi, made with no clay at all — quartz, glass and borax. Throw, paint and glaze your own tile.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Shape a piece from the quartz dough", "Paint the cobalt-blue motifs", "Tour a working kiln", "Kripal Kumbh legacy studio"],
+    bestTime: "October – March", entryFee: "Workshop from ₹1,200 pp", timings: "Half-day sessions", tips: ["Pieces are fired later and shipped — allow 2 weeks.", "Combine with a walk through the pink-city bazaars.", "The blue comes from cobalt; the green from copper."], packages: ["rajasthan"] },
+  { cat: "meet-the-makers", slug: "channapatna-lacquer-toys", title: "Channapatna Lacquer Toys", location: "Channapatna", state: "Karnataka",
+    desc: "The 'toy town' between Bengaluru and Mysuru, where ivory-wood is turned on a lathe and coloured with food-safe lac. A GI craft kept alive by co-operatives.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Turn a spinning top on a hand lathe", "Watch lac colour applied by friction", "Visit the Maya Organic / Bharat Ratna workshops", "Toy market on the highway"],
+    bestTime: "Year-round", entryFee: "Workshop ≈ ₹600 pp", timings: "9:30 am – 5 pm", tips: ["Ask for the natural-dye pieces.", "It's an easy day trip from Bengaluru (60 km).", "Great for gifts for kids — non-toxic by design."] },
+
+  /* ── Live Rural India ───────────────────────────────────────────────── */
+  { cat: "live-rural-india", slug: "spiti-homestay-network", title: "Spiti Homestay Network", location: "Demul & Komic, Spiti", state: "Himachal Pradesh",
+    desc: "A rotation-based homestay system in villages above 4,000 m that spreads income evenly and lets you live a Spitian day — yak, barley, butter tea and all.",
+    img: U2("1595815771614-ade9d652a65d"), activities: ["Help with the morning farm chores", "Yak ride between Demul and Lhalung", "Fossil hunting near Langza", "Komic — one of the world's highest villages"],
+    bestTime: "June – September", entryFee: "Homestay ≈ ₹1,200 pp incl. meals", timings: "—", tips: ["Only BSNL has signal; treat it as a detox.", "Carry cash; there are no ATMs past Kaza.", "Nights drop below freezing even in summer."], packages: ["spiti-valley"] },
+  { cat: "live-rural-india", slug: "hodka-bhungas", title: "Hodka Bhunga Village", location: "Hodka, Kutch", state: "Gujarat",
+    desc: "A community-run resort of mud-and-mirror bhungas on the edge of the Banni grasslands, staffed and owned by the village.",
+    img: U2("1516026672322-bc52d61a55d5"), activities: ["Stay in a hand-painted bhunga", "Meghwal and Mutwa embroidery demos", "Sunset at the White Rann (25 km)", "Folk music around the fire"],
+    bestTime: "November – February", entryFee: "Stay from ₹3,000 per bhunga", timings: "—", tips: ["Book ahead in the Rann Utsav season.", "The grasslands are good for birding at dawn.", "Profits go back into village schools and water."], packages: ["kutch"] },
+  { cat: "live-rural-india", slug: "mawlynnong-cleanest-village", title: "Mawlynnong", location: "Mawlynnong", state: "Meghalaya",
+    desc: "Asia's 'cleanest village' — a Khasi community that runs its own tourism, composts everything, and grows living-root bridges from rubber-fig roots.",
+    img: U2("1614531341773-3bff8b7cb3fc"), activities: ["Walk to the single-decker living-root bridge", "Climb the bamboo Sky View tower", "Balancing Rock", "Homestay with a Khasi family"],
+    bestTime: "October – April", entryFee: "Village entry ≈ ₹50", timings: "—", tips: ["It's 90 km from Shillong on a winding road.", "The double-decker bridge is at Nongriat, a separate trek.", "Carry your waste out — the village will notice."] },
+  { cat: "live-rural-india", slug: "kumbalangi-model-village", title: "Kumbalangi Model Village", location: "Kumbalangi, Kochi", state: "Kerala",
+    desc: "India's first eco-tourism village — a backwater island of coir-makers, clam-collectors and Chinese fishing nets, 20 minutes from Fort Kochi.",
+    img: U2("1602216056096-3b40cc0c9944"), activities: ["Operate a Chinese fishing net", "Coir-spinning and toddy-tapping", "Crab farm and clam-picking", "Canoe through the mangroves"],
+    bestTime: "September – March", entryFee: "Experiences ≈ ₹400 each", timings: "Day visits", tips: ["Go by ferry for the scenic approach.", "Lunch is a village home's fish curry.", "Sunset over the nets is the shot."], packages: ["kerala"] },
+
+  /* ── Follow the Rivers ──────────────────────────────────────────────── */
+  { cat: "follow-the-rivers", slug: "ganga-rafting-rishikesh", title: "Ganga Rafting, Rishikesh", location: "Rishikesh", state: "Uttarakhand",
+    desc: "The classic 16 km run from Brahmapuri to Rishikesh — Grade II–III rapids with names like Roller Coaster and Golf Course, plus a cliff jump.",
+    img: U2("1530866495561-507c9faab2ed"), activities: ["16 km rafting with a cliff jump", "Body-surfing a calm stretch", "Kayak clinic for beginners", "Riverside camp on the sand"],
+    bestTime: "September – June (closed in the monsoon)", entryFee: "From ₹600 pp for the 16 km stretch", timings: "Slots from ~9 am", tips: ["Non-swimmers are fine — life jackets and guides.", "Wear quick-dry clothes and secure your glasses.", "The 26 km run from Marine Drive is for stronger groups."], packages: ["rishikesh"] },
+  { cat: "follow-the-rivers", slug: "zanskar-chadar-walk", title: "The Chadar — Frozen Zanskar", location: "Zanskar, Ladakh", state: "Ladakh",
+    desc: "For a few weeks in deep winter the Zanskar river freezes into a walkable sheet of ice through a gorge — the only route the Zanskaris had for centuries.",
+    img: U2("1519681393784-d120267933ba"), activities: ["Walk the ice between vertical cliffs", "Camp in riverside caves", "The frozen Nerak waterfall", "Meet Zanskari families en route"],
+    bestTime: "Mid-January – mid-February", entryFee: "Permits & ALTOA fees apply", timings: "Multi-day expedition", tips: ["Temperatures hit −25 °C; this needs real preparation.", "Mandatory acclimatisation and medical check in Leh.", "Ice conditions change daily — the guide decides the route."], packages: ["chadar-trek"] },
+  { cat: "follow-the-rivers", slug: "alleppey-backwater-houseboat", title: "Alleppey Backwater Houseboat", location: "Alappuzha", state: "Kerala",
+    desc: "A night on a converted rice barge (kettuvallam), drifting past paddy fields below sea level, toddy shops and villages that face the water.",
+    img: U2("1602216056096-3b40cc0c9944"), activities: ["Overnight on a kettuvallam", "Village canoe ride into the narrow canals", "Karumadi and Kuttanad paddy country", "Sunset with fresh karimeen fry"],
+    bestTime: "September – March", entryFee: "Houseboats from ₹8,000 per night", timings: "Board ~12 pm, disembark ~9 am", tips: ["A weekday booking dodges the boat traffic.", "Ask for a boat that actually moves, not a moored one.", "Smaller boats reach the prettier back-canals."], packages: ["kerala"] },
+  { cat: "follow-the-rivers", slug: "majuli-brahmaputra-island", title: "Majuli — Brahmaputra River Island", location: "Majuli", state: "Assam",
+    desc: "One of the world's largest river islands and the heart of Assam's neo-Vaishnavite culture, with monastic satras that teach mask-making and dance.",
+    img: U2("1614531341773-3bff8b7cb3fc"), activities: ["Ferry across the Brahmaputra from Nimati Ghat", "Samaguri Satra mask-making", "Mishing tribal stilt-house stay", "Sunrise birding on the sandbars"],
+    bestTime: "November – March", entryFee: "Ferry ≈ ₹15; satra donations", timings: "Ferries run morning & afternoon only", tips: ["The island shrinks every year to erosion — go soon.", "Cycle or scooter to get between satras.", "Raas Leela in November is the big festival."] },
+
+  /* ── Enter the Wild ─────────────────────────────────────────────────── */
+  { cat: "enter-the-wild", slug: "ranthambhore-tiger-safari", title: "Ranthambhore Tiger Safari", location: "Sawai Madhopur", state: "Rajasthan",
+    desc: "Tigers among the ruins of a 10th-century fort and its lakes — one of the best places in India to actually see one in daylight.",
+    img: U2("1549366021-9f761d450615"), activities: ["Morning & afternoon jeep/canter safari", "Zones 1–5 around the lakes", "Ranthambhore Fort walk", "Village Walk with a local naturalist"],
+    bestTime: "October – June (April–June for sightings)", entryFee: "Jeep safari from ₹1,800 pp", timings: "Two fixed slots, dawn and mid-afternoon", tips: ["Book safaris 90 days out — permits sell fast.", "Zones 1–5 are the core; 6–10 are quieter.", "Carry a zoom lens and neutral clothes."], packages: ["rajasthan"] },
+  { cat: "enter-the-wild", slug: "kaziranga-rhino-safari", title: "Kaziranga Rhino Safari", location: "Kaziranga", state: "Assam",
+    desc: "Two-thirds of the world's one-horned rhinos live in this floodplain of the Brahmaputra, alongside wild buffalo, elephants and a dense tiger population.",
+    img: U2("1549366021-9f761d450615"), activities: ["Elephant-back safari at dawn (Central range)", "Jeep safari in Western & Eastern ranges", "Birding at the Eastern range beels", "Tea-estate stay on the park edge"],
+    bestTime: "November – April (park closed in the monsoon)", entryFee: "Jeep ≈ ₹2,300; elephant ≈ ₹1,500 pp", timings: "Morning & afternoon slots", tips: ["The Central (Kohora) range has the highest rhino density.", "Fly to Jorhat, 1.5 hrs away.", "Layers — dawn is cold on the grassland."] },
+  { cat: "enter-the-wild", slug: "sundarbans-mangrove-boat", title: "Sundarbans Mangrove Boat Safari", location: "Sundarbans", state: "West Bengal",
+    desc: "The largest mangrove forest on earth and the only one with tigers that swim. You explore it slowly, by boat, through a maze of tidal channels.",
+    img: U2("1441974231531-c6227db76b6e"), activities: ["Slow boat through the tidal creeks", "Sajnekhali and Sudhanyakhali watchtowers", "Village folk-theatre on Bonbibi", "Sunrise from the boat deck"],
+    bestTime: "November – February", entryFee: "Permit + boat ≈ ₹1,500 pp/day", timings: "Overnight boat or lodge trips", tips: ["Tiger sightings are rare — come for the ecosystem.", "Irrawaddy dolphins in the wider channels.", "Carry binoculars; distances on the water are large."] },
+  { cat: "enter-the-wild", slug: "periyar-bamboo-rafting", title: "Periyar Bamboo Rafting", location: "Thekkady", state: "Kerala",
+    desc: "A quiet day rafting and trekking inside the Periyar Tiger Reserve with former poachers turned guides — the reserve's model conservation programme.",
+    img: U2("1602216056096-3b40cc0c9944"), activities: ["Bamboo raft on Periyar Lake", "Guided forest trek with ex-poacher guides", "Elephant and gaur herds at the shore", "Border Hiking and Jungle Patrol options"],
+    bestTime: "September – March", entryFee: "Bamboo rafting ≈ ₹2,000 pp", timings: "Full-day, starts ~8 am", tips: ["Book the eco-tourism programmes, not the boat-jetty crowd.", "Leeches after rain — carry socks and salt.", "Groups are capped small; reserve ahead."], packages: ["kerala"] },
+
+  /* ── Walk Through Living History ────────────────────────────────────── */
+  { cat: "living-history", slug: "taj-mahal", title: "Taj Mahal", location: "Agra", state: "Uttar Pradesh",
+    desc: "The white-marble mausoleum on the Yamuna — a Mughal love letter and a UNESCO World Heritage Site that still stops people mid-sentence.",
+    history: "Commissioned by Shah Jahan in 1631 for Mumtaz Mahal; completed around 1653 by some 20,000 artisans and a thousand elephants.",
+    img: U2("1564507592333-c60657eea523"), activities: ["Sunrise entry from the East Gate", "Marble-inlay (pietra dura) workshop in Agra", "Mehtab Bagh sunset view across the river", "Agra Fort, where Shah Jahan was imprisoned"],
+    bestTime: "October – March, at sunrise", entryFee: "₹50 (Indian) / ₹1,100 (foreign) + ₹200 mausoleum", timings: "Sunrise to sunset, closed Fridays", tips: ["East Gate has the shortest queues at opening.", "Only phones and small cameras inside the mausoleum.", "Allow 2–3 hours including security."], packages: ["rajasthan", "taj-mahal"] },
+  { cat: "living-history", slug: "mehrangarh-fort", title: "Mehrangarh Fort", location: "Jodhpur", state: "Rajasthan",
+    desc: "A fort that grows straight out of a 120 m cliff over the blue city — and one of the best-run museum forts in India.",
+    history: "Founded by Rao Jodha in 1459 when he moved the Marwar capital; expanded over five centuries by successive Rathore rulers.",
+    img: U2("1477587458883-47145ed94245"), activities: ["Audio-guided museum tour", "Zip-line over the fort walls", "Blue-city walk below the ramparts", "Chokelao Bagh stepped garden"],
+    bestTime: "October – March", entryFee: "≈ ₹100 (Indian) / ₹600 (foreign)", timings: "9 am – 5 pm", tips: ["The audio guide is genuinely good — take it.", "Go early; the courtyards get hot by noon.", "RIFF music festival is around Sharad Purnima (Oct)."], packages: ["rajasthan"] },
+  { cat: "living-history", slug: "hampi-ruins", title: "Hampi", location: "Hampi", state: "Karnataka",
+    desc: "The boulder-strewn capital of the Vijayanagara empire — temples, a stone chariot, elephant stables and a river you cross by coracle.",
+    history: "Capital of the Vijayanagara empire from 1336; one of the richest cities in the world before it was sacked in 1565 and abandoned.",
+    img: U2("1477587458883-47145ed94245"), activities: ["Virupaksha Temple & the Hampi Bazaar", "Vittala Temple stone chariot and musical pillars", "Sunrise from Matanga Hill", "Coracle ride across the Tungabhadra"],
+    bestTime: "October – February", entryFee: "Combined ticket ≈ ₹40 (Indian) / ₹600 (foreign)", timings: "6 am – 6 pm", tips: ["Rent a cycle or scooter — the site is spread over 25 km².", "The Hippie Island side has the sunset spots.", "Two full days does it justice."] },
+  { cat: "living-history", slug: "rani-ki-vav-stepwell", title: "Rani ki Vav Stepwell", location: "Patan", state: "Gujarat",
+    desc: "An 11th-century stepwell built as an inverted temple, seven storeys down, with over 500 principal sculptures. On the ₹100 note for a reason.",
+    history: "Commissioned around 1063 by Queen Udayamati in memory of King Bhima I; silted over by the Saraswati river and only fully excavated in the 1980s.",
+    img: U2("1524492412937-b28074a5d7da"), activities: ["Descend the seven sculpted levels", "Spot the Dashavatara panels", "Sahastralinga Talav water tank nearby", "Patan patola double-ikat weaving in town"],
+    bestTime: "November – February", entryFee: "≈ ₹40 (Indian) / ₹600 (foreign)", timings: "8 am – 6 pm", tips: ["Morning light reaches deepest into the well.", "Combine with the Modhera Sun Temple, 30 km away.", "Patan is 2 hours from Ahmedabad."] },
+
+  /* ── Understand India's Spirituality ───────────────────────────────── */
+  { cat: "indias-spirituality", slug: "ganga-aarti-varanasi", title: "Ganga Aarti, Varanasi", location: "Varanasi", state: "Uttar Pradesh",
+    desc: "The nightly fire ceremony at Dashashwamedh Ghat, best watched from a boat as the whole riverfront of the world's oldest living city lights up.",
+    history: "Varanasi (Kashi) has been a pilgrimage centre for at least 3,000 years; the organised evening aarti in its current form dates to the 1990s.",
+    img: U2("1591017403286-fd8493524e1e"), activities: ["Evening aarti from a rowboat", "Sunrise boat past the bathing ghats", "Walk the galis to the Kashi Vishwanath corridor", "Sarnath, where the Buddha first taught (10 km)"],
+    bestTime: "October – March", entryFee: "Free; shared boat ≈ ₹150 pp", timings: "Aarti ~6:45 pm (earlier in winter)", tips: ["Reach the ghat or boat 45 minutes early.", "Manikarnika is a cremation ghat — no photos.", "A local guide makes the old-city lanes navigable."] },
+  { cat: "indias-spirituality", slug: "golden-temple-amritsar", title: "Golden Temple", location: "Amritsar", state: "Punjab",
+    desc: "Harmandir Sahib — a gold-leafed shrine on a lake, open on all four sides, where 100,000 people are fed free every day and anyone can help.",
+    history: "The pool was completed in 1577 by Guru Ram Das; the central shrine by Guru Arjan in 1604, who installed the first copy of the Guru Granth Sahib.",
+    img: U2("1516026672322-bc52d61a55d5"), activities: ["Pre-dawn Palki Sahib ceremony", "Seva (volunteering) in the langar or dish hall", "Walk the parikrama around the sarovar", "Partition Museum, 10 minutes away"],
+    bestTime: "October – March", entryFee: "Free", timings: "Open 24 hours; quietest 4–6 am", tips: ["Heads must be covered; scarves at the entrance.", "Leave shoes at the free counter and wash your feet.", "The night is the most peaceful time to visit."] },
+  { cat: "indias-spirituality", slug: "hemis-monastery", title: "Hemis Monastery", location: "Hemis, Ladakh", state: "Ladakh",
+    desc: "The largest and wealthiest gompa in Ladakh, hidden in a gorge, famous for its two-day masked Cham dance festival in early summer.",
+    history: "Re-established in 1672 under King Sengge Namgyal; the Hemis festival honours Guru Padmasambhava and runs on the 10th day of the Tibetan lunar month.",
+    img: U2("1544735716-392fe2489ffa"), activities: ["Cham masked dances (Hemis Tsechu, Jun–Jul)", "The monastery museum's thangkas", "Short hike to Gotsang hermitage", "Combine with Thiksey and Shey on the same road"],
+    bestTime: "June – September (festival in Jun/Jul)", entryFee: "≈ ₹100", timings: "8 am – 6 pm", tips: ["Festival dates shift each year with the lunar calendar.", "Arrive early on festival days for a courtyard spot.", "It's 45 km south of Leh."] },
+  { cat: "indias-spirituality", slug: "bodh-gaya-mahabodhi", title: "Mahabodhi Temple, Bodh Gaya", location: "Bodh Gaya", state: "Bihar",
+    desc: "The place where the Buddha attained enlightenment, marked by a descendant of the original Bodhi tree and monasteries built by every Buddhist nation.",
+    history: "The current temple dates largely to the 5th–6th century Gupta period, on a site marked by Emperor Ashoka around 250 BCE. A UNESCO World Heritage Site.",
+    img: U2("1441974231531-c6227db76b6e"), activities: ["Meditate under the Bodhi tree", "Walk the ring of national monasteries", "80 ft Great Buddha Statue", "Dungeshwari caves, where the Buddha fasted"],
+    bestTime: "October – March", entryFee: "Free; camera ≈ ₹100", timings: "5 am – 9 pm", tips: ["Winter mornings are misty and cold — carry a shawl.", "The Dalai Lama often teaches here in December–January.", "Gaya is the nearest railhead and airport."] },
+
+  /* ── Learn an Indian Art ───────────────────────────────────────────── */
+  { cat: "learn-an-indian-art", slug: "miniature-painting-udaipur", title: "Mewar Miniature Painting", location: "Udaipur", state: "Rajasthan",
+    desc: "Sit with a family that has painted in the Mewar style for generations, grind your own colours from stone and gold, and complete a small painting on hand-made paper.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Make squirrel-hair brushes and mineral paint", "Learn the 'wasli' paper and burnishing", "Paint a small elephant or peacock", "Studio visits around Lake Pichola"],
+    bestTime: "October – March", entryFee: "Half-day class from ₹1,500 pp", timings: "Morning or afternoon", tips: ["No experience needed — beginners finish a piece.", "The fine detail is done with a one- or two-hair brush.", "Pair it with a City Palace visit."], packages: ["rajasthan"] },
+  { cat: "learn-an-indian-art", slug: "kathakali-behind-the-scenes", title: "Kathakali — Behind the Makeup", location: "Fort Kochi", state: "Kerala",
+    desc: "Arrive early to watch performers spend two hours applying rice-paste and pigment, learn the eye and hand vocabulary, then see the story performed.",
+    img: U2("1602216056096-3b40cc0c9944"), activities: ["Watch the chutti makeup being built up", "Learn the nine navarasa expressions", "Try a few mudras (hand gestures)", "Full evening performance with percussion"],
+    bestTime: "September – March", entryFee: "Show + demo ≈ ₹500 pp", timings: "Makeup from ~5 pm, show ~6:30 pm", tips: ["Kerala Kathakali Centre and See India Foundation both run daily shows.", "Sit close for the eye work.", "The green face is a hero; red is a villain."], packages: ["kerala"] },
+  { cat: "learn-an-indian-art", slug: "madhubani-painting-bihar", title: "Madhubani (Mithila) Painting", location: "Madhubani", state: "Bihar",
+    desc: "A folk tradition painted by women on the walls of Mithila for weddings and festivals, now on paper. Learn the line-work and natural colours from a village artist.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Learn the kachni (line) and bharni (fill) styles", "Make colour from turmeric, soot and flowers", "Paint a fish or a wedding kohbar motif", "Visit painted homes in Jitwarpur / Ranti"],
+    bestTime: "October – March", entryFee: "Workshop from ₹1,000 pp", timings: "Half or full day", tips: ["The double line filled with hatching is the signature.", "Buy directly from the artists' co-operatives.", "Darbhanga is the nearest airport."] },
+  { cat: "learn-an-indian-art", slug: "hindustani-music-varanasi", title: "Sitar & Tabla in Varanasi", location: "Varanasi", state: "Uttar Pradesh",
+    desc: "The Benares gharana city. Take an introductory lesson from a teaching family, understand raga and taal, and end with a small private recital by the river.",
+    img: U2("1591017403286-fd8493524e1e"), activities: ["First lesson on sitar or tabla", "Learn to count a teentaal cycle", "Attend a rooftop mehfil", "Instrument-making workshop visit"],
+    bestTime: "October – March", entryFee: "Single lesson from ₹800 pp", timings: "By appointment", tips: ["No musical background needed for a taster.", "Ask about the Dhrupad Mela in February–March.", "The ITC Sangeet Research Academy has archives worth seeing."] },
+
+  /* ── Listen to India's Stories ─────────────────────────────────────── */
+  { cat: "indias-stories", slug: "dastangoi-delhi", title: "Dastangoi — Urdu Epic Storytelling", location: "Delhi", state: "Delhi",
+    desc: "A 13th-century oral form — two narrators in white, no props, telling the vast Dastan-e-Amir Hamza. Nearly lost, revived in Delhi since 2005.",
+    img: U2("1522202176988-66273c2fd55f"), activities: ["Attend a live dastangoi baithak", "Q&A with the dastango on the form", "A short try at narrating a tilism (enchantment)", "Old Delhi walk to the poets' haunts"],
+    bestTime: "October – March (performance season)", entryFee: "Tickets ≈ ₹300–500", timings: "Evening baithaks", tips: ["Some understanding of Hindi/Urdu helps but isn't essential.", "Venues: India Habitat Centre, Alliance Française, private havelis.", "Follow Dastangoi Collective for dates."] },
+  { cat: "indias-stories", slug: "kaavad-storytelling-rajasthan", title: "Kaavad Portable-Shrine Storytelling", location: "Bassi", state: "Rajasthan",
+    desc: "The kaavad is a red wooden box that folds open into panel after painted panel; the kaavadiya bhat opens each door and sings the family and epic stories inside.",
+    img: U2("1477587458883-47145ed94245"), activities: ["A full kaavad recitation", "Meet the Suthar makers who build the boxes", "Paint a small panel yourself", "Bassi wood-craft workshops"],
+    bestTime: "October – March", entryFee: "Session ≈ ₹800 pp", timings: "By arrangement", tips: ["Bassi is 25 km from Chittorgarh.", "The storyteller and the box-maker are different castes — you can meet both.", "Ask for the Ramayana kaavad; it's the most elaborate."] },
+  { cat: "indias-stories", slug: "tholu-bommalata-shadow-puppets", title: "Tholu Bommalata Shadow Puppets", location: "Nimmalakunta", state: "Andhra Pradesh",
+    desc: "Translucent goat-hide puppets up to 1.8 m tall, coloured and perforated, throwing coloured shadows on a lamplit screen as the Ramayana is sung all night.",
+    img: U2("1528323273322-d81458248d40"), activities: ["Evening shadow-puppet performance", "Watch a puppet cut and dyed from hide", "Try manipulating a puppet behind the screen", "The Dharmavaram silk-weaving town nearby"],
+    bestTime: "November – February", entryFee: "Performance ≈ ₹500 pp", timings: "After dark", tips: ["Nimmalakunta is the surviving puppeteer village, near Anantapur.", "The families now also make lampshades to stay afloat — buy one.", "Performances are traditionally all night; ask for a short set."] },
+  { cat: "indias-stories", slug: "patua-scroll-singers-bengal", title: "Patua Scroll Singers", location: "Naya, Pingla", state: "West Bengal",
+    desc: "In one village, families paint long vertical scrolls (patachitra) and then sing them — each frame a verse — on subjects from myth to the news.",
+    img: U2("1524492412937-b28074a5d7da"), activities: ["A patua unrolls and sings a scroll", "Watch a scroll painted with natural colour", "The annual POT Maya festival (November)", "Paint on a terracotta pot or a sari border"],
+    bestTime: "October – March (festival in November)", entryFee: "Song + scroll demo ≈ ₹400 pp", timings: "Daytime visits", tips: ["Naya is 2.5 hours from Kolkata via Pingla.", "The whole village paints — walk in and knock.", "Buy a scroll straight from the singer."] },
 ];
+
+const ATTRACTIONS = ATTRACTION_DATA.map((a, i) => ({
+  slug: a.slug,
+  title: a.title,
+  category: a.cat,
+  description: a.desc,
+  history: a.history || "",
+  heroImage: a.img,
+  gallery: S([a.img, IMG.mountains, IMG.village]),
+  activities: S(a.activities),
+  location: a.location,
+  state: a.state,
+  bestTime: a.bestTime,
+  entryFee: a.entryFee || "Varies — enquire",
+  timings: a.timings || "",
+  travelTips: S(a.tips),
+  nearbyHotels: S([]),
+  restaurants: S([]),
+  packages: S(a.packages || []),
+  faqs: S(a.faqs || []),
+  seoTitle: `${a.title} | Ibex Adventure`,
+  seoDescription: a.desc.slice(0, 155),
+  published: true,
+  featured: i % 10 < 3,
+  displayOrder: i + 1,
+}));
 
 /* -------------------------------------------------------------------------- */
 /*  Memories / stories gallery                                                */
@@ -620,6 +777,9 @@ async function main() {
     });
   });
 
+  await prisma.adventureCategory.deleteMany({
+    where: { slug: { notIn: EXPERIENCE_CATEGORIES.map((c) => c[1]) } },
+  });
   await upsertMany("AdventureCategory (experience categories)", [...EXPERIENCE_CATEGORIES], async ([title, slug, description, icon, image], ) => {
     await prisma.adventureCategory.upsert({
       where: { slug },
@@ -669,9 +829,12 @@ async function main() {
     });
   });
 
-  /* Destinations + Attractions */
+  /* Destinations + Attractions (drop rows no longer in the seed) */
   await upsertMany("Destination", DESTINATIONS, async (d) => {
     await prisma.destination.upsert({ where: { slug: d.slug }, update: d, create: d });
+  });
+  await prisma.attraction.deleteMany({
+    where: { slug: { notIn: ATTRACTIONS.map((a) => a.slug) } },
   });
   await upsertMany("Attraction", ATTRACTIONS, async (a) => {
     await prisma.attraction.upsert({ where: { slug: a.slug }, update: a, create: a });
