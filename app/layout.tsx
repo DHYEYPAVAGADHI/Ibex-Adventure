@@ -111,7 +111,6 @@ export default async function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={`${garamond.variable} ${hanken.variable} font-sans antialiased`}
-        style={{ backgroundColor: "#FCF9F2", color: "#1C1C18" }}
       >
         <SettingsProvider initialSettings={{ logoUrl: settings?.logoUrl || null }}>
           <ContactProvider initialContactInfo={contactInfo}>

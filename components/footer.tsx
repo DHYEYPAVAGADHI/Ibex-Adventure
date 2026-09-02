@@ -4,17 +4,25 @@ import { buildTelLink } from "@/lib/contact";
 import { prisma } from "@/lib/prisma";
 
 const exploreLinks = [
-  { label: "Discover", href: "/#programs" },
-  { label: "Programs", href: "/#programs" },
-  { label: "Destinations", href: "/#destinations" },
-  { label: "Attractions", href: "/#attractions" },
-  { label: "About", href: "/#about" },
+  { label: "Experiences", href: "/experiences" },
+  { label: "Journeys", href: "/journeys" },
+  { label: "Learn", href: "/for-colleges" },
+  { label: "About Us", href: "/#about" },
+  { label: "Stories", href: "/#stories" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const infoLinks = [
-  { label: "Our Story", href: "/our-story" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Enquire", href: "/contact" },
+const destinationLinks = [
+  { label: "India", href: "/destinations/india" },
+  { label: "Nepal", href: "/destinations/nepal" },
+  { label: "Bhutan", href: "/destinations/bhutan" },
+  { label: "Sri Lanka", href: "/destinations/sri-lanka" },
+];
+
+const legalLinks = [
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Cancellation Policy", href: "/cancellation" },
 ];
 
 export async function Footer() {
@@ -33,7 +41,7 @@ export async function Footer() {
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
   return (
-    <footer style={{ backgroundColor: "#172C21" }}>
+    <footer style={{ backgroundColor: "var(--color-forest)" }}>
       {/* Main footer content */}
       <div className="container-shell py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
@@ -59,13 +67,12 @@ export async function Footer() {
               )}
             </Link>
 
-            <p className="text-sm font-light leading-7 text-white/55 max-w-xs">
-              Premium adventure programs, trekking expeditions, and student immersion 
-              tours designed for endurance, discovery, and transformation.
+            <p className="text-sm font-bold uppercase tracking-wider text-white mt-4">
+              Start your journey today.
             </p>
 
-            {/* Gold rule */}
-            <div className="mt-8 h-px w-16 bg-[#D4AF37]/40" />
+            {/* Rule */}
+            <div className="mt-8 h-px w-16 bg-white/20" />
           </div>
 
           {/* Explore column */}
@@ -87,13 +94,32 @@ export async function Footer() {
             </ul>
           </div>
 
-          {/* Information column */}
+          {/* Destinations column */}
           <div>
             <h4 className="mb-6 text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-              Information
+              Destinations
             </h4>
             <ul className="space-y-3">
-              {infoLinks.map((link) => (
+              {destinationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-light text-white/65 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal column */}
+          <div>
+            <h4 className="mb-6 text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+              Legal
+            </h4>
+            <ul className="space-y-3">
+              {legalLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -120,7 +146,7 @@ export async function Footer() {
                   className="group flex items-start gap-3 text-white/65 hover:text-white transition-colors"
                   aria-label="View office location"
                 >
-                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#D4AF37]" />
+                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--color-accent-green)]" />
                   <span className="text-sm font-light leading-6 max-w-[200px]">{address}</span>
                 </a>
               </li>
@@ -130,7 +156,7 @@ export async function Footer() {
                   className="flex items-center gap-3 text-sm font-light text-white/65 hover:text-white transition-colors"
                   aria-label="Call Ibex Adventure"
                 >
-                  <Phone className="h-4 w-4 flex-shrink-0 text-[#D4AF37]" />
+                  <Phone className="h-4 w-4 flex-shrink-0 text-[var(--color-accent-green)]" />
                   {phone}
                 </a>
               </li>
@@ -140,7 +166,7 @@ export async function Footer() {
                   className="flex items-center gap-3 text-sm font-light text-white/65 hover:text-white transition-colors"
                   aria-label="Email Ibex Adventure"
                 >
-                  <Mail className="h-4 w-4 flex-shrink-0 text-[#D4AF37]" />
+                  <Mail className="h-4 w-4 flex-shrink-0 text-[var(--color-accent-green)]" />
                   {email}
                 </a>
               </li>

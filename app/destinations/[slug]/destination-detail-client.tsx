@@ -279,9 +279,8 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                 </button>
                 <button
                   onClick={() => setWishlist(!wishlist)}
-                  className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all backdrop-blur-md ${
-                    wishlist ? "border-red-400/50 bg-red-400/20 text-red-400" : "border-white/20 bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                  }`}
+                  className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all backdrop-blur-md ${wishlist ? "border-red-400/50 bg-red-400/20 text-red-400" : "border-white/20 bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                    }`}
                   title="Add to Wishlist"
                 >
                   <Heart className={`h-5 w-5 ${wishlist ? "fill-red-400" : ""}`} />
@@ -598,11 +597,10 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     <button
                       key={tab.key}
                       onClick={() => setReachTab(tab.key)}
-                      className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${
-                        reachTab === tab.key
+                      className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${reachTab === tab.key
                           ? "bg-[#172C21] text-white border border-[#172C21]"
                           : "text-[#424844] border border-[#C2C8C2] hover:text-[#172C21] hover:border-[#172C21]"
-                      }`}
+                        }`}
                     >
                       <tab.icon className="h-4 w-4" />
                       {tab.label}

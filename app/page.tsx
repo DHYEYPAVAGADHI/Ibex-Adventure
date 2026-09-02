@@ -90,17 +90,12 @@ export default function Home() {
       <main>
         <Navbar />
         <HeroSection />
-        <DiscoverySection />
-        <DestinationsSection />
-        <AttractionsSection />
         <AboutSection />
+        <AttractionsSection />
         <ProgramsSection />
-        <StudentGainsSection />
-        <TestimonialsSection />
         <SafetySection />
-        <ProgramDetailsSection />
+        <TestimonialsSection />
         <CtaSection />
-        <ContactSection />
       </main>
     </>
   );

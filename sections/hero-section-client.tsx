@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronRight, Play } from "lucide-react";
 import { globalEasing } from "@/components/animated-section";
 
 export interface HeroSectionClientProps {
@@ -19,77 +19,10 @@ export interface HeroSectionClientProps {
   images: string[];
 }
 
-/* ──────────────────────────────────────────
-   Animated word flip — cinematic editorial
-────────────────────────────────────────── */
-function AnimatedWord({ words }: { words: string[] }) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (words.length < 2) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [words.length]);
-
-  return (
-    <span className="relative block h-[1.15em] w-full overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          className="absolute left-0 top-0 text-[#D4AF37]"
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -40, opacity: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {words[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
-/* ──────────────────────────────────────────
-   Split headline helper
-────────────────────────────────────────── */
-function splitHeadline(
-  headline: string,
-  prefix?: string,
-  scrollWords?: string[]
-): { prefix: string; words: string[] } {
-  if (prefix && scrollWords && scrollWords.length > 0) {
-    return { prefix, words: scrollWords };
-  }
-  const parts = (headline || "Adventure Awaits").trim().split(/\s+/);
-  if (parts.length >= 2) {
-    const lastWord = parts[parts.length - 1];
-    const prefixPart = parts.slice(0, -1).join(" ");
-    const words =
-      scrollWords && scrollWords.length > 0
-        ? scrollWords
-        : [lastWord, "Journeys", "Experiences", "Expeditions", "Treks", "Escapes"];
-    return { prefix: prefixPart, words };
-  }
-  return {
-    prefix: headline || "Incredible",
-    words: scrollWords && scrollWords.length > 0 ? scrollWords : ["Adventures", "Journeys", "Experiences"],
-  };
-}
-
-/* ──────────────────────────────────────────
-   Main hero client component
-────────────────────────────────────────── */
 export function HeroSectionClient({
   variant,
   headline,
-  headlinePrefix,
-  scrollWords,
   subtitle,
-  description,
-  buttonText,
-  buttonLink,
   images,
 }: HeroSectionClientProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -112,25 +45,20 @@ export function HeroSectionClient({
     return () => clearInterval(timer);
   }, [images.length]);
 
-  const { prefix, words } =
-    variant === "home"
-      ? splitHeadline(headline || "Incredible Adventures", headlinePrefix, scrollWords)
-      : { prefix: headline || "", words: [] };
-
   return (
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen overflow-hidden bg-[#172C21]"
+      className="relative min-h-[100vh] overflow-hidden bg-[#111]"
     >
-      {/* Background slideshow with subtle Ken Burns */}
+      {/* Background slideshow */}
       <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
         <AnimatePresence initial={false}>
           <motion.div
             key={currentIndex}
             className="absolute inset-0"
             initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1.05 }}
             exit={{ opacity: 0 }}
             transition={{
               opacity: { duration: 1.8, ease: "easeInOut" },
@@ -143,7 +71,7 @@ export function HeroSectionClient({
                   ? images[currentIndex]
                   : "/placeholder.svg"
               }
-              alt="Ibex Adventure — India's premium expedition company"
+              alt="Ibex Adventure"
               fill
               priority
               className="object-cover object-center"
@@ -153,131 +81,105 @@ export function HeroSectionClient({
           </motion.div>
         </AnimatePresence>
 
-        {/* Cinematic overlays — lighter than before, preserves photography */}
-        <div className="absolute inset-0 bg-[#172C21]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/10 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/55 to-transparent" />
+        {/* Overlays matching the screenshot's darker cinematic tone */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
       </motion.div>
 
       {/* Hero content */}
       <motion.div
-        className="relative z-10 flex min-h-screen flex-col items-start justify-center px-5 pb-32 pt-28 md:px-16 lg:px-24"
+        className="relative z-10 flex min-h-screen flex-col items-start justify-center px-6 md:px-16 lg:px-24 pt-32 pb-20"
         style={{ y: textY, opacity: overlayOpacity }}
       >
-        <div className="max-w-3xl">
-          {/* Eyebrow */}
-          {subtitle && variant === "home" && (
-            <motion.p
-              className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#D4AF37]"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: globalEasing, delay: 0.1 }}
-            >
-              {subtitle}
-            </motion.p>
-          )}
-
+        <div className="max-w-[800px] w-full">
           {variant === "category" ? (
-            /* Category hero — large script title */
+            /* Category hero */
             <>
               {subtitle && (
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#D4AF37]">
+                <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#86A857]">
                   {subtitle}
                 </p>
               )}
-              <h1 className="font-serif text-6xl font-normal leading-tight text-white drop-shadow-2xl md:text-8xl lg:text-9xl capitalize">
+              <h1 className="font-sans text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl uppercase tracking-tight">
                 {headline}
               </h1>
             </>
           ) : (
-            /* Home hero — animated headline */
+            /* Home hero EXACT MATCH */
             <>
               <motion.h1
-                className="mb-6 flex flex-col font-serif font-normal leading-[1.05] text-white drop-shadow-lg overflow-visible"
-                initial={{ opacity: 0, y: 32 }}
+                className="mb-8 flex flex-col font-sans font-black leading-[1.05] text-white uppercase tracking-tighter drop-shadow-xl"
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: globalEasing, delay: 0.2 }}
+                transition={{ duration: 0.8, ease: globalEasing }}
               >
-                {/* Static prefix */}
-                <span className="text-[clamp(2.5rem,7vw,5rem)]">{prefix}</span>
-                {/* Animated word */}
-                <span className="text-[clamp(2.5rem,7vw,5rem)]">
-                  <AnimatedWord words={words} />
+                <span className="text-[clamp(3rem,8vw,6.5rem)]">INDIA IS NOT</span>
+                <span className="text-[clamp(3rem,8vw,6.5rem)]">A DESTINATION.</span>
+                <span className="text-[clamp(3rem,8vw,6.5rem)] text-[#86A857] italic font-serif -mt-2">
+                  IT'S AN EXPERIENCE.
                 </span>
               </motion.h1>
 
-              {description && (
-                <motion.p
-                  className="mb-10 max-w-xl text-base text-white/85 leading-relaxed font-light md:text-lg"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.9, ease: globalEasing, delay: 0.45 }}
-                >
-                  {description}
-                </motion.p>
-              )}
-
-              {/* CTA buttons */}
               <motion.div
-                className="flex flex-wrap items-center gap-4"
+                className="mb-8 text-white/90 text-lg md:text-xl font-medium leading-relaxed max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: globalEasing, delay: 0.65 }}
+                transition={{ duration: 0.8, ease: globalEasing, delay: 0.2 }}
               >
-                <Link
-                  href={buttonLink}
-                  className="inline-flex items-center gap-2.5 rounded-full bg-[#D4AF37] px-8 py-4 text-sm font-semibold text-[#172C21] transition-all hover:bg-[#FED65B] hover:shadow-xl hover:shadow-[#D4AF37]/30"
-                >
-                  {buttonText}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href="#about"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-white/75 underline underline-offset-4 transition-colors hover:text-white"
-                >
-                  Our Story
-                </a>
+                Travel beyond sightseeing.<br />
+                Experience places. Meet people.<br />
+                Discover stories. Learn from the journey.
+              </motion.div>
+
+              <motion.p
+                className="mb-12 text-[#86A857] text-lg md:text-xl font-bold tracking-wide"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: globalEasing, delay: 0.3 }}
+              >
+                Travel. Experience. Learn.
+              </motion.p>
+
+              {/* Buttons row */}
+              <motion.div
+                className="flex flex-wrap items-center justify-between w-full gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: globalEasing, delay: 0.4 }}
+              >
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/journeys"
+                    className="inline-flex items-center gap-2 rounded bg-[#5D7C3F] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432]"
+                  >
+                    EXPLORE JOURNEYS
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 rounded border border-white/50 bg-black/20 backdrop-blur-sm px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white/10"
+                  >
+                    PLAN YOUR JOURNEY
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+
+                {/* Watch Our Story */}
+                <button className="group flex items-center gap-4 hover:opacity-80 transition-opacity">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg shadow-white/20">
+                    <Play className="h-5 w-5 ml-1 text-black" fill="currentColor" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold tracking-wider text-white uppercase">WATCH OUR STORY</p>
+                    <p className="text-xs text-white/60">#ExperienceIBEX</p>
+                  </div>
+                </button>
               </motion.div>
             </>
           )}
         </div>
       </motion.div>
-
-      {/* Slide indicators */}
-      {images.length > 1 && (
-        <div className="absolute bottom-20 left-5 z-20 flex gap-2 md:left-16">
-          {images.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              className={`h-[2px] transition-all duration-500 ease-out ${
-                idx === currentIndex ? "w-10 bg-[#D4AF37]" : "w-5 bg-white/35 hover:bg-white/60"
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Scroll indicator */}
-      {variant === "home" && (
-        <motion.div
-          className="absolute bottom-8 right-5 z-20 flex flex-col items-center gap-2 md:right-16"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-        >
-          <span className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/50 [writing-mode:vertical-rl]">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          >
-            <ChevronDown className="h-4 w-4 text-white/40" />
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   );
 }

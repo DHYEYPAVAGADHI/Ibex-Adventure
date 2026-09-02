@@ -1,60 +1,46 @@
-import { HeartPulse, Shield, Siren, TentTree, UserRoundCheck } from "lucide-react";
+"use client";
 
-const safetyItems = [
-  { label: "Trained trip leaders", icon: UserRoundCheck, description: "Every expedition led by qualified outdoor professionals." },
-  { label: "Certified guides", icon: Shield, description: "Locally certified guides with deep regional knowledge." },
-  { label: "First aid support", icon: HeartPulse, description: "Medical kit and trained first-responders on every trip." },
-  { label: "Emergency protocols", icon: Siren, description: "Clear emergency response plans for every destination." },
-  { label: "Safe accommodations", icon: TentTree, description: "Vetted, safe, and comfortable stays throughout." },
-] as const;
+import { Shield, PlusSquare, Radio, Phone, TreePine, Mountain } from "lucide-react";
+
+const SAFETY_FEATURES = [
+  { icon: <Mountain className="w-8 h-8" />, label: "35 YEARS OF\nEXPERIENCE" },
+  { icon: <Shield className="w-8 h-8" />, label: "RISK\nMANAGEMENT" },
+  { icon: <PlusSquare className="w-8 h-8" />, label: "WFR\nCERTIFIED" },
+  { icon: <Phone className="w-8 h-8" />, label: "SAT\nPHONES" },
+  { icon: <Radio className="w-8 h-8" />, label: "VHF\nRADIOS" },
+  { icon: <TreePine className="w-8 h-8" />, label: "LEAVE NO\nTRACE" },
+];
 
 export function SafetySection() {
   return (
-    <section
-      className="section-spacing"
-      style={{ backgroundColor: "#FCF9F2" }}
-    >
-      <div className="container-shell">
-        {/* Header */}
-        <div className="mb-16 grid md:grid-cols-2 md:items-end gap-8">
-          <div>
-            <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
-              Safety & Trust
-            </p>
-            <h2 className="font-serif text-5xl leading-[1.08] tracking-tight text-[#1C1C18] sm:text-6xl md:text-7xl">
-              Adventure,
+    <section id="safety" className="py-16 bg-white border-b border-[#eee]">
+      <div className="container-shell max-w-[1400px] mx-auto">
+        
+        <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-20">
+          
+          <div className="shrink-0">
+            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] md:text-3xl max-w-[300px]">
+              YOUR SAFETY.
               <br />
-              <em>Responsibly.</em>
+              <span className="text-[#86A857]">OUR RESPONSIBILITY.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-base font-light leading-7 text-[#424844] md:pb-2">
-            Every Ibex Adventure program is designed with safety as the first principle — 
-            so you can focus entirely on the experience.
-          </p>
-        </div>
 
-        <div className="h-px bg-[#C2C8C2] mb-16" />
-
-        {/* Safety items — horizontal editorial list */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {safetyItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.label}
-                className="border-t-2 border-[#172C21]/20 pt-6 hover:border-[#D4AF37] transition-colors duration-300 group"
-              >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#172C21]/8 text-[#172C21] group-hover:bg-[#172C21] group-hover:text-white transition-colors duration-300">
-                  <Icon className="h-5 w-5" />
+          <div className="flex-grow grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-4">
+            {SAFETY_FEATURES.map((feature, i) => (
+              <div key={i} className="flex flex-col items-center text-center gap-4 group">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4] text-[#444] transition-colors group-hover:bg-[#5D7C3F] group-hover:text-white">
+                  {feature.icon}
                 </div>
-                <p className="text-sm font-semibold text-[#1C1C18]">{item.label}</p>
-                <p className="mt-2 text-xs font-light leading-5 text-[#424844]/70">
-                  {item.description}
-                </p>
+                <span className="whitespace-pre-line text-[10px] font-bold uppercase tracking-widest text-[#222]">
+                  {feature.label}
+                </span>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
         </div>
+
       </div>
     </section>
   );

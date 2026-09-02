@@ -7,18 +7,20 @@
   --font-script: var(--font-script), cursive;
 
   /* ─── Editorial Color Palette ────────────── */
-  --color-ivory: #FCF9F2;
-  --color-ivory-dark: #F4EFE3;
-  --color-forest: #172C21;
-  --color-forest-mid: #2D4236;
-  --color-forest-light: #3D5A4A;
+  --color-ivory: #F7F6F1;
+  --color-ivory-dark: #FCFAF4;
+  --color-forest: #10271C;
+  --color-forest-mid: #173D27;
+  --color-forest-light: #3E6B43;
+  --color-accent-green: #7BAE45;
+  --color-light-green: #EAF1E2;
   --color-gold: #D4AF37;
   --color-gold-light: #FED65B;
   --color-gold-pale: #FBF3D5;
-  --color-text: #1C1C18;
-  --color-text-muted: #424844;
-  --color-text-light: #6B7280;
-  --color-border: #C2C8C2;
+  --color-text: #182019;
+  --color-text-muted: #59635B;
+  --color-text-light: #657067;
+  --color-border: #DDE2DA;
   --color-border-light: #E5E9E5;
 
   /* ─── Marquee Animations ─────────────────── */
@@ -71,8 +73,8 @@ body {
 
 body {
   min-height: 100vh;
-  background-color: #FCF9F2;
-  color: #1C1C18;
+  background-color: var(--color-ivory);
+  color: var(--color-text);
 }
 
 /* ─── Text Selection ─────────────────────────── */
@@ -112,7 +114,7 @@ body {
 /* ─── Editorial Dividers ─────────────────────── */
 .editorial-rule {
   border: none;
-  border-top: 1px solid #C2C8C2;
+  border-top: 1px solid var(--color-border);
   margin: 0;
 }
 
@@ -127,7 +129,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #172C21;
+  color: var(--color-forest);
 }
 
 /* ─── Scrollbar ──────────────────────────────── */

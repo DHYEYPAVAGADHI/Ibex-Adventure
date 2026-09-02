@@ -1,53 +1,104 @@
 "use client";
 
-import { useContact } from "@/components/providers/contact-provider";
-import { buildGeneralInquiry } from "@/lib/contact";
-import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Calendar, GraduationCap, Briefcase, Users, Pencil } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
+
+const CTA_OPTIONS = [
+  {
+    icon: <Calendar className="h-5 w-5 text-[#222]" />,
+    title: "JOIN AN\nUPCOMING TRIP",
+    link: "/journeys",
+  },
+  {
+    icon: <GraduationCap className="h-5 w-5 text-[#222]" />,
+    title: "PLAN A\nCOLLEGE TRIP",
+    link: "/for-colleges",
+  },
+  {
+    icon: <Briefcase className="h-5 w-5 text-[#222]" />,
+    title: "PLAN A\nCORPORATE TRIP",
+    link: "/for-corporates",
+  },
+  {
+    icon: <Users className="h-5 w-5 text-[#222]" />,
+    title: "PLAN A FAMILY /\nGROUP TRIP",
+    link: "/contact",
+  },
+  {
+    icon: <Pencil className="h-5 w-5 text-[#222]" />,
+    title: "CREATE A\nCUSTOM JOURNEY",
+    link: "/contact",
+  }
+];
 
 export function CtaSection() {
-  const { phone } = useContact();
-
   return (
-    <section
-      className="py-24 md:py-32"
-      style={{ backgroundColor: "#172C21" }}
-    >
-      <div className="container-shell">
-        <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center">
-          {/* Left — editorial statement */}
+    <section className="relative section-spacing overflow-hidden min-h-[500px] flex items-center">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <SafeImage
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80"
+          alt="Mountains"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      <div className="container-shell max-w-[1400px] mx-auto relative z-10 w-full">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-end">
+          
+          {/* Left Side: Text and Buttons */}
           <div>
-            <p className="mb-6 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">
-              Start the Journey
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#86A857]">
+              READY TO EXPERIENCE
             </p>
-            <h2 className="font-serif text-5xl font-normal leading-[1.1] text-white sm:text-6xl lg:text-7xl">
-              Let&apos;s plan your
-              <br />
-              <em className="text-[#D4AF37]">next adventure.</em>
+            <h2 className="font-sans text-4xl font-black uppercase tracking-tight text-white md:text-5xl lg:text-6xl mb-6">
+              INDIA DIFFERENTLY?
             </h2>
-            <p className="mt-6 max-w-md text-base font-light leading-7 text-white/65">
-              Share your interests and we&apos;ll craft a journey that challenges, inspires, and transforms.
+            <p className="text-white/90 text-sm md:text-base font-medium mb-8 max-w-md">
+              Tell us what you're looking for.<br/>
+              We'll design the perfect journey for you.
             </p>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded bg-[#5D7C3F] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432]"
+              >
+                PLAN YOUR JOURNEY
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded border border-white/40 bg-white/10 px-8 py-4 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              >
+                WHATSAPP IBEX
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
 
-          {/* Right — CTA */}
-          <div className="flex flex-col gap-4">
-            <a
-              href={buildGeneralInquiry(phone)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full bg-[#D4AF37] px-8 py-4 text-sm font-semibold text-[#172C21] transition-all hover:bg-[#FED65B] hover:shadow-xl hover:shadow-[#D4AF37]/30"
-            >
-              Enquire on WhatsApp
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <p className="text-xs text-white/40 text-center">
-              We respond within 2 hours
-            </p>
+          {/* Right Side: 5 Horizontal Icons */}
+          <div className="bg-white/95 backdrop-blur-md rounded-lg p-2 shadow-2xl flex flex-wrap lg:flex-nowrap justify-between gap-1">
+            {CTA_OPTIONS.map((option, i) => (
+              <Link
+                key={i}
+                href={option.link}
+                className="group flex-1 min-w-[120px] flex flex-col items-center justify-center text-center p-4 hover:bg-black/5 rounded transition-colors"
+              >
+                <div className="mb-3">
+                  {option.icon}
+                </div>
+                <h4 className="text-[9px] font-bold uppercase tracking-widest text-[#222] whitespace-pre-line leading-relaxed group-hover:text-[#5D7C3F] transition-colors">
+                  {option.title}
+                </h4>
+              </Link>
+            ))}
           </div>
+
         </div>
-
-        {/* Bottom editorial rule */}
-        <div className="mt-16 h-px bg-white/10" />
       </div>
     </section>
   );
