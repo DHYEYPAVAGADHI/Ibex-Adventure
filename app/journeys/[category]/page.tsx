@@ -1,9 +1,35 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowUpRight, Clock, MapPin, BarChart3 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
+import { PageHeader } from "@/components/page-header";
+import { SafeImage } from "@/components/safe-image";
 import { prisma } from "@/lib/prisma";
-import { ArrowRight, ChevronRight, Clock, MapPin, BarChart3 } from "lucide-react";
+
+export const revalidate = 300;
+
+async function resolveCategory(slug: string) {
+  const s = slug.toLowerCase();
+  const [activity, adv] = await Promise.all([
+    prisma.activity.findUnique({ where: { slug: s } }),
+    prisma.adventureCategory.findUnique({ where: { slug: s } }),
+  ]);
+  const title = activity?.title || adv?.title;
+  const description = activity?.description || adv?.description || null;
+  const image = activity?.image || adv?.image || null;
+  if (title) return { title, description, image };
+
+  // Fall back to any package that uses this categorySlug.
+  const pkg = await prisma.package.findFirst({ where: { categorySlug: s } });
+  if (pkg) {
+    return {
+      title: pkg.category || slug.replace(/-/g, " "),
+      description: null,
+      image: pkg.thumbnail,
+    };
+  }
+  return null;
+}
 
 export async function generateMetadata({
   params,
@@ -11,16 +37,26 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
-  const categoryData = await prisma.activity.findUnique({
-    where: { slug: category },
-  });
-  if (!categoryData) return { title: "Not Found" };
+  const data = await resolveCategory(category);
+  if (!data) return { title: "Not Found" };
   return {
-    title: categoryData.title,
-    description:
-      categoryData.description?.substring(0, 160) ||
-      "Explore with Ibex Adventure.",
+    title: data.title,
+    description: data.description?.slice(0, 160) || `${data.title} journeys with Ibex Adventure.`,
   };
+}
+
+function firstImage(p: { thumbnail: string | null; images: string | null; gallery: string | null }) {
+  if (p.thumbnail) return p.thumbnail;
+  for (const raw of [p.gallery, p.images]) {
+    if (!raw) continue;
+    try {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr[0]) return arr[0] as string;
+    } catch {
+      /* ignore */
+    }
+  }
+  return "/placeholder.svg";
 }
 
 export default async function CategoryPage({
@@ -29,200 +65,133 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
-
-  const categoryData = await prisma.activity.findUnique({
-    where: { slug: category },
-  });
-
-  if (!categoryData) notFound();
+  const data = await resolveCategory(category);
+  if (!data) notFound();
 
   const packages = await prisma.package.findMany({
-    where: { categorySlug: category, status: "active" },
+    where: { categorySlug: category.toLowerCase(), publishStatus: "Published" },
     orderBy: { displayOrder: "asc" },
   });
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: "#FCF9F2" }}>
+    <>
       <Navbar />
-
-      {/* ── Editorial Category Hero ── */}
-      <section
-        className="relative flex items-end overflow-hidden pt-28"
-        style={{
-          minHeight: "55vh",
-          background: `linear-gradient(160deg, var(--color-forest-band) 0%, #2D4236 100%)`,
-        }}
-      >
-        {/* Texture overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 40px)," +
-              "repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 40px)",
-          }}
+      <main className="bg-[var(--color-ivory)]">
+        <PageHeader
+          eyebrow="Journeys"
+          title={data.title}
+          lede={data.description || undefined}
+          image={data.image || packages[0]?.thumbnail || undefined}
+          crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Journeys", href: "/journeys" },
+            { label: data.title },
+          ]}
         />
 
-        <div className="container-shell relative z-10 pb-16">
-          {/* Breadcrumb */}
-          <nav className="mb-8 flex items-center gap-2 text-xs" aria-label="Breadcrumb">
-            <Link href="/" className="text-white/45 hover:text-white/70 transition-colors">
-              Home
-            </Link>
-            <ChevronRight className="h-3 w-3 text-white/25" />
-            <Link href="/#programs" className="text-white/45 hover:text-white/70 transition-colors">
-              Programs
-            </Link>
-            <ChevronRight className="h-3 w-3 text-white/25" />
-            <span className="text-[#D4AF37]">{categoryData.title}</span>
-          </nav>
-
-          {/* Eyebrow */}
-          <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-[#D4AF37]">
-            Adventure Program
-          </p>
-
-          {/* Title */}
-          <h1 className="font-serif text-6xl font-normal leading-tight text-white md:text-7xl lg:text-8xl">
-            {categoryData.title}
-          </h1>
-
-          {categoryData.description && (
-            <p className="mt-6 max-w-xl text-base font-light leading-7 text-white/65">
-              {categoryData.description}
-            </p>
-          )}
-
-          {/* Package count */}
-          {packages.length > 0 && (
-            <p className="mt-8 text-sm font-semibold text-white/40">
-              {packages.length} {packages.length === 1 ? "Program" : "Programs"} available
-            </p>
-          )}
-        </div>
-
-        {/* Gold bottom rule */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/30 to-[#D4AF37]/0" />
-      </section>
-
-      {/* ── Packages ── */}
-      <section className="section-spacing">
-        <div className="container-shell">
+        <section className="container-wide py-16 md:py-24">
           {packages.length > 0 ? (
             <>
-              <div className="mb-12">
-                <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-forest-band)]">
-                  Available Journeys
-                </p>
-                <h2 className="font-serif text-4xl text-[#1C1C18] sm:text-5xl">
-                  Choose your expedition.
-                </h2>
+              <div className="mb-10 flex items-end justify-between gap-4 border-b border-[var(--color-hair)] pb-5">
+                <div>
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-moss)]">
+                    Available journeys
+                  </p>
+                  <h2 className="display-hed text-3xl text-[var(--color-ink)] md:text-4xl">
+                    {packages.length} {packages.length === 1 ? "journey" : "journeys"} to choose from
+                  </h2>
+                </div>
+                <Link
+                  href="/journeys"
+                  className="hidden shrink-0 text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-moss)] hover:text-[var(--color-moss-dark)] sm:block"
+                >
+                  All journeys
+                </Link>
               </div>
 
-              <div className="h-px bg-[#C2C8C2] mb-12" />
-
-              <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-                {packages.map((place) => {
-                  let images: string[] = [];
-                  try {
-                    if (place.images) images = JSON.parse(place.images);
-                    else if (place.gallery) images = JSON.parse(place.gallery);
-                  } catch {}
-                  const displayImage =
-                    images.length > 0
-                      ? images[0]
-                      : place.banner ||
-                        place.thumbnail ||
-                        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80";
-
-                  return (
-                    <Link
-                      key={place.slug}
-                      href={`/programs/${categoryData.slug}/${place.slug}`}
-                      className="group block overflow-hidden border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-colors duration-300"
-                      style={{ borderRadius: "2px" }}
-                    >
-                      {/* Image */}
-                      <div className="relative overflow-hidden" style={{ height: "260px" }}>
-                        <Image
-                          src={
-                            typeof displayImage === "string" && displayImage.trim()
-                              ? displayImage
-                              : "/placeholder.svg"
-                          }
-                          alt={place.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        />
-
-                        {/* Difficulty badge */}
-                        {place.difficulty && (
-                          <span
-                            className={`absolute top-4 left-4 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm border ${
-                              place.difficulty.toLowerCase() === "easy"
-                                ? "bg-emerald-500/20 text-emerald-100 border-emerald-500/30"
-                                : place.difficulty.toLowerCase() === "moderate"
-                                ? "bg-amber-500/20 text-amber-100 border-amber-500/30"
-                                : "bg-red-500/20 text-red-100 border-red-500/30"
-                            }`}
-                          >
-                            {place.difficulty}
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {packages.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/journeys/${p.categorySlug}/${p.slug}`}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-hair)] bg-white transition-shadow hover:shadow-xl"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-sand)]">
+                      <SafeImage
+                        src={firstImage(p)}
+                        alt={p.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        unoptimized
+                      />
+                      {p.difficulty && (
+                        <span className="absolute left-4 top-4 rounded bg-[var(--color-forest-band)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                          {p.difficulty}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
+                        {p.location && (
+                          <span className="flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5 text-[var(--color-moss)]" />
+                            {p.location}
+                          </span>
+                        )}
+                        {p.duration && (
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3.5 w-3.5 text-[var(--color-moss)]" />
+                            {p.duration}
                           </span>
                         )}
                       </div>
-
-                      {/* Card body */}
-                      <div className="p-6" style={{ backgroundColor: "#FCF9F2" }}>
-                        {/* Meta */}
-                        <div className="mb-3 flex flex-wrap gap-3">
-                          {place.location && (
-                            <span className="flex items-center gap-1 text-xs text-[#424844]/60">
-                              <MapPin className="h-3 w-3 text-[var(--color-forest-band)]" />
-                              {place.location}
+                      <h3 className="display-hed text-xl text-[var(--color-ink)] group-hover:text-[var(--color-forest)]">
+                        {p.title}
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[var(--color-ink-muted)]">
+                        {(p.overview || p.description || "").replace(/<[^>]+>/g, "")}
+                      </p>
+                      <div className="mt-auto flex items-center justify-between pt-5">
+                        <span className="text-sm font-bold text-[var(--color-ink)]">
+                          {p.price ? (
+                            <>
+                              <span className="text-[10px] font-medium uppercase tracking-widest text-[var(--color-ink-muted)]">
+                                From{" "}
+                              </span>
+                              ₹{p.price}
+                            </>
+                          ) : (
+                            <span className="text-[11px] uppercase tracking-widest text-[var(--color-ink-muted)]">
+                              Enquire for price
                             </span>
                           )}
-                          {place.duration && (
-                            <span className="flex items-center gap-1 text-xs text-[#424844]/60">
-                              <Clock className="h-3 w-3 text-[var(--color-forest-band)]" />
-                              {place.duration}
-                            </span>
-                          )}
-                        </div>
-
-                        <h3 className="font-serif text-2xl text-[#1C1C18] leading-tight group-hover:text-[var(--color-forest-band)] transition-colors">
-                          {place.title}
-                        </h3>
-
-                        <p className="mt-3 text-sm font-light leading-6 text-[#424844] line-clamp-2">
-                          {place.overview || place.description}
-                        </p>
-
-                        <div className="mt-5 flex items-center gap-1.5 text-[var(--color-forest-band)]">
-                          <span className="text-xs font-semibold uppercase tracking-wider">
-                            Explore Program
-                          </span>
-                          <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
-                        </div>
-                        <div className="mt-3 h-px w-0 bg-[#D4AF37] group-hover:w-12 transition-all duration-500" />
+                        </span>
+                        <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-moss)]">
+                          View journey
+                          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </span>
                       </div>
-                    </Link>
-                  );
-                })}
+                    </div>
+                  </Link>
+                ))}
               </div>
             </>
           ) : (
-            <div className="py-24 text-center border border-[var(--color-hair)]">
-              <p className="font-serif text-3xl text-[#1C1C18]">
-                No programs published yet.
+            <div className="rounded-2xl border border-[var(--color-hair)] py-24 text-center">
+              <BarChart3 className="mx-auto h-8 w-8 text-[var(--color-ink-muted)]" />
+              <p className="display-hed mt-4 text-2xl text-[var(--color-ink)]">
+                No journeys here yet
               </p>
-              <p className="mt-3 text-sm font-light text-[#424844]/60">
-                Check back soon — we&apos;re adding new expeditions.
-              </p>
+              <Link
+                href="/journeys"
+                className="mt-4 inline-block text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-moss)]"
+              >
+                Browse all journeys
+              </Link>
             </div>
           )}
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }

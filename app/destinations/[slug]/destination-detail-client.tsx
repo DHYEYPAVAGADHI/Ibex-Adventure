@@ -685,7 +685,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                       <h3 className="font-semibold text-[#1C1C18] group-hover:text-[var(--color-forest-band)] transition-colors mb-1">{pkg.title}</h3>
                       {pkg.duration && <p className="text-sm text-[#424844]/60 mb-4"><Clock className="inline h-3 w-3 mr-1" />{pkg.duration}</p>}
                       <Link
-                        href={`/programs/adventure/${pkg.slug}`}
+                        href={`/journeys/adventure/${pkg.slug}`}
                         className="inline-flex items-center gap-1 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
                       >
                         View Details <ArrowRight className="h-4 w-4" />

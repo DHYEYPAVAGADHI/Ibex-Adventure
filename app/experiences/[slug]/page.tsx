@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { AttractionDetailClient } from "./attraction-detail-client";
+import { ExperienceCategoryView } from "./category-view";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const attraction = await prisma.attraction.findUnique({ where: { slug } });
 
   if (!attraction) {
-    return { title: "Attraction Not Found" };
+    const cat = await prisma.adventureCategory.findUnique({ where: { slug } });
+    if (cat) return { title: cat.title, description: cat.description };
+    return { title: "Not Found" };
   }
 
   const title = attraction.seoTitle || attraction.title;
@@ -52,6 +55,28 @@ export default async function AttractionPage({ params }: Props) {
   const attraction = await prisma.attraction.findUnique({ where: { slug } });
 
   if (!attraction || !attraction.published) {
+    // Not an attraction — maybe it's an experience category (e.g. /experiences/food).
+    const category = await prisma.adventureCategory.findUnique({ where: { slug } });
+    if (category && category.isActive) {
+      const [attractions, journeys] = await Promise.all([
+        prisma.attraction.findMany({
+          where: { published: true, category: { equals: category.title.split(" ")[0], mode: "insensitive" } },
+          take: 6,
+        }),
+        prisma.package.findMany({
+          where: { publishStatus: "Published", categorySlug: slug },
+          take: 6,
+          orderBy: { displayOrder: "asc" },
+        }),
+      ]);
+      return (
+        <ExperienceCategoryView
+          category={category}
+          attractions={attractions}
+          journeys={journeys}
+        />
+      );
+    }
     notFound();
   }
 

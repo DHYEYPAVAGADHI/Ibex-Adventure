@@ -310,12 +310,12 @@ const HERO_JOURNEYS = [
 const HOMEPAGE_CARDS = [
   ["Walk the Himalayas", "Discover resilience", "Mountain", "/journeys/treks", IMG.mountains],
   ["Eat Like a Local", "Discover culture", "Utensils", "/experiences/food", IMG.food],
-  ["Meet the Makers", "Discover livelihoods", "Hammer", "/journeys/culture/kutch", IMG.craft],
+  ["Meet the Makers", "Discover livelihoods", "Hammer", "/journeys/experiential/kutch", IMG.craft],
   ["Live Rural India", "Discover community", "Home", "/experiences/rural", IMG.village],
   ["Follow the Rivers", "Discover civilisation", "Waves", "/journeys/experiential/rishikesh", IMG.rafting],
   ["Enter the Wild", "Discover biodiversity", "PawPrint", "/experiences/wildlife", IMG.wildlife],
   ["Walk Through Living History", "Discover the past", "Landmark", "/journeys/experiential/rajasthan", IMG.rajasthan],
-  ["Understand India's Spirituality", "Discover belief & tradition", "Sparkles", "/journeys/experiential/rishikesh", IMG.forest],
+  ["Understand India's Spirituality", "Discover belief & tradition", "Sparkles", "/experiences/ganga-aarti-rishikesh", IMG.forest],
   ["Learn an Indian Art", "Discover creativity", "Palette", "/experiences/culture", IMG.craft],
   ["Listen to India's Stories", "Discover people", "MessageCircle", "/stories", IMG.student],
 ];

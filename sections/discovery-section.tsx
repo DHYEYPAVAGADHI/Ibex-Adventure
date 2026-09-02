@@ -51,7 +51,7 @@ export async function DiscoverySection() {
             return (
               <Link
                 key={category.id}
-                href={`/programs/${category.slug}`}
+                href={`/journeys/${category.slug}`}
                 className={`group block relative overflow-hidden rounded-xl bg-[var(--color-ivory)] ${spanClasses}`}
               >
                 {/* Image */}

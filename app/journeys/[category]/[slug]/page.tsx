@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -41,10 +41,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ category: string; slug: string }>;
 }) {
-  const { category, slug } = await params;
+  const { slug } = await params;
   const pkg = await prisma.package.findUnique({ where: { slug } });
-  if (!pkg || pkg.categorySlug !== category.toLowerCase())
-    return { title: "Not Found" };
+  if (!pkg) return { title: "Not Found" };
   return {
     title: pkg.title,
     description:
@@ -63,20 +62,11 @@ export default async function PackagePage({
 
   const pkg = await prisma.package.findUnique({ where: { slug } });
 
-  if (pkg && pkg.categorySlug !== category.toLowerCase()) notFound();
-  if (!pkg) {
-    return (
-      <main className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-center">
-          <h1 className="font-sans text-3xl font-black uppercase text-[var(--color-ink)] mb-4">
-            JOURNEY NOT FOUND.
-          </h1>
-          <Link href="/journeys" className="text-sm font-bold text-[var(--color-moss)] underline underline-offset-4 uppercase tracking-widest">
-            Browse all journeys
-          </Link>
-        </div>
-      </main>
-    );
+  if (!pkg) notFound();
+
+  // Canonicalise the URL: /journeys/<anything>/<slug> -> /journeys/<real category>/<slug>
+  if (pkg.categorySlug && category.toLowerCase() !== pkg.categorySlug.toLowerCase()) {
+    redirect(`/journeys/${pkg.categorySlug}/${slug}`);
   }
 
   const safeParse = (data: unknown, fallback: unknown = []) => {
