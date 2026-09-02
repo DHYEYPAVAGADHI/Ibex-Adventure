@@ -33,7 +33,7 @@ export function PrimaryButton({
     variant === "secondary"
       ? secondaryButtonClasses
       : variant === "gold"
-      ? "inline-flex items-center justify-center gap-2 rounded-full border-none bg-[#D4AF37] px-7 py-3.5 text-sm font-semibold text-[#172C21] transition-all duration-300 hover:bg-[#FED65B] hover:shadow-lg hover:shadow-[#D4AF37]/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172C21] disabled:opacity-50 disabled:cursor-not-allowed"
+      ? "inline-flex items-center justify-center gap-2 rounded-full border-none bg-[#D4AF37] px-7 py-3.5 text-sm font-semibold text-[var(--color-forest-band)] transition-all duration-300 hover:bg-[var(--color-gold-star)] hover:shadow-lg hover:shadow-[#D4AF37]/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-forest-band)] disabled:opacity-50 disabled:cursor-not-allowed"
       : primaryButtonClasses;
 
   const combined = `${base} ${className}`.trim();

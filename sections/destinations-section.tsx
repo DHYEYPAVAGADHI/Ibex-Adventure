@@ -163,7 +163,7 @@ function DestinationCardContent({
         )}
         {destination.rating ? (
           <div className="flex items-center gap-1 rounded-full bg-black/20 backdrop-blur-md px-2.5 py-1">
-            <Star className="h-3 w-3 text-[#FED65B] fill-[#FED65B]" />
+            <Star className="h-3 w-3 text-[var(--color-gold-star)] fill-[var(--color-gold-star)]" />
             <span className="text-[0.6rem] font-semibold text-white">
               {destination.rating}
             </span>

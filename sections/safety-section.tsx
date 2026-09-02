@@ -22,14 +22,14 @@ export function SafetySection() {
             <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] md:text-3xl max-w-[300px]">
               YOUR SAFETY.
               <br />
-              <span className="text-[#86A857]">OUR RESPONSIBILITY.</span>
+              <span className="text-[var(--color-lime)]">OUR RESPONSIBILITY.</span>
             </h2>
           </div>
 
           <div className="flex-grow grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-4">
             {SAFETY_FEATURES.map((feature, i) => (
               <div key={i} className="flex flex-col items-center text-center gap-4 group">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4] text-[#444] transition-colors group-hover:bg-[#5D7C3F] group-hover:text-white">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4] text-[#444] transition-colors group-hover:bg-[var(--color-moss)] group-hover:text-white">
                   {feature.icon}
                 </div>
                 <span className="whitespace-pre-line text-[10px] font-bold uppercase tracking-widest text-[#222]">

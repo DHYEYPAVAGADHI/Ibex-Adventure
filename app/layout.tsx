@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Hanken_Grotesk } from "next/font/google";
+import { Archivo, EB_Garamond, Hanken_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
@@ -15,7 +15,14 @@ const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-hanken",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -92,7 +99,10 @@ export const metadata: Metadata = {
   category: "Travel & Adventure",
 };
 
+import { headers } from "next/headers";
+
 import { Footer } from "@/components/footer";
+import { WhatsAppFab } from "@/components/whatsapp-button";
 import { getContactInfo } from "@/lib/data/contact";
 import { prisma } from "@/lib/prisma";
 
@@ -106,16 +116,23 @@ export default async function RootLayout({
 }>) {
   const contactInfo = await getContactInfo();
   const settings = await prisma.websiteSetting.findFirst();
+  const pathname = (await headers()).get("x-pathname") ?? "";
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${garamond.variable} ${hanken.variable} font-sans antialiased`}
+        className={`${garamond.variable} ${hanken.variable} ${archivo.variable} font-sans antialiased`}
       >
         <SettingsProvider initialSettings={{ logoUrl: settings?.logoUrl || null }}>
           <ContactProvider initialContactInfo={contactInfo}>
             {children}
-            <Footer />
+            {!isAdmin && (
+              <>
+                <Footer />
+                <WhatsAppFab />
+              </>
+            )}
           </ContactProvider>
         </SettingsProvider>
       </body>

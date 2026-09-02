@@ -2,29 +2,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, Shield, Phone, ShieldCheck } from "lucide-react";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { SafeImage } from "@/components/safe-image";
+import { prisma } from "@/lib/prisma";
+
+export const revalidate = 300;
 
 const CATEGORIES = [
   { title: "Educational Trips", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=600&q=80" },
-  { title: "Adventure Journeys", image: "https://images.unsplash.com/photo-1542640244-7e672d6cb466?auto=format&fit=crop&w=600&q=80" },
+  { title: "Adventure Journeys", image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80" },
   { title: "Service & Community", image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=600&q=80" },
-  { title: "Leadership Retreats", image: "https://images.unsplash.com/photo-1518182170546-076616fdfaaf?auto=format&fit=crop&w=600&q=80" },
+  { title: "Leadership Retreats", image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80" },
 ];
 
-const POPULAR_JOURNEYS = [
-  { title: "LADAKH", duration: "7N / 8D", price: "₹18,999", image: "https://images.unsplash.com/photo-1526761122248-c31c93f8b2b9?auto=format&fit=crop&w=600&q=80" },
-  { title: "SPITI VALLEY", duration: "6N / 7D", price: "₹16,999", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" },
-  { title: "RISHIKESH", duration: "3N / 4D", price: "₹8,999", image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80" },
-  { title: "RAJASTHAN", duration: "5N / 6D", price: "₹14,999", image: "https://images.unsplash.com/photo-1600100397608-f010f443b0d2?auto=format&fit=crop&w=600&q=80" },
-  { title: "KUTCH", duration: "4N / 5D", price: "₹12,999", image: "https://images.unsplash.com/photo-1542640244-7e672d6cb466?auto=format&fit=crop&w=600&q=80" },
-];
+export default async function ForCollegesPage() {
+  const POPULAR_JOURNEYS = (
+    await prisma.package.findMany({
+      where: { isFeatured: true, publishStatus: "Published" },
+      orderBy: { displayOrder: "asc" },
+      take: 5,
+    })
+  ).map((j) => ({
+    title: j.title,
+    href: `/journeys/${j.categorySlug}/${j.slug}`,
+    duration: j.duration || "",
+    price: j.price ? `₹${j.price}` : "",
+    image: j.thumbnail || "/placeholder.svg",
+  }));
 
-export default function ForCollegesPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#f9f9f9] pt-20">
-        
+      <main className="bg-[var(--color-ivory)]">
+
         {/* Hero */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center text-center overflow-hidden">
           <Image
@@ -37,11 +46,11 @@ export default function ForCollegesPage() {
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative z-10 px-6 max-w-4xl">
             <h1 className="font-sans text-5xl font-black uppercase text-white md:text-7xl lg:text-8xl tracking-tight leading-[1.05] mb-8">
-              YOUR STUDENTS DESERVE <span className="text-[#86A857]">MORE THAN A TOUR.</span>
+              YOUR STUDENTS DESERVE <span className="text-[var(--color-lime)]">MORE THAN A TOUR.</span>
             </h1>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded bg-[#5D7C3F] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432]"
+              className="inline-flex items-center gap-2 rounded bg-[var(--color-moss)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--color-moss-dark)]"
             >
               PLAN A COLLEGE EXPEDITION
               <ArrowRight className="h-4 w-4" />
@@ -50,23 +59,23 @@ export default function ForCollegesPage() {
         </section>
 
         {/* Stats Bar */}
-        <div className="bg-[#172C21] text-white py-6">
+        <div className="bg-[var(--color-forest-band)] text-white py-6">
           <div className="container-shell max-w-7xl mx-auto flex flex-wrap justify-between items-center text-center gap-6">
             <div className="flex-1 min-w-[150px]">
               <p className="font-sans text-3xl font-black">100+</p>
-              <p className="text-xs uppercase tracking-widest text-[#86A857] mt-1 font-bold">COLLEGES</p>
+              <p className="text-xs uppercase tracking-widest text-[var(--color-lime)] mt-1 font-bold">COLLEGES</p>
             </div>
             <div className="flex-1 min-w-[150px]">
               <p className="font-sans text-3xl font-black">500+</p>
-              <p className="text-xs uppercase tracking-widest text-[#86A857] mt-1 font-bold">JOURNEYS</p>
+              <p className="text-xs uppercase tracking-widest text-[var(--color-lime)] mt-1 font-bold">JOURNEYS</p>
             </div>
             <div className="flex-1 min-w-[150px]">
               <p className="font-sans text-3xl font-black">15+</p>
-              <p className="text-xs uppercase tracking-widest text-[#86A857] mt-1 font-bold">YEARS EXPERIENCE</p>
+              <p className="text-xs uppercase tracking-widest text-[var(--color-lime)] mt-1 font-bold">YEARS EXPERIENCE</p>
             </div>
             <div className="flex-1 min-w-[150px]">
               <p className="font-sans text-3xl font-black">ZERO</p>
-              <p className="text-xs uppercase tracking-widest text-[#86A857] mt-1 font-bold">ACCIDENTS</p>
+              <p className="text-xs uppercase tracking-widest text-[var(--color-lime)] mt-1 font-bold">ACCIDENTS</p>
             </div>
           </div>
         </div>
@@ -75,7 +84,7 @@ export default function ForCollegesPage() {
         <section className="section-spacing text-center">
           <div className="container-shell max-w-5xl mx-auto">
             <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[#222] mb-12">
-              NOT JUST A TRIP. <span className="text-[#86A857]">A TRANSFORMATIVE EXPERIENCE.</span>
+              NOT JUST A TRIP. <span className="text-[var(--color-lime)]">A TRANSFORMATIVE EXPERIENCE.</span>
             </h2>
             
             <div className="bg-white p-12 rounded-2xl shadow-sm border border-[#eee]">
@@ -91,7 +100,7 @@ export default function ForCollegesPage() {
                 <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-xs font-bold text-gray-400 uppercase">VS</span>
               </div>
               {/* Bottom Row: The Ibex way */}
-              <div className="flex items-center justify-center gap-4 text-[#5D7C3F] font-bold uppercase tracking-widest text-sm flex-wrap">
+              <div className="flex items-center justify-center gap-4 text-[var(--color-moss)] font-bold uppercase tracking-widest text-sm flex-wrap">
                 <span className="bg-green-50 px-4 py-2 rounded border border-green-100">PREPARE</span>
                 <span>→</span>
                 <span className="bg-green-50 px-4 py-2 rounded border border-green-100">EXPERIENCE</span>
@@ -119,11 +128,11 @@ export default function ForCollegesPage() {
               ))}
             </div>
             
-            <div className="bg-[#172C21] p-10 rounded-xl text-white flex flex-col justify-center">
+            <div className="bg-[var(--color-forest-band)] p-10 rounded-xl text-white flex flex-col justify-center">
               <h3 className="font-sans text-3xl font-black uppercase tracking-tight mb-6">
                 YOU DEFINE THE OBJECTIVE.
                 <br />
-                <span className="text-[#86A857]">WE BUILD THE EXPERIENCE.</span>
+                <span className="text-[var(--color-lime)]">WE BUILD THE EXPERIENCE.</span>
               </h3>
               <p className="text-sm text-white/80 leading-relaxed font-medium">
                 Whether your focus is leadership development, cultural immersion, biological field study, or community service, our team will custom-design an itinerary that meets your academic and developmental goals perfectly.
@@ -142,7 +151,7 @@ export default function ForCollegesPage() {
               <div className="hidden md:block absolute top-6 left-12 right-12 h-1 bg-[#eee] z-0" />
               {['CONSULTATION', 'DESIGN', 'RISK ASSESSMENT', 'PRE-DEPARTURE', 'THE JOURNEY', 'POST-TRIP'].map((step, i) => (
                 <div key={i} className="relative z-10 flex flex-col items-center bg-white px-2">
-                  <div className="w-12 h-12 rounded-full bg-[#172C21] text-white flex items-center justify-center font-bold text-lg mb-4">{i + 1}</div>
+                  <div className="w-12 h-12 rounded-full bg-[var(--color-forest-band)] text-white flex items-center justify-center font-bold text-lg mb-4">{i + 1}</div>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#222] w-24 text-center">{step}</span>
                 </div>
               ))}
@@ -159,21 +168,21 @@ export default function ForCollegesPage() {
               </h2>
               <div className="space-y-8">
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[#5D7C3F]"><Shield /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><Shield /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">WFR CERTIFIED LEADERS</h4>
                     <p className="text-sm text-[#666]">All our lead instructors hold active Wilderness First Responder certifications.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[#5D7C3F]"><Phone /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><Phone /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">24/7 COMMS</h4>
                     <p className="text-sm text-[#666]">We carry satellite phones and VHF radios in regions without cellular networks.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[#5D7C3F]"><ShieldCheck /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><ShieldCheck /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">STRICT PROTOCOLS</h4>
                     <p className="text-sm text-[#666]">Comprehensive risk management documents tailored for every single route.</p>
@@ -182,18 +191,18 @@ export default function ForCollegesPage() {
               </div>
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <Image src="https://images.unsplash.com/photo-1544645229-873b75c8088f?auto=format&fit=crop&w=800&q=80" alt="Rafting" fill className="object-cover" />
+              <Image src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Rafting" fill className="object-cover" />
             </div>
           </div>
         </section>
 
         {/* Popular Journeys */}
-        <section className="section-spacing bg-[#172C21] text-white">
+        <section className="section-spacing bg-[var(--color-forest-band)] text-white">
           <div className="container-shell max-w-[1400px] mx-auto">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
               <div>
                 <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-white md:text-4xl">
-                  POPULAR <span className="text-[#86A857]">JOURNEYS</span>
+                  POPULAR <span className="text-[var(--color-lime)]">JOURNEYS</span>
                 </h2>
               </div>
             </div>
@@ -201,10 +210,10 @@ export default function ForCollegesPage() {
               {POPULAR_JOURNEYS.map((journey, i) => (
                 <Link
                   key={i}
-                  href={`/journeys/${journey.title.toLowerCase().replace(" ", "-")}`}
+                  href={journey.href}
                   className="group relative flex flex-col min-w-[260px] md:min-w-0 aspect-[3/4] rounded-xl overflow-hidden snap-center bg-gray-900 border border-white/10 shadow-lg"
                 >
-                  <Image src={journey.image} alt={journey.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <SafeImage src={journey.image} alt={journey.title} fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-4">
                     <h3 className="font-sans text-lg font-black tracking-wide text-white uppercase mb-1">{journey.title}</h3>
@@ -229,7 +238,7 @@ export default function ForCollegesPage() {
             <div className="flex flex-wrap justify-center gap-4 md:gap-12 mb-20">
               {['CONFIDENCE', 'LEADERSHIP', 'RESILIENCE', 'EMPATHY', 'TEAMWORK'].map((lesson, i) => (
                 <div key={i} className="flex flex-col items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-[#f9f9f9] border border-[#eee] flex items-center justify-center text-[#5D7C3F] font-serif text-2xl font-bold italic">
+                  <div className="w-16 h-16 rounded-full bg-[#f9f9f9] border border-[#eee] flex items-center justify-center text-[var(--color-moss)] font-serif text-2xl font-bold italic">
                     {lesson[0]}
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#222]">{lesson}</span>
@@ -240,7 +249,7 @@ export default function ForCollegesPage() {
             <div className="grid md:grid-cols-4 gap-6 text-left">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="bg-[#f9f9f9] p-6 rounded-xl border border-[#eee]">
-                  <div className="flex text-[#FED65B] mb-4">{"★★★★★"}</div>
+                  <div className="flex text-[var(--color-gold-star)] mb-4">{"★★★★★"}</div>
                   <p className="text-sm font-medium text-[#444] mb-6 italic">
                     "The Ibex team was incredibly professional. They handled 40 students with ease and delivered an experience that students are still talking about."
                   </p>
@@ -252,7 +261,6 @@ export default function ForCollegesPage() {
         </section>
 
       </main>
-      <Footer />
     </>
   );
 }

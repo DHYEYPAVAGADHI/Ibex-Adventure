@@ -52,7 +52,7 @@ export function TestimonialsSection() {
             {TESTIMONIALS.map((item, i) => (
               <div key={i} className="flex flex-col justify-between rounded bg-white p-6 shadow-sm border border-[#eee]">
                 <div>
-                  <Quote className="h-6 w-6 text-[#86A857] mb-4" fill="currentColor" />
+                  <Quote className="h-6 w-6 text-[var(--color-lime)] mb-4" fill="currentColor" />
                   <p className="text-[13px] font-medium leading-relaxed text-[#444] mb-6">
                     {item.quote}
                   </p>
@@ -83,17 +83,17 @@ export function TestimonialsSection() {
                <SafeImage src="https://images.unsplash.com/photo-1526761122248-c31c93f8b2b9?auto=format&fit=crop&w=600&q=80" alt="Collage 1" fill className="object-cover" />
             </div>
             <div className="absolute top-1/4 left-0 w-[50%] aspect-[4/3] rounded overflow-hidden shadow-lg border-4 border-white z-20">
-               <SafeImage src="https://images.unsplash.com/photo-1544645229-873b75c8088f?auto=format&fit=crop&w=600&q=80" alt="Collage 2" fill className="object-cover" />
+               <SafeImage src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=600&q=80" alt="Collage 2" fill className="object-cover" />
             </div>
             <div className="absolute bottom-10 right-0 w-[55%] aspect-video rounded overflow-hidden shadow-lg border-4 border-white z-30">
-               <SafeImage src="https://images.unsplash.com/photo-1542640244-7e672d6cb466?auto=format&fit=crop&w=600&q=80" alt="Collage 3" fill className="object-cover" />
+               <SafeImage src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80" alt="Collage 3" fill className="object-cover" />
             </div>
             
             {/* CTA Button placed relative to the collage */}
             <div className="absolute -bottom-4 right-10 z-40">
               <Link
                 href="/stories"
-                className="inline-flex items-center gap-2 rounded bg-[#86A857] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-xl transition-all hover:bg-[#729345]"
+                className="inline-flex items-center gap-2 rounded bg-[var(--color-lime)] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-xl transition-all hover:bg-[#729345]"
               >
                 READ MORE STORIES
                 <ArrowRight className="h-4 w-4" />

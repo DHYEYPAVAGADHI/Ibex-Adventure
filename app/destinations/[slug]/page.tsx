@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Destination Not Found" };
   }
 
-  const title = destination.seoTitle || `${destination.title} | Ibex Adventure`;
+  const title = destination.seoTitle || destination.title;
   const description =
     destination.seoDescription ||
     destination.shortDescription ||

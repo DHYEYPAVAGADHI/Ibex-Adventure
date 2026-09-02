@@ -16,7 +16,7 @@ export async function generateMetadata({
   });
   if (!categoryData) return { title: "Not Found" };
   return {
-    title: `${categoryData.title} | Ibex Adventure`,
+    title: categoryData.title,
     description:
       categoryData.description?.substring(0, 160) ||
       "Explore with Ibex Adventure.",
@@ -50,7 +50,7 @@ export default async function CategoryPage({
         className="relative flex items-end overflow-hidden pt-28"
         style={{
           minHeight: "55vh",
-          background: `linear-gradient(160deg, #172C21 0%, #2D4236 100%)`,
+          background: `linear-gradient(160deg, var(--color-forest-band) 0%, #2D4236 100%)`,
         }}
       >
         {/* Texture overlay */}
@@ -111,7 +111,7 @@ export default async function CategoryPage({
           {packages.length > 0 ? (
             <>
               <div className="mb-12">
-                <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+                <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-forest-band)]">
                   Available Journeys
                 </p>
                 <h2 className="font-serif text-4xl text-[#1C1C18] sm:text-5xl">
@@ -139,7 +139,7 @@ export default async function CategoryPage({
                     <Link
                       key={place.slug}
                       href={`/programs/${categoryData.slug}/${place.slug}`}
-                      className="group block overflow-hidden border border-[#C2C8C2] hover:border-[#172C21] transition-colors duration-300"
+                      className="group block overflow-hidden border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors duration-300"
                       style={{ borderRadius: "2px" }}
                     >
                       {/* Image */}
@@ -178,19 +178,19 @@ export default async function CategoryPage({
                         <div className="mb-3 flex flex-wrap gap-3">
                           {place.location && (
                             <span className="flex items-center gap-1 text-xs text-[#424844]/60">
-                              <MapPin className="h-3 w-3 text-[#172C21]" />
+                              <MapPin className="h-3 w-3 text-[var(--color-forest-band)]" />
                               {place.location}
                             </span>
                           )}
                           {place.duration && (
                             <span className="flex items-center gap-1 text-xs text-[#424844]/60">
-                              <Clock className="h-3 w-3 text-[#172C21]" />
+                              <Clock className="h-3 w-3 text-[var(--color-forest-band)]" />
                               {place.duration}
                             </span>
                           )}
                         </div>
 
-                        <h3 className="font-serif text-2xl text-[#1C1C18] leading-tight group-hover:text-[#172C21] transition-colors">
+                        <h3 className="font-serif text-2xl text-[#1C1C18] leading-tight group-hover:text-[var(--color-forest-band)] transition-colors">
                           {place.title}
                         </h3>
 
@@ -198,7 +198,7 @@ export default async function CategoryPage({
                           {place.overview || place.description}
                         </p>
 
-                        <div className="mt-5 flex items-center gap-1.5 text-[#172C21]">
+                        <div className="mt-5 flex items-center gap-1.5 text-[var(--color-forest-band)]">
                           <span className="text-xs font-semibold uppercase tracking-wider">
                             Explore Program
                           </span>

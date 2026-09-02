@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle, ChevronDown } from "lucide-react";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { prisma } from "@/lib/prisma";
 
 export default async function JourneysPage() {
@@ -31,7 +30,7 @@ export default async function JourneysPage() {
           
           <div className="relative z-10 px-6 max-w-4xl pt-10">
             <h1 className="font-sans text-5xl font-black uppercase text-white md:text-7xl lg:text-8xl tracking-tight leading-[1.05] mb-4">
-              CURATED <span className="text-[#86A857]">JOURNEYS.</span>
+              CURATED <span className="text-[var(--color-lime)]">JOURNEYS.</span>
             </h1>
           </div>
         </section>
@@ -71,7 +70,7 @@ export default async function JourneysPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105" 
                     />
                     <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="bg-[#172C21] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded shadow">
+                      <span className="bg-[var(--color-forest-band)] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded shadow">
                         {journey.category || "ADVENTURE"}
                       </span>
                     </div>
@@ -84,7 +83,7 @@ export default async function JourneysPage() {
                     
                     <div className="flex flex-wrap gap-4 text-xs font-bold uppercase tracking-widest text-[#888] mb-6">
                       <span className="flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5D7C3F]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-moss)]" />
                         {journey.duration || "7N / 8D"}
                       </span>
                       <span className="flex items-center gap-1">
@@ -100,7 +99,7 @@ export default async function JourneysPage() {
                           {journey.price ? `₹${journey.price}` : "₹65,000"}
                         </span>
                       </div>
-                      <ArrowRightCircle className="h-8 w-8 text-[#5D7C3F] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                      <ArrowRightCircle className="h-8 w-8 text-[var(--color-moss)] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                     </div>
                   </div>
                 </Link>
@@ -109,7 +108,7 @@ export default async function JourneysPage() {
             
             {/* Load More */}
             <div className="mt-16 flex justify-center">
-              <button className="px-8 py-4 border-2 border-[#172C21] text-[#172C21] rounded text-xs font-bold uppercase tracking-widest hover:bg-[#172C21] hover:text-white transition-colors">
+              <button className="px-8 py-4 border-2 border-[var(--color-forest-band)] text-[var(--color-forest-band)] rounded text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-forest-band)] hover:text-white transition-colors">
                 LOAD MORE JOURNEYS
               </button>
             </div>
@@ -117,7 +116,6 @@ export default async function JourneysPage() {
         </section>
 
       </main>
-      <Footer />
     </>
   );
 }

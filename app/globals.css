@@ -4,24 +4,35 @@
   /* ─── Public Editorial Fonts ─────────────── */
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-garamond), ui-serif, Georgia, "Times New Roman", serif;
+  --font-display: var(--font-display), var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-script: var(--font-script), cursive;
 
   /* ─── Editorial Color Palette ────────────── */
   --color-ivory: #F7F6F1;
   --color-ivory-dark: #FCFAF4;
+  --color-sand: #FCF9F2;
   --color-forest: #10271C;
+  --color-forest-deep: #0F1F16;
   --color-forest-mid: #173D27;
   --color-forest-light: #3E6B43;
+  --color-forest-band: #172C21;
   --color-accent-green: #7BAE45;
+  --color-moss: #5D7C3F;
+  --color-moss-dark: #4A6432;
+  --color-lime: #86A857;
   --color-light-green: #EAF1E2;
   --color-gold: #D4AF37;
   --color-gold-light: #FED65B;
+  --color-gold-star: #FED65B;
   --color-gold-pale: #FBF3D5;
   --color-text: #182019;
+  --color-ink: #1E2420;
+  --color-ink-muted: #666B64;
   --color-text-muted: #59635B;
   --color-text-light: #657067;
   --color-border: #DDE2DA;
   --color-border-light: #E5E9E5;
+  --color-hair: #E6E4DC;
 
   /* ─── Marquee Animations ─────────────────── */
   --animate-marquee-left: marquee-left 35s linear infinite;
@@ -95,6 +106,26 @@ body {
   }
 }
 
+.container-wide {
+  margin: 0 auto;
+  width: min(100% - 2.5rem, 87.5rem);
+}
+
+@media (min-width: 1024px) {
+  .container-wide {
+    width: min(100% - 5rem, 87.5rem);
+  }
+}
+
+/* ─── Display Headline Treatment ──────────────── */
+.display-hed {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
 .section-spacing {
   padding-block: 5rem;
 }
@@ -133,12 +164,26 @@ body {
 }
 
 /* ─── Scrollbar ──────────────────────────────── */
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
+.no-scrollbar,
+.hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ─── Reduced Motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ─── Focus Styles ───────────────────────────── */
@@ -151,6 +196,12 @@ body {
 /* ─── Smooth Anchor Scroll ───────────────────── */
 html {
   scroll-behavior: smooth;
+}
+
+/* Offset anchored sections for the fixed header */
+section[id],
+[data-anchor] {
+  scroll-margin-top: 72px;
 }
 
 /* ─── Image Fallback ─────────────────────────── */

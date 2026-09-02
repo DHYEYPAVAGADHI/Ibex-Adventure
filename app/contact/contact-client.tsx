@@ -70,7 +70,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
     <main className="min-h-screen" style={{ backgroundColor: "#FCF9F2" }}>
       <Navbar />
 
-      <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b" style={{ borderColor: "#C2C8C2", backgroundColor: "#172C21" }}>
+      <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b" style={{ borderColor: "#C2C8C2", backgroundColor: "var(--color-forest-band)" }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-10 relative z-10 text-center max-w-3xl">
           <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">Contact</p>
           <h1 className="text-4xl md:text-6xl font-serif font-normal text-white mb-6">Let's plan your journey.</h1>
@@ -86,7 +86,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
           {/* Contact Information */}
           <div className="grid gap-6">
             <div>
-              <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">Get in Touch</p>
+              <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-forest-band)]">Get in Touch</p>
               <h2 className="font-serif text-4xl leading-tight text-[#1C1C18]">Official contact information.</h2>
               <p className="mt-4 text-sm font-light leading-7 text-[#424844]">Reach out to our team directly through the channels below.</p>
             </div>
@@ -95,12 +95,12 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
               href={addressQuery}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="View office location on Google Maps"
             >
               <div className="flex items-start gap-5">
-                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#172C21]/8 border border-[#172C21]/15 group-hover:bg-[#172C21] group-hover:border-[#172C21] transition-colors">
-                  <MapPin className="h-4 w-4 text-[#172C21] group-hover:text-white transition-colors" />
+                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[var(--color-forest-band)]/8 border border-[var(--color-forest-band)]/15 group-hover:bg-[var(--color-forest-band)] group-hover:border-[var(--color-forest-band)] transition-colors">
+                  <MapPin className="h-4 w-4 text-[var(--color-forest-band)] group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-[#1C1C18] mb-2">Office Address</h3>
@@ -113,32 +113,32 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
 
             <a 
               href={buildTelLink(phone)}
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="Call Ibex Adventure"
             >
               <div className="flex items-center gap-5">
-                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#172C21]/8 border border-[#172C21]/15 group-hover:bg-[#172C21] group-hover:border-[#172C21] transition-colors">
-                  <Phone className="h-4 w-4 text-[#172C21] group-hover:text-white transition-colors" />
+                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[var(--color-forest-band)]/8 border border-[var(--color-forest-band)]/15 group-hover:bg-[var(--color-forest-band)] group-hover:border-[var(--color-forest-band)] transition-colors">
+                  <Phone className="h-4 w-4 text-[var(--color-forest-band)] group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-[#1C1C18] mb-1">Phone Number</h3>
-                  <p className="text-lg text-[#172C21] font-light tracking-wide">{phone}</p>
+                  <p className="text-lg text-[var(--color-forest-band)] font-light tracking-wide">{phone}</p>
                 </div>
               </div>
             </a>
 
             <a 
               href={`mailto:${email}`}
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="Email Ibex Adventure"
             >
               <div className="flex items-center gap-5">
-                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#172C21]/8 border border-[#172C21]/15 group-hover:bg-[#172C21] group-hover:border-[#172C21] transition-colors">
-                  <Mail className="h-4 w-4 text-[#172C21] group-hover:text-white transition-colors" />
+                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[var(--color-forest-band)]/8 border border-[var(--color-forest-band)]/15 group-hover:bg-[var(--color-forest-band)] group-hover:border-[var(--color-forest-band)] transition-colors">
+                  <Mail className="h-4 w-4 text-[var(--color-forest-band)] group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-[#1C1C18] mb-1">Email Address</h3>
-                  <p className="text-lg text-[#172C21] font-light">{email}</p>
+                  <p className="text-lg text-[var(--color-forest-band)] font-light">{email}</p>
                 </div>
               </div>
             </a>
@@ -150,63 +150,63 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
             
             <form onSubmit={handleSubmit} className="grid gap-5">
               <label className="grid gap-2 w-full min-w-0">
-                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">Name</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-forest-band)] mb-2">Name</span>
                 <input
                   required
                   type="text"
                   value={form.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[#172C21]"
+                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                   placeholder="Your full name"
                 />
               </label>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full min-w-0">
                 <label className="grid gap-2 w-full min-w-0">
-                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">Email</span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-forest-band)] mb-2">Email</span>
                   <input
                     required
                     type="email"
                     value={form.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[#172C21]"
+                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                     placeholder="your@email.com"
                   />
                 </label>
 
                 <label className="grid gap-2 w-full min-w-0">
-                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">Phone Number</span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-forest-band)] mb-2">Phone Number</span>
                   <input
                     required
                     type="tel"
                     value={form.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
-                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[#172C21]"
+                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                     placeholder="Mobile number"
                   />
                 </label>
               </div>
 
               <label className="grid gap-2 w-full min-w-0">
-                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">Subject</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-forest-band)] mb-2">Subject</span>
                 <input
                   required
                   type="text"
                   value={form.subject}
                   onChange={(e) => handleChange("subject", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[#172C21]"
+                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                   placeholder="How can we help?"
                 />
               </label>
 
               <label className="grid gap-2 w-full min-w-0">
-                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#172C21] mb-2">Message</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-forest-band)] mb-2">Message</span>
                 <textarea
                   required
                   rows={5}
                   value={form.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[#172C21] resize-none"
+                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)] resize-none"
                   placeholder="Tell us more about your inquiry..."
                 />
               </label>

@@ -63,7 +63,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
         className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[#F4EFE3] transition-colors"
       >
         <span className="font-medium text-[#1C1C18] text-sm leading-relaxed">{q}</span>
-        {open ? <ChevronUp className="h-5 w-5 text-[#172C21] flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-[#424844]/40 flex-shrink-0" />}
+        {open ? <ChevronUp className="h-5 w-5 text-[var(--color-forest-band)] flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-[#424844]/40 flex-shrink-0" />}
       </button>
       <AnimatePresence>
         {open && (
@@ -142,8 +142,8 @@ export function AttractionDetailClient({ attraction }: Props) {
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-forest-band)]/80 via-[var(--color-forest-band)]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-forest-band)]/55 to-transparent" />
 
         <motion.div
           style={{ opacity: heroOpacity }}
@@ -200,7 +200,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                 href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-3.5 font-semibold text-[#172C21] transition-all hover:bg-[#FED65B] hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
+                className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-3.5 font-semibold text-[var(--color-forest-band)] transition-all hover:bg-[var(--color-gold-star)] hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
               >
                 <BookOpen className="h-5 w-5" /> Plan a Visit
               </a>
@@ -244,7 +244,7 @@ export function AttractionDetailClient({ attraction }: Props) {
             viewport={{ once: true }}
             className="mx-auto max-w-6xl border border-[#C2C8C2] bg-[#FCF9F2] p-8" style={{ borderRadius: "2px" }}
           >
-            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]/50">Visitor Info</h2>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]/50">Visitor Info</h2>
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {attraction.location && (
                 <div className="flex flex-col gap-1">
@@ -294,7 +294,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               className="grid gap-12 lg:grid-cols-[1fr_360px] items-start"
             >
               <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">About</p>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">About</p>
                 <h2 className="mb-6 font-serif text-4xl font-bold text-[#1C1C18] md:text-5xl">{attraction.title}</h2>
                 <div className="text-[#424844]/80 leading-relaxed space-y-4">
                   {attraction.description.split("\n\n").map((para, i) => (
@@ -323,7 +323,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                     <p className="text-xs text-[#424844]/50 uppercase tracking-wider mb-3">Activities</p>
                     <div className="flex flex-wrap gap-2">
                       {activities.map((act, i) => (
-                        <span key={i} className="inline-flex items-center gap-1 rounded-full bg-[#172C21]/10 border border-[#172C21]/20 px-3 py-1 text-xs text-[#172C21]">
+                        <span key={i} className="inline-flex items-center gap-1 rounded-full bg-[var(--color-forest-band)]/10 border border-[var(--color-forest-band)]/20 px-3 py-1 text-xs text-[var(--color-forest-band)]">
                           <Check className="h-3 w-3" /> {act}
                         </span>
                       ))}
@@ -335,7 +335,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                     href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[#172C21] py-3 font-semibold text-white text-sm transition-all hover:bg-[#2D4236]"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-forest-band)] py-3 font-semibold text-white text-sm transition-all hover:bg-[#2D4236]"
                   >
                     Plan Visit <ArrowRight className="h-4 w-4" />
                   </a>
@@ -351,7 +351,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Gallery</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Gallery</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Visual Journey</h2>
             </motion.div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -437,7 +437,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Experiences</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Experiences</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Activities</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -448,9 +448,9 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex items-center gap-3 border border-[#C2C8C2] px-4 py-3 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+                  className="flex items-center gap-3 border border-[#C2C8C2] px-4 py-3 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
-                  <span className="text-[#172C21]">✦</span>
+                  <span className="text-[var(--color-forest-band)]">✦</span>
                   <span className="text-sm text-[#1C1C18] font-medium">{act}</span>
                 </motion.div>
               ))}
@@ -464,7 +464,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Useful Tips</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Useful Tips</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Travel Tips</h2>
             </motion.div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -491,7 +491,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Stay</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Stay</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Nearby Hotels</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -502,14 +502,14 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="border border-[#C2C8C2] p-5 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+                  className="border border-[#C2C8C2] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <Star className="h-4 w-4 text-amber-400 fill-amber-400 flex-shrink-0" />
                     <h3 className="font-semibold text-[#1C1C18] text-sm">{hotel.name}</h3>
                   </div>
                   {hotel.distance && <p className="text-xs text-[#424844]/50 mb-1"><MapPin className="inline h-3 w-3 mr-1" />{hotel.distance}</p>}
-                  {hotel.priceRange && <p className="text-xs text-[#172C21]/70">{hotel.priceRange}</p>}
+                  {hotel.priceRange && <p className="text-xs text-[var(--color-forest-band)]/70">{hotel.priceRange}</p>}
                 </motion.div>
               ))}
             </div>
@@ -522,7 +522,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Dining</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Dining</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Where to Eat</h2>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -533,10 +533,10 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="border border-[#C2C8C2] p-5 hover:border-[#172C21] transition-colors" style={{ borderRadius: "2px" }}
+                  className="border border-[#C2C8C2] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <h3 className="font-semibold text-[#1C1C18] text-sm mb-1">{rest.name}</h3>
-                  {rest.cuisine && <p className="text-xs text-[#172C21]/60 mb-1">{rest.cuisine}</p>}
+                  {rest.cuisine && <p className="text-xs text-[var(--color-forest-band)]/60 mb-1">{rest.cuisine}</p>}
                   {rest.distance && <p className="text-xs text-[#424844]/50"><MapPin className="inline h-3 w-3 mr-1" />{rest.distance}</p>}
                 </motion.div>
               ))}
@@ -550,7 +550,7 @@ export function AttractionDetailClient({ attraction }: Props) {
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Questions</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Questions</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Frequently Asked</h2>
             </motion.div>
             <div className="space-y-3">
@@ -582,7 +582,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#172C21] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
@@ -590,7 +590,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#172C21] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2D4236] transition-all shadow-lg shadow-[#172C21]/20"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-forest-band)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2D4236] transition-all shadow-lg shadow-[var(--color-forest-band)]/20"
             >
               <BookOpen className="h-4 w-4" /> Plan Visit
             </a>

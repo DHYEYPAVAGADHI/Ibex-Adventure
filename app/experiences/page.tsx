@@ -2,12 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mountain, Leaf, Landmark, Music, Utensils, Users, Heart, Camera, Home, ArrowRightCircle } from "lucide-react";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { prisma } from "@/lib/prisma";
 
 const CATEGORIES = [
-  { name: "ADVENTURE", icon: <Mountain className="w-8 h-8 text-[#5D7C3F]" />, color: "border-[#5D7C3F]" },
-  { name: "NATURE", icon: <Leaf className="w-8 h-8 text-[#86A857]" />, color: "border-[#86A857]" },
+  { name: "ADVENTURE", icon: <Mountain className="w-8 h-8 text-[var(--color-moss)]" />, color: "border-[var(--color-moss)]" },
+  { name: "NATURE", icon: <Leaf className="w-8 h-8 text-[var(--color-lime)]" />, color: "border-[var(--color-lime)]" },
   { name: "HERITAGE", icon: <Landmark className="w-8 h-8 text-[#8E44AD]" />, color: "border-[#8E44AD]" },
   { name: "CULTURE", icon: <Music className="w-8 h-8 text-[#E67E22]" />, color: "border-[#E67E22]" },
   { name: "FOOD", icon: <Utensils className="w-8 h-8 text-[#D35400]" />, color: "border-[#D35400]" },
@@ -32,7 +31,7 @@ export default async function ExperiencesPage() {
         {/* Hero */}
         <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center text-center overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1544645229-873b75c8088f?auto=format&fit=crop&w=2000&q=80"
+            src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=2000&q=80"
             alt="Rafting Experience"
             fill
             className="object-cover"
@@ -43,7 +42,7 @@ export default async function ExperiencesPage() {
           
           <div className="relative z-10 px-6 max-w-4xl pt-20">
             <h1 className="font-sans text-5xl font-black uppercase text-white md:text-7xl lg:text-8xl tracking-tight leading-[1.05] mb-4">
-              EXPERIENCE INDIA <span className="text-[#86A857]">DIFFERENTLY.</span>
+              EXPERIENCE INDIA <span className="text-[var(--color-lime)]">DIFFERENTLY.</span>
             </h1>
           </div>
 
@@ -89,7 +88,7 @@ export default async function ExperiencesPage() {
             </h2>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-bold uppercase tracking-widest">
-              <div className="bg-[#f9f9f9] border-2 border-[#5D7C3F] text-[#5D7C3F] px-8 py-4 rounded-xl shadow-sm">
+              <div className="bg-[#f9f9f9] border-2 border-[var(--color-moss)] text-[var(--color-moss)] px-8 py-4 rounded-xl shadow-sm">
                 EXPERIENCE
               </div>
               <ArrowRight className="text-[#888] h-6 w-6 rotate-90 md:rotate-0" />
@@ -122,7 +121,7 @@ export default async function ExperiencesPage() {
                   href={`/experiences/${exp.slug}`}
                   className="group relative flex flex-col min-w-[260px] md:min-w-0 aspect-[4/5] rounded-xl overflow-hidden snap-center bg-gray-100 shadow-md"
                 >
-                  <Image src={exp.heroImage || "https://images.unsplash.com/photo-1542640244-7e672d6cb466?auto=format&fit=crop&w=600&q=80"} alt={exp.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src={exp.heroImage || "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80"} alt={exp.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
                     <h3 className="font-sans text-xl font-black tracking-wide text-white uppercase mb-4 leading-tight">
@@ -140,9 +139,9 @@ export default async function ExperiencesPage() {
         </section>
 
         {/* Customizer CTA */}
-        <section className="bg-[#172C21] py-24 text-center text-white">
+        <section className="bg-[var(--color-forest-band)] py-24 text-center text-white">
           <div className="container-shell max-w-4xl mx-auto">
-            <p className="font-serif text-3xl italic text-[#86A857] mb-8">
+            <p className="font-serif text-3xl italic text-[var(--color-lime)] mb-8">
               "You don't just visit India..."
             </p>
             <h2 className="font-sans text-4xl font-black uppercase tracking-tight md:text-5xl mb-16">
@@ -151,17 +150,17 @@ export default async function ExperiencesPage() {
             
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               <div className="bg-black/20 p-8 rounded-xl border border-white/10">
-                <div className="w-12 h-12 rounded-full bg-[#5D7C3F] flex items-center justify-center font-bold text-lg mb-6 mx-auto">1</div>
+                <div className="w-12 h-12 rounded-full bg-[var(--color-moss)] flex items-center justify-center font-bold text-lg mb-6 mx-auto">1</div>
                 <h4 className="font-bold uppercase tracking-widest text-sm mb-4">TELL US YOUR INTERESTS</h4>
                 <p className="text-xs text-white/60">Share what you love - wildlife, food, heritage, or adventure.</p>
               </div>
               <div className="bg-black/20 p-8 rounded-xl border border-white/10">
-                <div className="w-12 h-12 rounded-full bg-[#5D7C3F] flex items-center justify-center font-bold text-lg mb-6 mx-auto">2</div>
+                <div className="w-12 h-12 rounded-full bg-[var(--color-moss)] flex items-center justify-center font-bold text-lg mb-6 mx-auto">2</div>
                 <h4 className="font-bold uppercase tracking-widest text-sm mb-4">WE BUILD AN ITINERARY</h4>
                 <p className="text-xs text-white/60">Our local experts craft a personalized journey just for you.</p>
               </div>
               <div className="bg-black/20 p-8 rounded-xl border border-white/10">
-                <div className="w-12 h-12 rounded-full bg-[#5D7C3F] flex items-center justify-center font-bold text-lg mb-6 mx-auto">3</div>
+                <div className="w-12 h-12 rounded-full bg-[var(--color-moss)] flex items-center justify-center font-bold text-lg mb-6 mx-auto">3</div>
                 <h4 className="font-bold uppercase tracking-widest text-sm mb-4">YOU LIVE THE EXPERIENCE</h4>
                 <p className="text-xs text-white/60">Arrive in India and immerse yourself in an unforgettable journey.</p>
               </div>
@@ -169,7 +168,7 @@ export default async function ExperiencesPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded bg-[#5D7C3F] px-10 py-5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432] shadow-xl"
+              className="inline-flex items-center gap-2 rounded bg-[var(--color-moss)] px-10 py-5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--color-moss-dark)] shadow-xl"
             >
               START DESIGNING
               <ArrowRight className="h-4 w-4" />
@@ -178,7 +177,6 @@ export default async function ExperiencesPage() {
         </section>
 
       </main>
-      <Footer />
     </>
   );
 }

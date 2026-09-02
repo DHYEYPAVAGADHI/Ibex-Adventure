@@ -51,7 +51,7 @@ export function CtaSection() {
           
           {/* Left Side: Text and Buttons */}
           <div>
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#86A857]">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[var(--color-lime)]">
               READY TO EXPERIENCE
             </p>
             <h2 className="font-sans text-4xl font-black uppercase tracking-tight text-white md:text-5xl lg:text-6xl mb-6">
@@ -65,7 +65,7 @@ export function CtaSection() {
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded bg-[#5D7C3F] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432]"
+                className="inline-flex items-center gap-2 rounded bg-[var(--color-moss)] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--color-moss-dark)]"
               >
                 PLAN YOUR JOURNEY
                 <ArrowRight className="h-4 w-4" />
@@ -91,7 +91,7 @@ export function CtaSection() {
                 <div className="mb-3">
                   {option.icon}
                 </div>
-                <h4 className="text-[9px] font-bold uppercase tracking-widest text-[#222] whitespace-pre-line leading-relaxed group-hover:text-[#5D7C3F] transition-colors">
+                <h4 className="text-[9px] font-bold uppercase tracking-widest text-[#222] whitespace-pre-line leading-relaxed group-hover:text-[var(--color-moss)] transition-colors">
                   {option.title}
                 </h4>
               </Link>

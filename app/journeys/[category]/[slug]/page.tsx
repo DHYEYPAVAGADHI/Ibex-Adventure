@@ -46,7 +46,7 @@ export async function generateMetadata({
   if (!pkg || pkg.categorySlug !== category.toLowerCase())
     return { title: "Not Found" };
   return {
-    title: `${pkg.title} | Ibex Adventure`,
+    title: pkg.title,
     description:
       (pkg.overview || pkg.description)?.substring(0, 160) ||
       "Explore with Ibex Adventure.",
@@ -71,7 +71,7 @@ export default async function PackagePage({
           <h1 className="font-sans text-3xl font-black uppercase text-[#222] mb-4">
             JOURNEY NOT FOUND.
           </h1>
-          <Link href="/journeys" className="text-sm font-bold text-[#5D7C3F] underline underline-offset-4 uppercase tracking-widest">
+          <Link href="/journeys" className="text-sm font-bold text-[var(--color-moss)] underline underline-offset-4 uppercase tracking-widest">
             Browse all journeys
           </Link>
         </div>
@@ -147,7 +147,7 @@ export default async function PackagePage({
               
               <p className="text-white/90 text-sm md:text-base font-semibold leading-relaxed max-w-xl mb-4 whitespace-pre-line">{pkg.overview || "High passes. Ancient monasteries. Stark beauty.\nWarm people. Raw adventures."}</p>
               
-              <p className="font-serif text-xl italic text-[#86A857] mb-12">
+              <p className="font-serif text-xl italic text-[var(--color-lime)] mb-12">
                 A journey that stays with you forever.
               </p>
 
@@ -207,7 +207,7 @@ export default async function PackagePage({
                 {[
                   { name: 'Overview', icon: <FileText className="w-4 h-4" /> },
                   { name: 'Itinerary', icon: <Calendar className="w-4 h-4" /> },
-                  { name: 'Inclusions', icon: <Check className="w-4 h-4 text-[#5D7C3F]" /> },
+                  { name: 'Inclusions', icon: <Check className="w-4 h-4 text-[var(--color-moss)]" /> },
                   { name: 'Exclusions', icon: <X className="w-4 h-4 text-red-500" /> },
                   { name: 'Gallery', icon: <ImageIcon className="w-4 h-4" /> },
                   { name: 'Reviews', icon: <MessageSquare className="w-4 h-4" /> },
@@ -216,7 +216,7 @@ export default async function PackagePage({
                   <a
                     key={i}
                     href={`#${item.name.toLowerCase()}`}
-                    className={`flex items-center gap-2 flex-shrink-0 px-6 py-4 text-[11px] font-bold uppercase tracking-widest border-b-2 transition-colors ${i === 0 ? 'border-[#5D7C3F] text-[#5D7C3F]' : 'border-transparent text-[#666] hover:text-[#222]'}`}
+                    className={`flex items-center gap-2 flex-shrink-0 px-6 py-4 text-[11px] font-bold uppercase tracking-widest border-b-2 transition-colors ${i === 0 ? 'border-[var(--color-moss)] text-[var(--color-moss)]' : 'border-transparent text-[#666] hover:text-[#222]'}`}
                   >
                     {item.icon}
                     {item.name}
@@ -236,7 +236,7 @@ export default async function PackagePage({
                   <span className="text-xs font-semibold text-[#888] mb-4 block">per person</span>
 
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="flex text-[#FED65B]">
+                    <div className="flex text-[var(--color-gold-star)]">
                       <Star className="w-4 h-4 fill-current" />
                       <Star className="w-4 h-4 fill-current" />
                       <Star className="w-4 h-4 fill-current" />
@@ -250,7 +250,7 @@ export default async function PackagePage({
                   <div className="space-y-3">
                     <a
                       href={enquireHref}
-                      className="w-full flex items-center justify-center rounded bg-[#4A6432] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3A4F27]"
+                      className="w-full flex items-center justify-center rounded bg-[var(--color-moss-dark)] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#3A4F27]"
                     >
                       ENQUIRE NOW
                     </a>
@@ -326,7 +326,7 @@ export default async function PackagePage({
                       const text = typeof item === 'string' ? item : item.text;
                       return (
                         <li key={i} className="flex gap-4">
-                          <div className="shrink-0 mt-0.5"><Check className="w-5 h-5 text-[#86A857]" /></div>
+                          <div className="shrink-0 mt-0.5"><Check className="w-5 h-5 text-[var(--color-lime)]" /></div>
                           <span className="text-[13px] font-semibold text-[#444] leading-snug">{text}</span>
                         </li>
                       );
@@ -356,8 +356,8 @@ export default async function PackagePage({
                     { day: "8", title: "Departure", bullets: ["Check-out", "Drop at airport", "Journey back with memories"] }
                   ]).map((node: any, i: number) => (
                     <div key={i} className="flex flex-col items-center w-[160px] relative z-10 px-2">
-                      <div className="w-10 h-10 rounded-full bg-white border-2 border-[#5D7C3F] flex items-center justify-center mb-4">
-                        <MapPin className="w-4 h-4 text-[#5D7C3F]" />
+                      <div className="w-10 h-10 rounded-full bg-white border-2 border-[var(--color-moss)] flex items-center justify-center mb-4">
+                        <MapPin className="w-4 h-4 text-[var(--color-moss)]" />
                       </div>
                       <div className="text-center mb-4">
                         <span className="block text-[10px] font-bold uppercase tracking-widest text-[#666] mb-1">DAY {node.day}</span>
@@ -397,7 +397,7 @@ export default async function PackagePage({
                     "IBEX trip Tshirt & cap"
                   ]).map((item: any, i: number) => (
                     <li key={i} className="flex items-start gap-2 text-[11px] font-semibold text-[#555]">
-                      <Check className="h-3.5 w-3.5 text-[#5D7C3F] shrink-0 mt-0.5" />
+                      <Check className="h-3.5 w-3.5 text-[var(--color-moss)] shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}
@@ -445,7 +445,7 @@ export default async function PackagePage({
 
               {/* Video */}
               <div className="relative rounded-xl overflow-hidden group">
-                <Image src="https://images.unsplash.com/photo-1517400508447-f8dd518b86e3?auto=format&fit=crop&w=600&q=80" alt="Video cover" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Video cover" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-3">
@@ -484,19 +484,19 @@ export default async function PackagePage({
                 </p>
                 <div className="flex flex-wrap gap-8">
                   <div className="flex flex-col items-center gap-2">
-                    <Shield className="w-6 h-6 text-[#5D7C3F]" />
+                    <Shield className="w-6 h-6 text-[var(--color-moss)]" />
                     <span className="text-[9px] font-bold uppercase tracking-widest text-[#222] text-center">Trained<br/>Leaders</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Check className="w-6 h-6 text-[#5D7C3F]" />
+                    <Check className="w-6 h-6 text-[var(--color-moss)]" />
                     <span className="text-[9px] font-bold uppercase tracking-widest text-[#222] text-center">Verified<br/>Vendors</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <MapPin className="w-6 h-6 text-[#5D7C3F]" />
+                    <MapPin className="w-6 h-6 text-[var(--color-moss)]" />
                     <span className="text-[9px] font-bold uppercase tracking-widest text-[#222] text-center">Medical<br/>Preparedness</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Heart className="w-6 h-6 text-[#5D7C3F]" />
+                    <Heart className="w-6 h-6 text-[var(--color-moss)]" />
                     <span className="text-[9px] font-bold uppercase tracking-widest text-[#222] text-center">Sustainable<br/>Travel</span>
                   </div>
                 </div>
@@ -531,7 +531,7 @@ export default async function PackagePage({
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[#222]">{item.name}</p>
                         <p className="text-[9px] text-[#666]">{item.loc}</p>
                       </div>
-                      <div className="ml-auto flex text-[#FED65B]">
+                      <div className="ml-auto flex text-[var(--color-gold-star)]">
                         <Star className="w-3 h-3 fill-current" />
                         <Star className="w-3 h-3 fill-current" />
                         <Star className="w-3 h-3 fill-current" />
@@ -567,7 +567,7 @@ export default async function PackagePage({
           <p className="font-serif text-xl italic text-[#fff] mb-2">The mountains are calling.</p>
           <h2 className="font-sans text-4xl md:text-5xl font-black uppercase tracking-tight text-white mb-8">ARE YOU READY?</h2>
           <div className="flex gap-4">
-            <a href={enquireHref} className="rounded bg-[#5D7C3F] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[#4A6432]">
+            <a href={enquireHref} className="rounded bg-[var(--color-moss)] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--color-moss-dark)]">
               PLAN YOUR JOURNEY
               <ArrowRight className="inline ml-2 h-4 w-4" />
             </a>
@@ -584,28 +584,28 @@ export default async function PackagePage({
         <div className="container-shell max-w-[1400px] mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap gap-8 md:gap-16 items-center text-xs justify-center md:justify-start">
             <div className="flex items-center gap-3">
-              <Headset className="w-5 h-5 text-[#86A857]" />
+              <Headset className="w-5 h-5 text-[var(--color-lime)]" />
               <div>
                 <p className="font-bold text-white/60">Need Help?</p>
                 <p className="font-bold text-white">+91 98765 43210</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Users className="w-5 h-5 text-[#86A857]" />
+              <Users className="w-5 h-5 text-[var(--color-lime)]" />
               <div>
                 <p className="font-bold text-white/60">Talk to an Expert</p>
                 <p className="font-bold text-white">Mon - Sat | 10 AM - 7 PM</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-[#86A857]" />
+              <Phone className="w-5 h-5 text-[var(--color-lime)]" />
               <div>
                 <p className="font-bold text-white/60">WhatsApp Us</p>
                 <p className="font-bold text-white">Quick Response</p>
               </div>
             </div>
             <div className="flex items-center gap-3 ml-auto">
-              <Mail className="w-5 h-5 text-[#86A857]" />
+              <Mail className="w-5 h-5 text-[var(--color-lime)]" />
               <div>
                 <p className="font-bold text-white/60">Email Us</p>
                 <p className="font-bold text-white">info@ibexadventure.com</p>

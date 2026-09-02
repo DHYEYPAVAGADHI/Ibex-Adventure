@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { 
   Compass, BookOpen, Heart, Leaf, 
   ArrowRight, Book, ClipboardCheck,
@@ -21,7 +20,7 @@ export default function ExperientialLearningPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1528150239922-384c5991d74a?auto=format&fit=crop&w=2000&q=80"
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2000&q=80"
               alt="Students learning in the mountains"
               fill
               className="object-cover"
@@ -91,51 +90,51 @@ export default function ExperientialLearningPage() {
 
               {/* Step 1 */}
               <div className="flex flex-col items-center text-center flex-1 px-4 mb-12 md:mb-0">
-                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[#86A857]/30 flex items-center justify-center text-[#5D7C3F] mb-6 shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[var(--color-lime)]/30 flex items-center justify-center text-[var(--color-moss)] mb-6 shadow-sm">
                   <Book className="w-6 h-6" />
                 </div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5D7C3F] mb-3">BEFORE THE JOURNEY</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">BEFORE THE JOURNEY</h3>
                 <p className="text-[13px] text-gray-600 font-medium mb-6 leading-relaxed max-w-[240px]">
                   We prepare you with the right context, knowledge and goals.
                 </p>
                 <ul className="text-left text-[11px] text-gray-500 space-y-2">
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Pre-trip briefing & orientation</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Set learning objectives</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Understand the place & people</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Pre-trip briefing & orientation</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Set learning objectives</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Understand the place & people</li>
                 </ul>
               </div>
 
               {/* Step 2 */}
               <div className="flex flex-col items-center text-center flex-1 px-4 mb-12 md:mb-0">
-                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[#86A857]/30 flex items-center justify-center text-[#5D7C3F] mb-6 shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[var(--color-lime)]/30 flex items-center justify-center text-[var(--color-moss)] mb-6 shadow-sm">
                   <Compass className="w-6 h-6" />
                 </div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5D7C3F] mb-3">DURING THE JOURNEY</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">DURING THE JOURNEY</h3>
                 <p className="text-[13px] text-gray-600 font-medium mb-6 leading-relaxed max-w-[240px]">
                   You experience, explore, challenge yourself and connect.
                 </p>
                 <ul className="text-left text-[11px] text-gray-500 space-y-2">
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Hands-on experiences</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Interactions with locals</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Real-world challenges</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Observation & exploration</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Hands-on experiences</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Interactions with locals</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Real-world challenges</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Observation & exploration</li>
                 </ul>
               </div>
 
               {/* Step 3 */}
               <div className="flex flex-col items-center text-center flex-1 px-4">
-                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[#86A857]/30 flex items-center justify-center text-[#5D7C3F] mb-6 shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-[#f4f7f4] border border-[var(--color-lime)]/30 flex items-center justify-center text-[var(--color-moss)] mb-6 shadow-sm">
                   <ClipboardCheck className="w-6 h-6" />
                 </div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5D7C3F] mb-3">AFTER THE JOURNEY</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">AFTER THE JOURNEY</h3>
                 <p className="text-[13px] text-gray-600 font-medium mb-6 leading-relaxed max-w-[240px]">
                   We help you reflect, discuss and apply your learning.
                 </p>
                 <ul className="text-left text-[11px] text-gray-500 space-y-2">
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Reflection sessions</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Group discussions</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Document & present</li>
-                  <li className="flex items-start gap-2"><span className="text-[#86A857] mt-0.5">•</span> Apply learnings in real life</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Reflection sessions</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Group discussions</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Document & present</li>
+                  <li className="flex items-start gap-2"><span className="text-[var(--color-lime)] mt-0.5">•</span> Apply learnings in real life</li>
                 </ul>
               </div>
             </div>
@@ -148,7 +147,7 @@ export default function ExperientialLearningPage() {
             <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
               
               <div className="lg:w-1/3">
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#5D7C3F] mb-4">LEARNING BEYOND BOOKS</h4>
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-4">LEARNING BEYOND BOOKS</h4>
                 <h2 className="font-sans text-4xl md:text-5xl font-black text-[#222] leading-tight mb-6 tracking-tight">
                   Skills for Life.<br/>
                   Lessons for a Lifetime.
@@ -156,7 +155,7 @@ export default function ExperientialLearningPage() {
                 <p className="text-sm text-gray-600 font-medium leading-relaxed mb-8 max-w-sm">
                   Our experiential journeys help develop essential life skills that stay with you forever.
                 </p>
-                <Link href="/journeys" className="inline-flex items-center justify-center gap-2 rounded bg-[#5D7C3F] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#4A6432]">
+                <Link href="/journeys" className="inline-flex items-center justify-center gap-2 rounded bg-[var(--color-moss)] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[var(--color-moss-dark)]">
                   EXPLORE JOURNEYS <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -171,7 +170,7 @@ export default function ExperientialLearningPage() {
                   { icon: Globe, title: "Environmental Awareness", desc: "Care for nature. Protect tomorrow." }
                 ].map((skill, i) => (
                   <div key={i} className="flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-[#5D7C3F] mb-4">
+                    <div className="w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-[var(--color-moss)] mb-4">
                       <skill.icon className="w-5 h-5" strokeWidth={1.5} />
                     </div>
                     <h5 className="font-bold text-[#222] text-sm mb-2">{skill.title}</h5>
@@ -189,12 +188,12 @@ export default function ExperientialLearningPage() {
           <div className="container-shell mx-auto px-6 max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
               <div>
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#5D7C3F] mb-3">LEARNING IN ACTION</h4>
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">LEARNING IN ACTION</h4>
                 <h2 className="font-sans text-3xl md:text-4xl font-black text-[#222] tracking-tight">
                   Journeys That Teach
                 </h2>
               </div>
-              <Link href="/journeys" className="text-xs font-bold uppercase tracking-widest text-[#5D7C3F] hover:text-[#4A6432] flex items-center gap-2">
+              <Link href="/journeys" className="text-xs font-bold uppercase tracking-widest text-[var(--color-moss)] hover:text-[var(--color-moss-dark)] flex items-center gap-2">
                 VIEW ALL JOURNEYS <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
@@ -203,31 +202,31 @@ export default function ExperientialLearningPage() {
               {[
                 { 
                   title: "LADAKH", 
-                  image: "https://images.unsplash.com/photo-1548679847-38e9ed301593?auto=format&fit=crop&w=800&q=80",
+                  image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
                   tags: "Adventure • Culture • Resilience",
                   focus: "Resilience, Geography, High Altitude Ecology"
                 },
                 { 
                   title: "RISHIKESH", 
-                  image: "https://images.unsplash.com/photo-1596484552834-8a58f96e2a22?auto=format&fit=crop&w=800&q=80",
+                  image: "https://images.unsplash.com/photo-1591017403286-fd8493524e1e?auto=format&fit=crop&w=800&q=80",
                   tags: "Adventure • Nature • Spirituality",
                   focus: "Risk Management, River Ecology, Mindfulness"
                 },
                 { 
                   title: "KUTCH", 
-                  image: "https://images.unsplash.com/photo-1623835695034-7162d04a60f9?auto=format&fit=crop&w=800&q=80",
+                  image: "https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=800&q=80",
                   tags: "Culture • Craft • Community",
                   focus: "Craft, Livelihood, Design Thinking, Community Engagement"
                 },
                 { 
                   title: "RAJASTHAN", 
-                  image: "https://images.unsplash.com/photo-1599661559875-927dcaf9637c?auto=format&fit=crop&w=800&q=80",
+                  image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
                   tags: "Heritage • Culture • History",
                   focus: "History, Architecture, Cultural Heritage"
                 },
                 { 
                   title: "SPITI VALLEY", 
-                  image: "https://images.unsplash.com/photo-1626714485860-264024227c44?auto=format&fit=crop&w=800&q=80",
+                  image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
                   tags: "Adventure • Remote • Community",
                   focus: "Sustainability, Local Life, Resourcefulness"
                 }
@@ -236,7 +235,7 @@ export default function ExperientialLearningPage() {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute top-3 left-3">
-                      <span className="bg-[#172C21] text-white px-2 py-1 text-[9px] font-bold uppercase tracking-widest rounded shadow">
+                      <span className="bg-[var(--color-forest-band)] text-white px-2 py-1 text-[9px] font-bold uppercase tracking-widest rounded shadow">
                         {card.title}
                       </span>
                     </div>
@@ -251,7 +250,7 @@ export default function ExperientialLearningPage() {
                         {card.focus}
                       </div>
                     </div>
-                    <Link href="/journeys" className="text-[10px] font-bold uppercase tracking-widest text-[#5D7C3F] flex items-center gap-1 mt-auto hover:text-[#4A6432]">
+                    <Link href="/journeys" className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] flex items-center gap-1 mt-auto hover:text-[var(--color-moss-dark)]">
                       VIEW JOURNEY <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
@@ -270,7 +269,7 @@ export default function ExperientialLearningPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#111A15] to-[#111A15]/80" />
 
           <div className="container-shell relative z-10 mx-auto px-6 max-w-7xl">
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#86A857] mb-4">WHAT MAKES IBEX DIFFERENT?</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-lime)] mb-4">WHAT MAKES IBEX DIFFERENT?</h4>
             
             <div className="flex flex-col lg:flex-row gap-16 justify-between items-start">
               
@@ -289,7 +288,7 @@ export default function ExperientialLearningPage() {
                     { icon: Sparkles, label: "Lasting Impact" }
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col items-center text-center">
-                      <div className="w-10 h-10 rounded-full border border-[#86A857]/30 flex items-center justify-center text-[#86A857] mb-3">
+                      <div className="w-10 h-10 rounded-full border border-[var(--color-lime)]/30 flex items-center justify-center text-[var(--color-lime)] mb-3">
                         <item.icon className="w-4 h-4" />
                       </div>
                       <span className="text-[10px] font-bold text-white/80 uppercase tracking-wider">{item.label}</span>
@@ -301,7 +300,7 @@ export default function ExperientialLearningPage() {
               <div className="lg:w-4/12 border-l border-white/10 pl-8 lg:pl-16 flex items-center">
                 <blockquote className="text-xl md:text-2xl font-serif italic text-white/90 leading-relaxed">
                   "Education is not the learning of facts, but the training of the mind to think."
-                  <footer className="mt-4 text-[#86A857] font-sans text-sm font-bold not-italic">
+                  <footer className="mt-4 text-[var(--color-lime)] font-sans text-sm font-bold not-italic">
                     — Albert Einstein
                   </footer>
                 </blockquote>
@@ -316,12 +315,12 @@ export default function ExperientialLearningPage() {
           <div className="container-shell mx-auto px-6 max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <div>
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#5D7C3F] mb-3">STUDENT VOICES</h4>
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">STUDENT VOICES</h4>
                 <h2 className="font-sans text-3xl md:text-4xl font-black text-[#222] tracking-tight">
                   Real Learnings. Real Impact.
                 </h2>
               </div>
-              <Link href="/stories" className="text-xs font-bold uppercase tracking-widest text-[#5D7C3F] hover:text-[#4A6432] flex items-center gap-2">
+              <Link href="/stories" className="text-xs font-bold uppercase tracking-widest text-[var(--color-moss)] hover:text-[var(--color-moss-dark)] flex items-center gap-2">
                 VIEW ALL STORIES <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
@@ -354,7 +353,7 @@ export default function ExperientialLearningPage() {
                 }
               ].map((testimonial, i) => (
                 <div key={i} className="border border-gray-100 bg-[#FAFAFA] rounded-2xl p-8 flex flex-col hover:shadow-lg transition-shadow">
-                  <div className="text-[#86A857] text-4xl font-serif mb-4 leading-none">"</div>
+                  <div className="text-[var(--color-lime)] text-4xl font-serif mb-4 leading-none">"</div>
                   <p className="text-[13px] text-gray-600 font-medium leading-relaxed flex-grow mb-8">
                     {testimonial.quote}
                   </p>
@@ -380,13 +379,13 @@ export default function ExperientialLearningPage() {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-[#172C21]/90 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-[var(--color-forest-band)]/90 mix-blend-multiply" />
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
           <div className="container-shell relative z-10 mx-auto px-6 max-w-7xl flex flex-col md:flex-row items-center justify-between gap-10">
             <div className="max-w-2xl">
-              <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#86A857] mb-4">LEARN. GROW. INSPIRE.</h4>
+              <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-lime)] mb-4">LEARN. GROW. INSPIRE.</h4>
               <h2 className="font-sans text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
                 YOUR NEXT LESSON <br/>
                 AWAITS BEYOND THE ROAD.
@@ -394,7 +393,7 @@ export default function ExperientialLearningPage() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded bg-[#5D7C3F] px-8 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#4A6432]">
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded bg-[var(--color-moss)] px-8 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[var(--color-moss-dark)]">
                 PLAN AN EXPERIENTIAL JOURNEY <ArrowRight className="w-4 h-4" />
               </Link>
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded border border-white/30 bg-transparent px-8 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10">
@@ -405,7 +404,6 @@ export default function ExperientialLearningPage() {
         </section>
 
       </main>
-      <Footer />
     </>
   );
 }

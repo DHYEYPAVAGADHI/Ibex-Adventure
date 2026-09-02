@@ -8,7 +8,7 @@ export function ProgramDetailsSection() {
     >
       <div className="container-shell">
         <div className="mb-12">
-          <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
+          <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-forest-band)]">
             Program Details
           </p>
           <h2 className="font-serif text-4xl leading-tight text-[#1C1C18] sm:text-5xl">
@@ -23,9 +23,9 @@ export function ProgramDetailsSection() {
           {programDetails.map((detail, i) => (
             <div
               key={detail.label}
-              className="border-t-2 border-[#172C21]/15 pt-6"
+              className="border-t-2 border-[var(--color-forest-band)]/15 pt-6"
             >
-              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]/40 mb-3">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-forest-band)]/40 mb-3">
                 {String(i + 1).padStart(2, "0")} — {detail.label}
               </p>
               <p className="font-serif text-2xl text-[#1C1C18]">
