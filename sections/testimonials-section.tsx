@@ -34,13 +34,13 @@ const TESTIMONIALS = [
 
 export function TestimonialsSection() {
   return (
-    <section id="stories" className="section-spacing bg-[#f9f9f9]">
+    <section id="stories" className="section-spacing bg-[var(--color-sand)]">
       <div className="container-shell max-w-[1400px] mx-auto">
         <div className="mb-12">
-          <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[#222] md:text-4xl">
+          <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[var(--color-ink)] md:text-4xl">
             STORIES FROM THE ROAD.
           </h2>
-          <p className="mt-1 text-sm font-bold text-[#666]">
+          <p className="mt-1 text-sm font-bold text-[var(--color-ink-muted)]">
             Real people. Real experiences.
           </p>
         </div>
@@ -50,15 +50,15 @@ export function TestimonialsSection() {
           {/* Left: 2x2 Grid of Testimonials */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {TESTIMONIALS.map((item, i) => (
-              <div key={i} className="flex flex-col justify-between rounded bg-white p-6 shadow-sm border border-[#eee]">
+              <div key={i} className="flex flex-col justify-between rounded bg-white p-6 shadow-sm border border-[var(--color-hair)]">
                 <div>
                   <Quote className="h-6 w-6 text-[var(--color-lime)] mb-4" fill="currentColor" />
-                  <p className="text-[13px] font-medium leading-relaxed text-[#444] mb-6">
+                  <p className="text-[13px] font-medium leading-relaxed text-[var(--color-ink)] mb-6">
                     {item.quote}
                   </p>
                 </div>
                 <div className="flex items-center gap-3 mt-auto">
-                  <div className="h-10 w-10 overflow-hidden rounded-full border border-[#ddd]">
+                  <div className="h-10 w-10 overflow-hidden rounded-full border border-[var(--color-hair)]">
                     <SafeImage
                       src={item.image}
                       alt={item.author}
@@ -68,8 +68,8 @@ export function TestimonialsSection() {
                     />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#222]">{item.author}</p>
-                    <p className="text-[10px] text-[#666]">{item.role}</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-ink)]">{item.author}</p>
+                    <p className="text-[10px] text-[var(--color-ink-muted)]">{item.role}</p>
                   </div>
                 </div>
               </div>

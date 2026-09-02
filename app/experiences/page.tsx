@@ -26,7 +26,7 @@ export default async function ExperiencesPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-[#f9f9f9] pt-20">
+      <main className="bg-[var(--color-ivory)]">
         
         {/* Hero */}
         <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center text-center overflow-hidden">
@@ -61,17 +61,17 @@ export default async function ExperiencesPage() {
         {/* Categories Grid */}
         <section className="section-spacing text-center">
           <div className="container-shell max-w-6xl mx-auto">
-            <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[#222] mb-12">
+            <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-12">
               HOW WILL YOU EXPERIENCE INDIA?
             </h2>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {CATEGORIES.map((cat, i) => (
                 <div key={i} className={`bg-white p-8 rounded-2xl shadow-sm border-b-4 ${cat.color} flex flex-col items-center gap-4 hover:-translate-y-1 transition-transform cursor-pointer`}>
-                  <div className="w-16 h-16 rounded-full bg-[#f4f4f4] flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-[var(--color-sand)] flex items-center justify-center">
                     {cat.icon}
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#222]">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-ink)]">
                     {cat.name}
                   </span>
                 </div>
@@ -81,22 +81,22 @@ export default async function ExperiencesPage() {
         </section>
 
         {/* Flowchart */}
-        <section className="py-20 bg-white border-y border-[#eee]">
+        <section className="py-20 bg-white border-y border-[var(--color-hair)]">
           <div className="container-shell max-w-5xl mx-auto text-center">
-            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] mb-10">
+            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-10">
               EVERY EXPERIENCE IS A LESSON.
             </h2>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-bold uppercase tracking-widest">
-              <div className="bg-[#f9f9f9] border-2 border-[var(--color-moss)] text-[var(--color-moss)] px-8 py-4 rounded-xl shadow-sm">
+              <div className="bg-[var(--color-sand)] border-2 border-[var(--color-moss)] text-[var(--color-moss)] px-8 py-4 rounded-xl shadow-sm">
                 EXPERIENCE
               </div>
-              <ArrowRight className="text-[#888] h-6 w-6 rotate-90 md:rotate-0" />
-              <div className="bg-[#f9f9f9] border-2 border-[#E67E22] text-[#E67E22] px-8 py-4 rounded-xl shadow-sm">
+              <ArrowRight className="text-[var(--color-ink-muted)] h-6 w-6 rotate-90 md:rotate-0" />
+              <div className="bg-[var(--color-sand)] border-2 border-[#E67E22] text-[#E67E22] px-8 py-4 rounded-xl shadow-sm">
                 LEARN
               </div>
-              <ArrowRight className="text-[#888] h-6 w-6 rotate-90 md:rotate-0" />
-              <div className="bg-[#f9f9f9] border-2 border-[#2980B9] text-[#2980B9] px-8 py-4 rounded-xl shadow-sm">
+              <ArrowRight className="text-[var(--color-ink-muted)] h-6 w-6 rotate-90 md:rotate-0" />
+              <div className="bg-[var(--color-sand)] border-2 border-[#2980B9] text-[#2980B9] px-8 py-4 rounded-xl shadow-sm">
                 REFLECT
               </div>
             </div>
@@ -106,9 +106,9 @@ export default async function ExperiencesPage() {
         {/* Popular Experiences Carousel/Grid */}
         <section className="section-spacing">
           <div className="container-shell max-w-[1400px] mx-auto">
-            <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#ddd] pb-6">
+            <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[var(--color-hair)] pb-6">
               <div>
-                <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[#222] md:text-4xl">
+                <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[var(--color-ink)] md:text-4xl">
                   HANDPICKED EXPERIENCES
                 </h2>
               </div>

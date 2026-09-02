@@ -95,7 +95,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
               href={addressQuery}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="View office location on Google Maps"
             >
               <div className="flex items-start gap-5">
@@ -113,7 +113,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
 
             <a 
               href={buildTelLink(phone)}
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="Call Ibex Adventure"
             >
               <div className="flex items-center gap-5">
@@ -129,7 +129,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
 
             <a 
               href={`mailto:${email}`}
-              className="group block p-6 md:p-8 border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+              className="group block p-6 md:p-8 border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
               aria-label="Email Ibex Adventure"
             >
               <div className="flex items-center gap-5">
@@ -145,7 +145,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
           </div>
 
           {/* Contact Form */}
-          <div className="border border-[#C2C8C2] p-6 sm:p-10 h-full" style={{ borderRadius: "2px" }}>
+          <div className="border border-[var(--color-hair)] p-6 sm:p-10 h-full" style={{ borderRadius: "2px" }}>
             <h3 className="font-serif text-2xl font-medium text-[#1C1C18] mb-8">Send a Message</h3>
             
             <form onSubmit={handleSubmit} className="grid gap-5">
@@ -156,7 +156,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
                   type="text"
                   value={form.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
+                  className="w-full min-w-0 border border-[var(--color-hair)] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                   placeholder="Your full name"
                 />
               </label>
@@ -169,7 +169,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
                     type="email"
                     value={form.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
+                    className="w-full min-w-0 border border-[var(--color-hair)] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                     placeholder="your@email.com"
                   />
                 </label>
@@ -181,7 +181,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
                     type="tel"
                     value={form.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
-                    className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
+                    className="w-full min-w-0 border border-[var(--color-hair)] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                     placeholder="Mobile number"
                   />
                 </label>
@@ -194,7 +194,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
                   type="text"
                   value={form.subject}
                   onChange={(e) => handleChange("subject", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
+                  className="w-full min-w-0 border border-[var(--color-hair)] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)]"
                   placeholder="How can we help?"
                 />
               </label>
@@ -206,7 +206,7 @@ export function ContactClient({ addressQuery }: ContactClientProps) {
                   rows={5}
                   value={form.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  className="w-full min-w-0 border border-[#C2C8C2] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)] resize-none"
+                  className="w-full min-w-0 border border-[var(--color-hair)] bg-transparent px-4 py-3 text-[#1C1C18] placeholder:text-[#424844]/40 outline-none transition focus:border-[var(--color-forest-band)] resize-none"
                   placeholder="Tell us more about your inquiry..."
                 />
               </label>

@@ -13,13 +13,13 @@ const SAFETY_FEATURES = [
 
 export function SafetySection() {
   return (
-    <section id="safety" className="py-16 bg-white border-b border-[#eee]">
+    <section id="safety" className="py-16 bg-white border-b border-[var(--color-hair)]">
       <div className="container-shell max-w-[1400px] mx-auto">
         
         <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-20">
           
           <div className="shrink-0">
-            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] md:text-3xl max-w-[300px]">
+            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[var(--color-ink)] md:text-3xl max-w-[300px]">
               YOUR SAFETY.
               <br />
               <span className="text-[var(--color-lime)]">OUR RESPONSIBILITY.</span>
@@ -29,10 +29,10 @@ export function SafetySection() {
           <div className="flex-grow grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-4">
             {SAFETY_FEATURES.map((feature, i) => (
               <div key={i} className="flex flex-col items-center text-center gap-4 group">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4] text-[#444] transition-colors group-hover:bg-[var(--color-moss)] group-hover:text-white">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-sand)] text-[var(--color-ink)] transition-colors group-hover:bg-[var(--color-moss)] group-hover:text-white">
                   {feature.icon}
                 </div>
-                <span className="whitespace-pre-line text-[10px] font-bold uppercase tracking-widest text-[#222]">
+                <span className="whitespace-pre-line text-[10px] font-bold uppercase tracking-widest text-[var(--color-ink)]">
                   {feature.label}
                 </span>
               </div>

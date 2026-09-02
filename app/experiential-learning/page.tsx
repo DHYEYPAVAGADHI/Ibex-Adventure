@@ -76,7 +76,7 @@ export default function ExperientialLearningPage() {
         {/* 2. THE IBEX LEARNING APPROACH */}
         <section className="py-24 bg-white border-b border-gray-100">
           <div className="container-shell mx-auto px-6 max-w-7xl">
-            <h2 className="text-center font-sans text-2xl font-black uppercase tracking-widest text-[#222] mb-20">
+            <h2 className="text-center font-sans text-2xl font-black uppercase tracking-widest text-[var(--color-ink)] mb-20">
               THE IBEX LEARNING APPROACH
             </h2>
             
@@ -142,13 +142,13 @@ export default function ExperientialLearningPage() {
         </section>
 
         {/* 3. SKILLS FOR LIFE */}
-        <section className="py-20 bg-[#F9FAF8]">
+        <section className="py-20 bg-[var(--color-sand)]">
           <div className="container-shell mx-auto px-6 max-w-7xl">
             <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
               
               <div className="lg:w-1/3">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-4">LEARNING BEYOND BOOKS</h4>
-                <h2 className="font-sans text-4xl md:text-5xl font-black text-[#222] leading-tight mb-6 tracking-tight">
+                <h2 className="font-sans text-4xl md:text-5xl font-black text-[var(--color-ink)] leading-tight mb-6 tracking-tight">
                   Skills for Life.<br/>
                   Lessons for a Lifetime.
                 </h2>
@@ -173,7 +173,7 @@ export default function ExperientialLearningPage() {
                     <div className="w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-[var(--color-moss)] mb-4">
                       <skill.icon className="w-5 h-5" strokeWidth={1.5} />
                     </div>
-                    <h5 className="font-bold text-[#222] text-sm mb-2">{skill.title}</h5>
+                    <h5 className="font-bold text-[var(--color-ink)] text-sm mb-2">{skill.title}</h5>
                     <p className="text-xs text-gray-500 max-w-[140px] leading-relaxed">{skill.desc}</p>
                   </div>
                 ))}
@@ -189,7 +189,7 @@ export default function ExperientialLearningPage() {
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
               <div>
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">LEARNING IN ACTION</h4>
-                <h2 className="font-sans text-3xl md:text-4xl font-black text-[#222] tracking-tight">
+                <h2 className="font-sans text-3xl md:text-4xl font-black text-[var(--color-ink)] tracking-tight">
                   Journeys That Teach
                 </h2>
               </div>
@@ -246,7 +246,7 @@ export default function ExperientialLearningPage() {
                     </div>
                     <div className="mb-4 flex-grow">
                       <div className="text-[10px] text-gray-400 mb-1 font-medium">Learning Focus</div>
-                      <div className="text-xs font-semibold text-[#222] leading-snug">
+                      <div className="text-xs font-semibold text-[var(--color-ink)] leading-snug">
                         {card.focus}
                       </div>
                     </div>
@@ -316,7 +316,7 @@ export default function ExperientialLearningPage() {
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <div>
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-moss)] mb-3">STUDENT VOICES</h4>
-                <h2 className="font-sans text-3xl md:text-4xl font-black text-[#222] tracking-tight">
+                <h2 className="font-sans text-3xl md:text-4xl font-black text-[var(--color-ink)] tracking-tight">
                   Real Learnings. Real Impact.
                 </h2>
               </div>
@@ -352,7 +352,7 @@ export default function ExperientialLearningPage() {
                   image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"
                 }
               ].map((testimonial, i) => (
-                <div key={i} className="border border-gray-100 bg-[#FAFAFA] rounded-2xl p-8 flex flex-col hover:shadow-lg transition-shadow">
+                <div key={i} className="border border-gray-100 bg-[var(--color-sand)] rounded-2xl p-8 flex flex-col hover:shadow-lg transition-shadow">
                   <div className="text-[var(--color-lime)] text-4xl font-serif mb-4 leading-none">"</div>
                   <p className="text-[13px] text-gray-600 font-medium leading-relaxed flex-grow mb-8">
                     {testimonial.quote}
@@ -360,7 +360,7 @@ export default function ExperientialLearningPage() {
                   <div className="flex items-center gap-3">
                     <Image src={testimonial.image} alt={testimonial.name} width={40} height={40} className="rounded-full object-cover" />
                     <div>
-                      <div className="text-xs font-bold text-[#222]">{testimonial.name}</div>
+                      <div className="text-xs font-bold text-[var(--color-ink)]">{testimonial.name}</div>
                       <div className="text-[10px] text-gray-500 uppercase tracking-wider">{testimonial.role}</div>
                     </div>
                   </div>

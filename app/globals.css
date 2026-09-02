@@ -79,7 +79,12 @@ html,
 body {
   margin: 0;
   width: 100%;
-  overflow-x: hidden;
+}
+
+/* clip (not hidden) so the root stays a normal scroll container —
+   `overflow-x: hidden` on <html> breaks anchor/scroll-to-section behaviour */
+body {
+  overflow-x: clip;
 }
 
 body {

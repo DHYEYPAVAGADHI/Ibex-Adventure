@@ -55,7 +55,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: i * 0.07 }}
-      className="border border-[#C2C8C2] overflow-hidden" style={{ borderRadius: "2px" }}
+      className="border border-[var(--color-hair)] overflow-hidden" style={{ borderRadius: "2px" }}
     >
       <button
         onClick={() => setOpen(!open)}
@@ -242,7 +242,7 @@ export function AttractionDetailClient({ attraction }: Props) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto max-w-6xl border border-[#C2C8C2] bg-[#FCF9F2] p-8" style={{ borderRadius: "2px" }}
+            className="mx-auto max-w-6xl border border-[var(--color-hair)] bg-[#FCF9F2] p-8" style={{ borderRadius: "2px" }}
           >
             <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]/50">Visitor Info</h2>
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -317,7 +317,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               </div>
 
               {/* Side card */}
-              <div className="border border-[#C2C8C2] p-6 space-y-5" style={{ borderRadius: "2px" }}>
+              <div className="border border-[var(--color-hair)] p-6 space-y-5" style={{ borderRadius: "2px" }}>
                 {activities.length > 0 && (
                   <div>
                     <p className="text-xs text-[#424844]/50 uppercase tracking-wider mb-3">Activities</p>
@@ -330,7 +330,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                     </div>
                   </div>
                 )}
-                <div className="border-t border-[#C2C8C2] pt-4">
+                <div className="border-t border-[var(--color-hair)] pt-4">
                   <a
                     href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                     target="_blank"
@@ -448,7 +448,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex items-center gap-3 border border-[#C2C8C2] px-4 py-3 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+                  className="flex items-center gap-3 border border-[var(--color-hair)] px-4 py-3 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <span className="text-[var(--color-forest-band)]">✦</span>
                   <span className="text-sm text-[#1C1C18] font-medium">{act}</span>
@@ -475,7 +475,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-3 border border-[#C2C8C2] px-4 py-4" style={{ borderRadius: "2px" }}
+                  className="flex items-start gap-3 border border-[var(--color-hair)] px-4 py-4" style={{ borderRadius: "2px" }}
                 >
                   <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">💡</span>
                   <p className="text-sm text-[#424844] leading-relaxed">{tip}</p>
@@ -502,7 +502,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="border border-[#C2C8C2] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+                  className="border border-[var(--color-hair)] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <Star className="h-4 w-4 text-amber-400 fill-amber-400 flex-shrink-0" />
@@ -533,7 +533,7 @@ export function AttractionDetailClient({ attraction }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="border border-[#C2C8C2] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
+                  className="border border-[var(--color-hair)] p-5 hover:border-[var(--color-forest-band)] transition-colors" style={{ borderRadius: "2px" }}
                 >
                   <h3 className="font-semibold text-[#1C1C18] text-sm mb-1">{rest.name}</h3>
                   {rest.cuisine && <p className="text-xs text-[var(--color-forest-band)]/60 mb-1">{rest.cuisine}</p>}
@@ -563,7 +563,7 @@ export function AttractionDetailClient({ attraction }: Props) {
       )}
 
       {/* ── STICKY CTA ─────────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#C2C8C2] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-hair)] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div className="hidden sm:block">
             <p className="font-semibold text-[#1C1C18]">{attraction.title}</p>
@@ -574,7 +574,7 @@ export function AttractionDetailClient({ attraction }: Props) {
           <div className="flex flex-wrap gap-3 ml-auto">
             <a
               href={buildTelLink(phone)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
             >
               <Phone className="h-4 w-4" /> Call
             </a>
@@ -582,7 +582,7 @@ export function AttractionDetailClient({ attraction }: Props) {
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>

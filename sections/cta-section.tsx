@@ -6,27 +6,27 @@ import { SafeImage } from "@/components/safe-image";
 
 const CTA_OPTIONS = [
   {
-    icon: <Calendar className="h-5 w-5 text-[#222]" />,
+    icon: <Calendar className="h-5 w-5 text-[var(--color-ink)]" />,
     title: "JOIN AN\nUPCOMING TRIP",
     link: "/journeys",
   },
   {
-    icon: <GraduationCap className="h-5 w-5 text-[#222]" />,
+    icon: <GraduationCap className="h-5 w-5 text-[var(--color-ink)]" />,
     title: "PLAN A\nCOLLEGE TRIP",
     link: "/for-colleges",
   },
   {
-    icon: <Briefcase className="h-5 w-5 text-[#222]" />,
+    icon: <Briefcase className="h-5 w-5 text-[var(--color-ink)]" />,
     title: "PLAN A\nCORPORATE TRIP",
     link: "/for-corporates",
   },
   {
-    icon: <Users className="h-5 w-5 text-[#222]" />,
+    icon: <Users className="h-5 w-5 text-[var(--color-ink)]" />,
     title: "PLAN A FAMILY /\nGROUP TRIP",
     link: "/contact",
   },
   {
-    icon: <Pencil className="h-5 w-5 text-[#222]" />,
+    icon: <Pencil className="h-5 w-5 text-[var(--color-ink)]" />,
     title: "CREATE A\nCUSTOM JOURNEY",
     link: "/contact",
   }
@@ -91,7 +91,7 @@ export function CtaSection() {
                 <div className="mb-3">
                   {option.icon}
                 </div>
-                <h4 className="text-[9px] font-bold uppercase tracking-widest text-[#222] whitespace-pre-line leading-relaxed group-hover:text-[var(--color-moss)] transition-colors">
+                <h4 className="text-[9px] font-bold uppercase tracking-widest text-[var(--color-ink)] whitespace-pre-line leading-relaxed group-hover:text-[var(--color-moss)] transition-colors">
                   {option.title}
                 </h4>
               </Link>

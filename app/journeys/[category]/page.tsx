@@ -139,7 +139,7 @@ export default async function CategoryPage({
                     <Link
                       key={place.slug}
                       href={`/programs/${categoryData.slug}/${place.slug}`}
-                      className="group block overflow-hidden border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-colors duration-300"
+                      className="group block overflow-hidden border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-colors duration-300"
                       style={{ borderRadius: "2px" }}
                     >
                       {/* Image */}
@@ -212,7 +212,7 @@ export default async function CategoryPage({
               </div>
             </>
           ) : (
-            <div className="py-24 text-center border border-[#C2C8C2]">
+            <div className="py-24 text-center border border-[var(--color-hair)]">
               <p className="font-serif text-3xl text-[#1C1C18]">
                 No programs published yet.
               </p>

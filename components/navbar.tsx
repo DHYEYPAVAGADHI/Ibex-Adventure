@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -95,18 +94,17 @@ export function Navbar() {
   useEffect(() => setOpen(false), [pathname]);
 
   const go = useCallback(
-    (id: string) => (e: React.MouseEvent) => {
-      if (!onHome) return; // let the Link navigate to /#id
-      e.preventDefault();
+    (id: string) => () => {
       setOpen(false);
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        history.replaceState(null, "", id === "home" ? "/" : `#${id}`);
-      }
+      if (onHome) setActive(id);
     },
     [onHome]
   );
+
+  // href: on the home route use a bare hash so the browser scrolls natively
+  // (respecting scroll-margin-top + smooth behavior); elsewhere navigate home.
+  const hrefFor = (id: string) =>
+    id === "home" ? (onHome ? "#home" : "/") : onHome ? `#${id}` : `/#${id}`;
 
   const dark = scrolled || open || !onHome;
   const waHref = buildWhatsappLink(whatsapp || phone, "Hello Ibex Adventure, I'd like to plan a journey.");
@@ -125,22 +123,22 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto flex max-w-[1520px] items-center gap-4 px-5 py-3 md:px-8 lg:px-10">
-          <Link href="/" aria-label="Ibex Adventure — Home" onClick={go("home")} className="flex-shrink-0">
+          <a href={hrefFor("home")} aria-label="Ibex Adventure — Home" onClick={go("home")} className="flex-shrink-0">
             {logoUrl ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img src={logoUrl} alt="Ibex Adventure" className="h-9 w-auto object-contain" />
             ) : (
               <LogoMark dark={dark} />
             )}
-          </Link>
+          </a>
 
           <nav className="ml-auto hidden items-center gap-x-4 lg:flex xl:gap-x-6" aria-label="Primary">
             {NAV_LINKS.map((item) => {
               const isActive = onHome && active === item.id;
               return (
-                <Link
+                <a
                   key={item.id}
-                  href={item.id === "home" ? "/" : `/#${item.id}`}
+                  href={hrefFor(item.id)}
                   onClick={go(item.id)}
                   className={`group relative whitespace-nowrap text-[12px] font-semibold transition-colors xl:text-[13px] ${
                     dark
@@ -158,19 +156,19 @@ export function Navbar() {
                       isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     }`}
                   />
-                </Link>
+                </a>
               );
             })}
           </nav>
 
           <div className="ml-auto hidden flex-shrink-0 items-center gap-2.5 lg:ml-4 lg:flex">
-            <Link
-              href="/#contact"
+            <a
+              href={hrefFor("contact")}
               onClick={go("contact")}
               className="inline-flex items-center rounded bg-[var(--color-moss)] px-4 py-2.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[var(--color-moss-dark)] xl:px-5 xl:text-[11px]"
             >
               Plan Your Journey
-            </Link>
+            </a>
             <a
               href={waHref}
               target="_blank"
@@ -202,9 +200,9 @@ export function Navbar() {
         <div className="fixed inset-0 top-[60px] z-40 overflow-y-auto bg-[var(--color-ivory)] lg:hidden">
           <nav className="flex flex-col px-6 py-6" aria-label="Mobile">
             {NAV_LINKS.map((item) => (
-              <Link
+              <a
                 key={item.id}
-                href={item.id === "home" ? "/" : `/#${item.id}`}
+                href={hrefFor(item.id)}
                 onClick={go(item.id)}
                 className={`border-b border-[var(--color-border-light)] py-4 text-lg font-semibold transition-colors ${
                   onHome && active === item.id
@@ -213,15 +211,15 @@ export function Navbar() {
                 }`}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
-            <Link
-              href="/#contact"
+            <a
+              href={hrefFor("contact")}
               onClick={go("contact")}
               className="mt-8 flex items-center justify-center rounded bg-[var(--color-moss)] px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white"
             >
               Plan Your Journey
-            </Link>
+            </a>
             <a
               href={waHref}
               target="_blank"

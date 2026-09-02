@@ -632,7 +632,11 @@ async function main() {
     });
   });
 
-  /* Flagship journeys */
+  /* Flagship journeys — only these six are featured on the homepage */
+  await prisma.package.updateMany({
+    where: { slug: { notIn: HERO_JOURNEYS.map((j) => j.slug) } },
+    data: { isFeatured: false },
+  });
   await upsertMany("Package (flagship journeys)", HERO_JOURNEYS, async (j) => {
     const { title } = j;
     await prisma.package.upsert({

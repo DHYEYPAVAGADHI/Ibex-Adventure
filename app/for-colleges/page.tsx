@@ -83,11 +83,11 @@ export default async function ForCollegesPage() {
         {/* Flowchart Section */}
         <section className="section-spacing text-center">
           <div className="container-shell max-w-5xl mx-auto">
-            <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[#222] mb-12">
+            <h2 className="font-sans text-3xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-12">
               NOT JUST A TRIP. <span className="text-[var(--color-lime)]">A TRANSFORMATIVE EXPERIENCE.</span>
             </h2>
             
-            <div className="bg-white p-12 rounded-2xl shadow-sm border border-[#eee]">
+            <div className="bg-white p-12 rounded-2xl shadow-sm border border-[var(--color-hair)]">
               {/* Top Row: The standard trip */}
               <div className="flex items-center justify-center gap-4 mb-8 text-red-500 font-bold uppercase tracking-widest text-sm">
                 <span className="bg-red-50 px-4 py-2 rounded">VISIT</span>
@@ -142,9 +142,9 @@ export default async function ForCollegesPage() {
         </section>
 
         {/* How Ibex Works Timeline */}
-        <section className="section-spacing bg-white border-y border-[#eee]">
+        <section className="section-spacing bg-white border-y border-[var(--color-hair)]">
           <div className="container-shell max-w-7xl mx-auto text-center">
-            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] mb-16">
+            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-16">
               HOW IBEX WORKS
             </h2>
             <div className="flex flex-wrap justify-between relative">
@@ -152,7 +152,7 @@ export default async function ForCollegesPage() {
               {['CONSULTATION', 'DESIGN', 'RISK ASSESSMENT', 'PRE-DEPARTURE', 'THE JOURNEY', 'POST-TRIP'].map((step, i) => (
                 <div key={i} className="relative z-10 flex flex-col items-center bg-white px-2">
                   <div className="w-12 h-12 rounded-full bg-[var(--color-forest-band)] text-white flex items-center justify-center font-bold text-lg mb-4">{i + 1}</div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#222] w-24 text-center">{step}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-ink)] w-24 text-center">{step}</span>
                 </div>
               ))}
             </div>
@@ -163,29 +163,29 @@ export default async function ForCollegesPage() {
         <section className="section-spacing">
           <div className="container-shell max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-sans text-4xl font-black uppercase tracking-tight text-[#222] mb-10">
+              <h2 className="font-sans text-4xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-10">
                 SAFETY COMES FIRST.
               </h2>
               <div className="space-y-8">
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><Shield /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[var(--color-sand)] flex items-center justify-center text-[var(--color-moss)]"><Shield /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">WFR CERTIFIED LEADERS</h4>
-                    <p className="text-sm text-[#666]">All our lead instructors hold active Wilderness First Responder certifications.</p>
+                    <p className="text-sm text-[var(--color-ink-muted)]">All our lead instructors hold active Wilderness First Responder certifications.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><Phone /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[var(--color-sand)] flex items-center justify-center text-[var(--color-moss)]"><Phone /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">24/7 COMMS</h4>
-                    <p className="text-sm text-[#666]">We carry satellite phones and VHF radios in regions without cellular networks.</p>
+                    <p className="text-sm text-[var(--color-ink-muted)]">We carry satellite phones and VHF radios in regions without cellular networks.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f4] flex items-center justify-center text-[var(--color-moss)]"><ShieldCheck /></div>
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[var(--color-sand)] flex items-center justify-center text-[var(--color-moss)]"><ShieldCheck /></div>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest text-sm mb-1">STRICT PROTOCOLS</h4>
-                    <p className="text-sm text-[#666]">Comprehensive risk management documents tailored for every single route.</p>
+                    <p className="text-sm text-[var(--color-ink-muted)]">Comprehensive risk management documents tailored for every single route.</p>
                   </div>
                 </div>
               </div>
@@ -219,7 +219,7 @@ export default async function ForCollegesPage() {
                     <h3 className="font-sans text-lg font-black tracking-wide text-white uppercase mb-1">{journey.title}</h3>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-[#ddd] mb-4">{journey.duration}</p>
                     <div className="flex items-center justify-between border-t border-white/20 pt-3">
-                      <p className="text-xs font-medium text-white"><span className="text-[#aaa] text-[10px] mr-1">From:</span>{journey.price}</p>
+                      <p className="text-xs font-medium text-white"><span className="text-[var(--color-ink-muted)] text-[10px] mr-1">From:</span>{journey.price}</p>
                       <ArrowRightCircle className="h-5 w-5 text-white transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
@@ -232,28 +232,28 @@ export default async function ForCollegesPage() {
         {/* Life Lessons & Educator Reviews */}
         <section className="section-spacing bg-white">
           <div className="container-shell max-w-7xl mx-auto text-center">
-            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[#222] mb-12">
+            <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-[var(--color-ink)] mb-12">
               LIFE LESSONS OUTSIDE THE CLASSROOM
             </h2>
             <div className="flex flex-wrap justify-center gap-4 md:gap-12 mb-20">
               {['CONFIDENCE', 'LEADERSHIP', 'RESILIENCE', 'EMPATHY', 'TEAMWORK'].map((lesson, i) => (
                 <div key={i} className="flex flex-col items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-[#f9f9f9] border border-[#eee] flex items-center justify-center text-[var(--color-moss)] font-serif text-2xl font-bold italic">
+                  <div className="w-16 h-16 rounded-full bg-[var(--color-sand)] border border-[var(--color-hair)] flex items-center justify-center text-[var(--color-moss)] font-serif text-2xl font-bold italic">
                     {lesson[0]}
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#222]">{lesson}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-ink)]">{lesson}</span>
                 </div>
               ))}
             </div>
 
             <div className="grid md:grid-cols-4 gap-6 text-left">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="bg-[#f9f9f9] p-6 rounded-xl border border-[#eee]">
+                <div key={i} className="bg-[var(--color-sand)] p-6 rounded-xl border border-[var(--color-hair)]">
                   <div className="flex text-[var(--color-gold-star)] mb-4">{"★★★★★"}</div>
-                  <p className="text-sm font-medium text-[#444] mb-6 italic">
+                  <p className="text-sm font-medium text-[var(--color-ink)] mb-6 italic">
                     "The Ibex team was incredibly professional. They handled 40 students with ease and delivered an experience that students are still talking about."
                   </p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#222]">- Educator, Delhi</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-ink)]">- Educator, Delhi</p>
                 </div>
               ))}
             </div>

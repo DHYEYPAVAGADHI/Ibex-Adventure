@@ -84,7 +84,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: i * 0.07 }}
-      className="border border-[#C2C8C2] overflow-hidden" style={{ borderRadius: "2px" }}
+      className="border border-[var(--color-hair)] overflow-hidden" style={{ borderRadius: "2px" }}
     >
       <button
         onClick={() => setOpen(!open)}
@@ -298,7 +298,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto max-w-6xl rounded-none border border-[#C2C8C2] bg-[#FCF9F2] p-8"
+            className="mx-auto max-w-6xl rounded-none border border-[var(--color-hair)] bg-[#FCF9F2] p-8"
           >
             <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]/50">Quick Facts</h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
@@ -383,7 +383,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               </div>
 
               {/* Side info card */}
-              <div className="border border-[#C2C8C2] p-6 space-y-4" style={{ borderRadius: "2px" }}>
+              <div className="border border-[var(--color-hair)] p-6 space-y-4" style={{ borderRadius: "2px" }}>
                 {destination.weather && (
                   <div className="flex items-start gap-3">
                     <Sun className="h-5 w-5 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -411,7 +411,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     </div>
                   </div>
                 )}
-                <div className="pt-4 border-t border-[#C2C8C2]">
+                <div className="pt-4 border-t border-[var(--color-hair)]">
                   <a
                     href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                     target="_blank"
@@ -509,7 +509,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="group border border-[#C2C8C2] p-6 hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
+                  className="group border border-[var(--color-hair)] p-6 hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
                 >
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-forest-band)]/8 text-[var(--color-forest-band)] text-2xl group-hover:bg-[var(--color-forest-band)] group-hover:text-white transition-colors">
                     {item.icon || "✦"}
@@ -560,7 +560,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Location</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Find Us on Map</h2>
             </motion.div>
-            <div className="overflow-hidden border border-[#C2C8C2]" style={{ height: 420 }}>
+            <div className="overflow-hidden border border-[var(--color-hair)]" style={{ height: 420 }}>
               <iframe
                 src={destination.googleMap}
                 width="100%"
@@ -599,7 +599,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                       onClick={() => setReachTab(tab.key)}
                       className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${reachTab === tab.key
                           ? "bg-[var(--color-forest-band)] text-white border border-[var(--color-forest-band)]"
-                          : "text-[#424844] border border-[#C2C8C2] hover:text-[var(--color-forest-band)] hover:border-[var(--color-forest-band)]"
+                          : "text-[#424844] border border-[var(--color-hair)] hover:text-[var(--color-forest-band)] hover:border-[var(--color-forest-band)]"
                         }`}
                     >
                       <tab.icon className="h-4 w-4" />
@@ -613,7 +613,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="border border-[#C2C8C2] p-6 text-[#424844] leading-relaxed" style={{ borderRadius: "2px" }}
+                    className="border border-[var(--color-hair)] p-6 text-[#424844] leading-relaxed" style={{ borderRadius: "2px" }}
                   >
                     {howToReach[reachTab] || "Information not available."}
                   </motion.div>
@@ -632,7 +632,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05 }}
-                      className="flex items-start gap-3 border border-[#C2C8C2] px-4 py-3" style={{ borderRadius: "2px" }}
+                      className="flex items-start gap-3 border border-[var(--color-hair)] px-4 py-3" style={{ borderRadius: "2px" }}
                     >
                       <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">💡</span>
                       <p className="text-sm text-[#424844] leading-relaxed">{tip}</p>
@@ -664,7 +664,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="group overflow-hidden border border-[#C2C8C2] hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
+                    className="group overflow-hidden border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
                   >
                     <div className="relative h-48 overflow-hidden">
                       <Image
@@ -717,7 +717,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
       )}
 
       {/* ── STICKY CTA ─────────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#C2C8C2] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-hair)] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div className="hidden sm:block">
             <p className="font-semibold text-[#1C1C18]">{destination.title}</p>
@@ -728,7 +728,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
           <div className="flex flex-wrap gap-3 ml-auto">
             <a
               href={buildTelLink(phone)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
             >
               <Phone className="h-4 w-4" /> Call
             </a>
@@ -736,7 +736,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>

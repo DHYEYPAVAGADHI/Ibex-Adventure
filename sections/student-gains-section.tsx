@@ -27,7 +27,7 @@ export function StudentGainsSection() {
             return (
               <div
                 key={item.title}
-                className="group border-t border-[#C2C8C2] pt-6 hover:border-[var(--color-forest-band)] transition-colors duration-300"
+                className="group border-t border-[var(--color-hair)] pt-6 hover:border-[var(--color-forest-band)] transition-colors duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-forest-band)]/8 text-[var(--color-forest-band)] group-hover:bg-[var(--color-forest-band)] group-hover:text-white transition-colors duration-300">
