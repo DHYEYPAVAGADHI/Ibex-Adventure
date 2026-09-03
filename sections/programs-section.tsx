@@ -1,180 +1,108 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { useContact } from "@/components/providers/contact-provider";
-import { buildProgramInquiry } from "@/lib/contact";
+import { ArrowRight, ArrowRightCircle } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
+import { prisma } from "@/lib/prisma";
 
-interface Category {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  icon: string;
-  displayOrder: number;
+const FALLBACK_IMG = "/placeholder.svg";
+
+function firstImage(pkg: { thumbnail: string | null; images: string | null; gallery: string | null }) {
+  if (pkg.thumbnail) return pkg.thumbnail;
+  for (const raw of [pkg.gallery, pkg.images]) {
+    if (!raw) continue;
+    try {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr[0]) return arr[0] as string;
+    } catch {
+      /* ignore */
+    }
+  }
+  return FALLBACK_IMG;
 }
 
-export function ProgramsSection() {
-  const { phone } = useContact();
-  const router = useRouter();
-  const [categories, setCategories] = useState<Category[]>([]);
+export async function ProgramsSection() {
+  const featured = await prisma.package.findMany({
+    where: { isFeatured: true, publishStatus: "Published" },
+    orderBy: { displayOrder: "asc" },
+    take: 6,
+  });
 
-  useEffect(() => {
-    fetch("/api/categories?featured=true")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) setCategories(data);
-      })
-      .catch(console.error);
-  }, []);
-
-  if (categories.length === 0) return null;
-
-  /* Editorial layout:
-     - First category spans full width as a hero card
-     - Remaining are in a 2/3-col grid
-  */
-  const [featured, ...rest] = categories;
+  const journeys = featured.length
+    ? featured
+    : await prisma.package.findMany({
+        where: { publishStatus: "Published" },
+        orderBy: { displayOrder: "asc" },
+        take: 6,
+      });
 
   return (
-    <section
-      id="programs"
-      className="section-spacing"
-      style={{ backgroundColor: "#F4EFE3" }}
-    >
-      <div className="container-shell">
-        {/* Section header */}
-        <div className="mb-16 grid md:grid-cols-[1fr_auto] md:items-end gap-8">
+    <section id="journeys" className="section-spacing bg-[var(--color-forest-band)] text-white">
+      <div className="container-wide">
+        <div className="mb-10 flex flex-col justify-between gap-6 border-b border-white/10 pb-6 md:flex-row md:items-end">
           <div>
-            <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
-              Transformative Programs
+            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--color-lime)]">
+              Your next journey is waiting.
             </p>
-            <h2 className="font-serif text-5xl leading-[1.08] tracking-tight text-[#1C1C18] sm:text-6xl md:text-[4.5rem]">
-              Adventure by
-              <br />
-              <em>Design.</em>
-            </h2>
+            <h2 className="display-hed text-3xl text-white md:text-4xl">Explore Featured Journeys</h2>
           </div>
-          <p className="max-w-xs text-sm font-light leading-7 text-[#424844] md:text-base">
-            Each journey is meticulously designed to challenge, inspire, and deeply 
-            connect you with India&apos;s most extraordinary landscapes.
-          </p>
+          <Link
+            href="/journeys"
+            className="inline-flex items-center gap-2 self-start rounded border border-white/20 bg-white/5 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10"
+          >
+            View All Journeys
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="h-px bg-[#C2C8C2] mb-16" />
-
-        {/* Featured large card */}
-        {featured && (
-          <div
-            className="group relative mb-6 cursor-pointer overflow-hidden"
-            style={{ height: "clamp(320px, 45vw, 520px)", borderRadius: "2px" }}
-            onClick={() => router.push(`/programs/${featured.slug}`)}
-          >
-            <Image
-              src={
-                featured.image && featured.image.trim()
-                  ? featured.image
-                  : "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80"
-              }
-              alt={featured.imageAlt || featured.title}
-              fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              sizes="(max-width: 768px) 100vw, 1280px"
-              priority
-            />
-
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/20 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/50 to-transparent" />
-
-            {/* Content overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-              <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#D4AF37]">
-                Featured Program
-              </p>
-              <h3 className="mb-4 font-serif text-4xl font-normal text-white md:text-5xl lg:text-6xl">
-                {featured.title}
-              </h3>
-              <p className="mb-6 max-w-lg text-sm font-light text-white/80 leading-6 line-clamp-2">
-                {featured.description}
-              </p>
-              <div className="flex gap-4">
-                <Link
-                  href={`/programs/${featured.slug}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-[#172C21] transition-all hover:bg-[#FED65B]"
-                >
-                  Explore <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-                <a
-                  href={buildProgramInquiry(phone, featured.title)}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
-                >
-                  Enquire
-                </a>
+        <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 hide-scrollbar md:mx-0 md:grid md:grid-cols-3 md:px-0 lg:grid-cols-6 md:gap-5">
+          {journeys.map((j) => (
+            <Link
+              key={j.id}
+              href={`/journeys/${j.categorySlug}/${j.slug}`}
+              className="group relative flex aspect-[3/4] min-w-[240px] snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-gray-900 shadow-lg transition-shadow hover:shadow-2xl md:min-w-0"
+            >
+              <SafeImage
+                src={firstImage(j)}
+                alt={j.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 60vw, 16vw"
+                unoptimized
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-4">
+                <h3 className="display-hed text-lg text-white">{j.title}</h3>
+                {j.duration && (
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
+                    {j.duration}
+                  </p>
+                )}
+                {j.tags && (
+                  <p className="mt-1 line-clamp-1 text-[10px] font-medium text-white/60">
+                    {(() => {
+                      try {
+                        const t = JSON.parse(j.tags) as string[];
+                        return Array.isArray(t) ? t.slice(0, 3).join(" · ") : j.tags;
+                      } catch {
+                        return j.tags;
+                      }
+                    })()}
+                  </p>
+                )}
+                <div className="mt-3 flex items-center justify-between border-t border-white/20 pt-3">
+                  <p className="text-xs font-medium text-white">
+                    {j.price ? (
+                      <>
+                        <span className="mr-1 text-[10px] text-white/60">From</span>₹{j.price}
+                      </>
+                    ) : (
+                      <span className="text-[10px] uppercase tracking-widest text-white/60">Enquire</span>
+                    )}
+                  </p>
+                  <ArrowRightCircle className="h-5 w-5 text-white transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* Rest — editorial grid */}
-        {rest.length > 0 && (
-          <div className={`grid gap-6 ${rest.length >= 3 ? "sm:grid-cols-2 lg:grid-cols-3" : rest.length === 2 ? "sm:grid-cols-2" : "grid-cols-1"}`}>
-            {rest.map((category) => {
-              const href = `/programs/${category.slug}`;
-              return (
-                <Link
-                  key={category.id}
-                  href={href}
-                  className="group relative block overflow-hidden"
-                  style={{ height: "clamp(260px, 30vw, 360px)", borderRadius: "2px" }}
-                >
-                  <Image
-                    src={
-                      category.image && category.image.trim()
-                        ? category.image
-                        : "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
-                    }
-                    alt={category.imageAlt || category.title}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/75 via-[#172C21]/10 to-transparent" />
-
-                  {/* Content */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
-                    <h3 className="font-serif text-2xl font-normal text-white md:text-3xl">
-                      {category.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-white/70 line-clamp-2 leading-6 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                      {category.description}
-                    </p>
-                    {/* Gold underline */}
-                    <div className="mt-4 h-px w-0 bg-[#D4AF37] group-hover:w-10 transition-all duration-500" />
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-
-        {/* All programs CTA */}
-        <div className="mt-12 text-center md:text-left">
-          <Link
-            href="/programs"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#172C21] underline underline-offset-4 hover:text-[#2D4236] transition-colors"
-          >
-            View all programs <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

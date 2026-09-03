@@ -84,7 +84,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: i * 0.07 }}
-      className="border border-[#C2C8C2] overflow-hidden" style={{ borderRadius: "2px" }}
+      className="border border-[var(--color-hair)] overflow-hidden" style={{ borderRadius: "2px" }}
     >
       <button
         onClick={() => setOpen(!open)}
@@ -92,7 +92,7 @@ function FAQItem({ q, a, i }: { q: string; a: string; i: number }) {
         className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[#F4EFE3] transition-colors"
       >
         <span className="font-medium text-[#1C1C18] text-sm leading-relaxed">{q}</span>
-        {open ? <ChevronUp className="h-5 w-5 text-[#172C21] flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-[#424844]/40 flex-shrink-0" />}
+        {open ? <ChevronUp className="h-5 w-5 text-[var(--color-forest-band)] flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-[#424844]/40 flex-shrink-0" />}
       </button>
       <AnimatePresence>
         {open && (
@@ -194,8 +194,8 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         )}
 
         {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172C21]/80 via-[#172C21]/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#172C21]/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-forest-band)]/80 via-[var(--color-forest-band)]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-forest-band)]/55 to-transparent" />
 
         <motion.div
           style={{ opacity: heroOpacity }}
@@ -257,7 +257,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                 href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-3.5 font-semibold text-[#172C21] transition-all hover:bg-[#FED65B] hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
+                className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-3.5 font-semibold text-[var(--color-forest-band)] transition-all hover:bg-[var(--color-gold-star)] hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
               >
                 <BookOpen className="h-5 w-5" /> Book Now
               </a>
@@ -279,9 +279,8 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                 </button>
                 <button
                   onClick={() => setWishlist(!wishlist)}
-                  className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all backdrop-blur-md ${
-                    wishlist ? "border-red-400/50 bg-red-400/20 text-red-400" : "border-white/20 bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                  }`}
+                  className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all backdrop-blur-md ${wishlist ? "border-red-400/50 bg-red-400/20 text-red-400" : "border-white/20 bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                    }`}
                   title="Add to Wishlist"
                 >
                   <Heart className={`h-5 w-5 ${wishlist ? "fill-red-400" : ""}`} />
@@ -299,9 +298,9 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto max-w-6xl rounded-none border border-[#C2C8C2] bg-[#FCF9F2] p-8"
+            className="mx-auto max-w-6xl rounded-none border border-[var(--color-hair)] bg-[#FCF9F2] p-8"
           >
-            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]/50">Quick Facts</h2>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]/50">Quick Facts</h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
               {destination.state && (
                 <div className="flex flex-col gap-1">
@@ -367,7 +366,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               className="grid gap-12 lg:grid-cols-[1fr_400px] items-start"
             >
               <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">About</p>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">About</p>
                 <h2 className="mb-6 font-serif text-4xl font-bold text-[#1C1C18] md:text-5xl">{destination.title}</h2>
                 {destination.shortDescription && (
                   <p className="mb-6 text-lg text-[#424844] leading-relaxed font-light border-l-2 border-[#D4AF37]/60 pl-6 italic">
@@ -384,7 +383,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               </div>
 
               {/* Side info card */}
-              <div className="border border-[#C2C8C2] p-6 space-y-4" style={{ borderRadius: "2px" }}>
+              <div className="border border-[var(--color-hair)] p-6 space-y-4" style={{ borderRadius: "2px" }}>
                 {destination.weather && (
                   <div className="flex items-start gap-3">
                     <Sun className="h-5 w-5 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -412,12 +411,12 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     </div>
                   </div>
                 )}
-                <div className="pt-4 border-t border-[#C2C8C2]">
+                <div className="pt-4 border-t border-[var(--color-hair)]">
                   <a
                     href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[#172C21] py-3 font-semibold text-white text-sm transition-all hover:bg-[#2D4236]"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-forest-band)] py-3 font-semibold text-white text-sm transition-all hover:bg-[#2D4236]"
                   >
                     Enquire Now <ArrowRight className="h-4 w-4" />
                   </a>
@@ -433,7 +432,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Gallery</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Gallery</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Visual Journey</h2>
             </motion.div>
 
@@ -499,7 +498,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Activities</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Activities</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Things To Do</h2>
             </motion.div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -510,12 +509,12 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="group border border-[#C2C8C2] p-6 hover:border-[#172C21] transition-all duration-300" style={{ borderRadius: "2px" }}
+                  className="group border border-[var(--color-hair)] p-6 hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#172C21]/8 text-[#172C21] text-2xl group-hover:bg-[#172C21] group-hover:text-white transition-colors">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-forest-band)]/8 text-[var(--color-forest-band)] text-2xl group-hover:bg-[var(--color-forest-band)] group-hover:text-white transition-colors">
                     {item.icon || "✦"}
                   </div>
-                  <h3 className="mb-2 font-semibold text-[#1C1C18] group-hover:text-[#172C21] transition-colors">{item.title}</h3>
+                  <h3 className="mb-2 font-semibold text-[#1C1C18] group-hover:text-[var(--color-forest-band)] transition-colors">{item.title}</h3>
                   {item.description && <p className="text-sm text-[#424844]/70 leading-relaxed">{item.description}</p>}
                 </motion.div>
               ))}
@@ -529,7 +528,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Why Go</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Why Go</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Highlights</h2>
             </motion.div>
             <div className="space-y-4">
@@ -542,7 +541,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                   transition={{ delay: i * 0.06 }}
                   className="flex items-start gap-4 border-l-2 border-[#D4AF37]/40 pl-4 py-2 hover:border-[#D4AF37] transition-colors"
                 >
-                  <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#172C21]/10 text-[#172C21] mt-0.5">
+                  <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-forest-band)]/10 text-[var(--color-forest-band)] mt-0.5">
                     <Check className="h-4 w-4" />
                   </div>
                   <p className="text-[#424844] leading-relaxed">{h}</p>
@@ -558,10 +557,10 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16">
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Location</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Location</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Find Us on Map</h2>
             </motion.div>
-            <div className="overflow-hidden border border-[#C2C8C2]" style={{ height: 420 }}>
+            <div className="overflow-hidden border border-[var(--color-hair)]" style={{ height: 420 }}>
               <iframe
                 src={destination.googleMap}
                 width="100%"
@@ -582,7 +581,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#FCF9F2" }}>
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Getting There</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Getting There</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Travel Information</h2>
             </motion.div>
 
@@ -598,11 +597,10 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     <button
                       key={tab.key}
                       onClick={() => setReachTab(tab.key)}
-                      className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${
-                        reachTab === tab.key
-                          ? "bg-[#172C21] text-white border border-[#172C21]"
-                          : "text-[#424844] border border-[#C2C8C2] hover:text-[#172C21] hover:border-[#172C21]"
-                      }`}
+                      className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${reachTab === tab.key
+                          ? "bg-[var(--color-forest-band)] text-white border border-[var(--color-forest-band)]"
+                          : "text-[#424844] border border-[var(--color-hair)] hover:text-[var(--color-forest-band)] hover:border-[var(--color-forest-band)]"
+                        }`}
                     >
                       <tab.icon className="h-4 w-4" />
                       {tab.label}
@@ -615,7 +613,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="border border-[#C2C8C2] p-6 text-[#424844] leading-relaxed" style={{ borderRadius: "2px" }}
+                    className="border border-[var(--color-hair)] p-6 text-[#424844] leading-relaxed" style={{ borderRadius: "2px" }}
                   >
                     {howToReach[reachTab] || "Information not available."}
                   </motion.div>
@@ -634,7 +632,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05 }}
-                      className="flex items-start gap-3 border border-[#C2C8C2] px-4 py-3" style={{ borderRadius: "2px" }}
+                      className="flex items-start gap-3 border border-[var(--color-hair)] px-4 py-3" style={{ borderRadius: "2px" }}
                     >
                       <span className="text-amber-400 text-lg flex-shrink-0 mt-0.5">💡</span>
                       <p className="text-sm text-[#424844] leading-relaxed">{tip}</p>
@@ -652,7 +650,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16">
           <div className="mx-auto max-w-6xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Book a Trip</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Book a Trip</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Related Packages</h2>
             </motion.div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -666,7 +664,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="group overflow-hidden border border-[#C2C8C2] hover:border-[#172C21] transition-all duration-300" style={{ borderRadius: "2px" }}
+                    className="group overflow-hidden border border-[var(--color-hair)] hover:border-[var(--color-forest-band)] transition-all duration-300" style={{ borderRadius: "2px" }}
                   >
                     <div className="relative h-48 overflow-hidden">
                       <Image
@@ -684,10 +682,10 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
                       )}
                     </div>
                     <div className="p-5" style={{ backgroundColor: "#FCF9F2" }}>
-                      <h3 className="font-semibold text-[#1C1C18] group-hover:text-[#172C21] transition-colors mb-1">{pkg.title}</h3>
+                      <h3 className="font-semibold text-[#1C1C18] group-hover:text-[var(--color-forest-band)] transition-colors mb-1">{pkg.title}</h3>
                       {pkg.duration && <p className="text-sm text-[#424844]/60 mb-4"><Clock className="inline h-3 w-3 mr-1" />{pkg.duration}</p>}
                       <Link
-                        href={`/programs/adventure/${pkg.slug}`}
+                        href={`/journeys/adventure/${pkg.slug}`}
                         className="inline-flex items-center gap-1 text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
                       >
                         View Details <ArrowRight className="h-4 w-4" />
@@ -706,7 +704,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
         <section className="section-spacing px-6 lg:px-16" style={{ backgroundColor: "#F4EFE3" }}>
           <div className="mx-auto max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[#172C21]">Questions</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-forest-band)]">Questions</p>
               <h2 className="font-serif text-4xl font-bold text-[#1C1C18]">Frequently Asked</h2>
             </motion.div>
             <div className="space-y-3">
@@ -719,7 +717,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
       )}
 
       {/* ── STICKY CTA ─────────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#C2C8C2] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-hair)] bg-[#FCF9F2]/95 backdrop-blur-xl px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div className="hidden sm:block">
             <p className="font-semibold text-[#1C1C18]">{destination.title}</p>
@@ -730,7 +728,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
           <div className="flex flex-wrap gap-3 ml-auto">
             <a
               href={buildTelLink(phone)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[#1C1C18] hover:bg-[#F4EFE3] transition-all"
             >
               <Phone className="h-4 w-4" /> Call
             </a>
@@ -738,7 +736,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#C2C8C2] bg-transparent px-4 py-2.5 text-sm font-medium text-[#172C21] hover:bg-[#F4EFE3] transition-all"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-hair)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-forest-band)] hover:bg-[#F4EFE3] transition-all"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
@@ -746,7 +744,7 @@ export function DestinationDetailClient({ destination, relatedPackages }: Props)
               href={`https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${waMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#172C21] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2D4236] transition-all shadow-lg shadow-[#172C21]/20"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-forest-band)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2D4236] transition-all shadow-lg shadow-[var(--color-forest-band)]/20"
             >
               <BookOpen className="h-4 w-4" /> Book Now
             </a>

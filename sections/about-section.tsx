@@ -1,48 +1,76 @@
+import Link from "next/link";
+import { ArrowRight, Check, X } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
+
+const IMG_A =
+  "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=900&q=80";
+const IMG_B =
+  "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=80";
+
 export function AboutSection() {
   return (
-    <section
-      id="about"
-      className="section-spacing"
-      style={{ backgroundColor: "#172C21" }}
-    >
-      <div className="container-shell">
-        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-          {/* Left — large editorial statement */}
-          <div>
-            <p className="mb-6 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">
-              The Ibex Philosophy
-            </p>
-            <h2 className="font-serif text-5xl font-normal leading-[1.1] text-white sm:text-6xl lg:text-7xl">
-              Beyond the Map.
-              <br />
-              <em className="text-[#D4AF37]">Into the Self.</em>
-            </h2>
-            <div className="mt-8 h-px w-24 bg-[#D4AF37]/40" />
+    <section id="about" className="section-spacing bg-[var(--color-sand)]">
+      <div className="container-wide">
+        <div className="grid gap-16 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+          {/* Split image */}
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-2 overflow-hidden rounded-2xl md:gap-3">
+              <div className="relative aspect-[3/4]">
+                <SafeImage src={IMG_A} alt="Travellers arriving in a village" fill unoptimized className="object-cover" />
+              </div>
+              <div className="relative aspect-[3/4]">
+                <SafeImage src={IMG_B} alt="Sharing a meal with a local family" fill unoptimized className="object-cover" />
+              </div>
+            </div>
+            <div className="absolute -bottom-5 left-4 flex flex-col gap-3 sm:flex-row">
+              <span className="flex items-center gap-2.5 rounded bg-white px-4 py-2.5 shadow-lg">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-red-200 bg-red-100">
+                  <X className="h-3.5 w-3.5 text-red-600" strokeWidth={3} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-ink)]">
+                  See a place
+                </span>
+              </span>
+              <span className="flex items-center gap-2.5 rounded bg-white px-4 py-2.5 shadow-lg">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-green-200 bg-green-100">
+                  <Check className="h-3.5 w-3.5 text-[var(--color-moss)]" strokeWidth={3} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-ink)]">
+                  Live the experience
+                </span>
+              </span>
+            </div>
           </div>
 
-          {/* Right — editorial copy */}
-          <div className="space-y-6">
-            <p className="text-lg font-light leading-8 text-white/80 border-l-2 border-[#D4AF37]/40 pl-6">
-              At Ibex Adventure, we design immersive outdoor programs that go beyond recreation. 
-              We integrate adventure with education, enabling students to connect classroom 
-              knowledge with real-world experiences.
+          {/* Text */}
+          <div className="flex flex-col pt-10 lg:pt-0">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-moss)]">
+              More than a trip.
             </p>
-            <p className="text-base font-light leading-7 text-white/60">
-              Every itinerary is built to balance inspiration, safety, and experiential learning — 
-              so participants leave with more than memories. They leave transformed.
-            </p>
-
-            {/* Three pillars */}
-            <div className="grid grid-cols-3 gap-4 pt-4">
-              {["Inspire", "Explore", "Transform"].map((item, i) => (
-                <div key={item} className="border-t border-white/15 pt-4">
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#D4AF37]/60 mb-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <p className="font-serif text-lg text-white">{item}</p>
-                </div>
-              ))}
+            <h2 className="display-hed text-[clamp(2.25rem,4vw,3.75rem)] text-[var(--color-ink)]">
+              A journey that
+              <br />
+              stays with you.
+            </h2>
+            <div className="mt-6 flex flex-col gap-5 text-[15px] leading-relaxed text-[var(--color-ink-muted)]">
+              <p className="font-semibold text-[var(--color-ink)]">
+                A trip ends when you return home. An experience stays with you.
+              </p>
+              <p>
+                At Ibex Adventure we create journeys that combine adventure, culture, nature, people
+                and experiential learning. We don&rsquo;t simply take you somewhere.
+              </p>
+              <p className="font-serif text-2xl italic text-[var(--color-moss)]">
+                We help you experience it.
+              </p>
             </div>
+            <Link
+              href="/our-story"
+              className="group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)] transition-colors hover:text-[var(--color-moss)]"
+            >
+              Explore Our Story
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </div>

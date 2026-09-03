@@ -17,7 +17,7 @@ export default async function SummerCampsPage() {
       
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-slate-950 pt-24">
         <Image
-          src="https://images.unsplash.com/photo-1533580556157-19eb7db6b78e?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80"
           alt="Summer Camps"
           fill
           priority
@@ -40,7 +40,7 @@ export default async function SummerCampsPage() {
                {camps.map((camp: any, i: number) => (
                  <div key={i} className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-amber-500/50">
                     <div className="relative h-64 overflow-hidden">
-                      <Image src={camp.image || "https://images.unsplash.com/photo-1533580556157-19eb7db6b78e?auto=format&fit=crop&w=800&q=80"} alt={camp.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <Image src={camp.image || "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"} alt={camp.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     </div>
                     <div className="p-6">
                       <h3 className="text-xl font-bold text-white mb-2">{camp.title}</h3>

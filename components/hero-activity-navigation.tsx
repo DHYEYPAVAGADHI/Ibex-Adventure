@@ -28,7 +28,7 @@ export function HeroActivityNavigation() {
           setCategories(data.map((c: any) => ({
             title: c.title,
             slug: c.slug,
-            href: `/programs/${c.slug}`,
+            href: `/journeys/${c.slug}`,
             displayOrder: c.displayOrder
           })));
         }

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#152A1E"/>
+  <path d="M0 640 L280 360 L440 560 L620 300 L820 620 L1000 440 L1200 660 L1200 900 L0 900 Z" fill="#1F3A2A"/>
+  <path d="M0 740 L340 520 L560 700 L820 480 L1050 720 L1200 600 L1200 900 L0 900 Z" fill="#2A4A35"/>
+  <path d="M600 300 L660 400 L560 400 Z" fill="#86A857"/>
+  <text x="600" y="470" fill="#86A857" font-family="system-ui, sans-serif" font-size="34" font-weight="700" letter-spacing="6" text-anchor="middle">IBEX ADVENTURE</text>
+</svg>

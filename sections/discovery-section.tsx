@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
 
 export async function DiscoverySection() {
   const categories = await prisma.adventureCategory.findMany({
@@ -11,85 +12,85 @@ export async function DiscoverySection() {
   if (categories.length === 0) return null;
 
   return (
-    <section className="section-spacing" style={{ backgroundColor: "#FCF9F2" }}>
+    <section id="experiences" className="section-spacing bg-white">
       <div className="container-shell">
-        {/* Editorial header */}
-        <div className="grid gap-8 mb-16 md:grid-cols-2 md:items-end">
-          <div>
-            <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[#172C21]">
-              Discover Ibex
-            </p>
-            <h2
-              className="font-serif text-5xl leading-[1.08] tracking-tight text-[#1C1C18] sm:text-6xl md:text-7xl"
-            >
-              Beyond the
+        {/* Header */}
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <h2 className="font-serif text-4xl leading-tight text-[var(--color-text)] md:text-5xl lg:text-6xl">
+              Explore India
               <br />
-              <em>Ordinary.</em>
+              <span className="text-[var(--color-forest)]">Your Way.</span>
             </h2>
           </div>
-          <div className="md:pb-2">
-            <p className="text-base font-light leading-7 text-[#424844] max-w-sm md:text-lg">
-              Explore landscapes, experiences, and journeys designed around genuine discovery — 
-              from the Himalayas to the Indian Ocean.
+          <div>
+            <p className="text-base font-light leading-relaxed text-[var(--color-text-muted)] max-w-sm mb-6">
+              Discover wildlife, heritage, nature, and adventure, curated into journeys that stay with you forever.
             </p>
             <Link
               href="/#programs"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#172C21] underline underline-offset-4 hover:text-[#2D4236] transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-forest-mid)] transition-colors hover:text-[var(--color-accent-green)] group"
             >
-              View all programs <ArrowRight className="h-3.5 w-3.5" />
+              Explore All Experiences 
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
 
-        {/* Editorial horizontal rule */}
-        <div className="h-px bg-[#C2C8C2] mb-16" />
+        {/* Asymmetric Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
+          {categories.slice(0, 5).map((category, index) => {
+            // Asymmetric layout logic for 5 items
+            let spanClasses = "md:col-span-4 h-[400px]"; // default
+            if (index === 0) spanClasses = "md:col-span-8 md:row-span-2 h-[400px] md:h-[824px]"; // Large first item
+            else if (index === 1) spanClasses = "md:col-span-4 h-[400px]";
+            else if (index === 2) spanClasses = "md:col-span-4 h-[400px]";
+            else if (index === 3) spanClasses = "md:col-span-6 h-[400px]";
+            else if (index === 4) spanClasses = "md:col-span-6 h-[400px]";
 
-        {/* Category editorial grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.slice(0, 6).map((category, index) => (
-            <Link
-              key={category.id}
-              href={`/programs/${category.slug}`}
-              className="group block relative overflow-hidden"
-              style={{ borderRadius: "4px" }}
-            >
-              {/* Number */}
-              <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#172C21]/50">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-
-              {/* Image */}
-              <div className="relative mb-4 overflow-hidden" style={{ height: "260px", borderRadius: "2px" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={
-                    category.image && category.image.trim()
-                      ? category.image
-                      : "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
-                  }
+            return (
+              <Link
+                key={category.id}
+                href={`/journeys/${category.slug}`}
+                className={`group block relative overflow-hidden rounded-xl bg-[var(--color-ivory)] ${spanClasses}`}
+              >
+                {/* Image */}
+                <SafeImage
+                  src={category.image}
                   alt={category.imageAlt || category.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  unoptimized
                 />
-                {/* Subtle forest overlay */}
-                <div className="absolute inset-0 bg-[#172C21]/10 group-hover:bg-[#172C21]/0 transition-colors duration-500" />
-              </div>
-
-              {/* Title row */}
-              <div className="flex items-end justify-between gap-4">
-                <h3 className="font-serif text-2xl font-medium text-[#1C1C18] leading-tight group-hover:text-[#172C21] transition-colors">
-                  {category.title}
-                </h3>
-                <ArrowRight className="h-5 w-5 flex-shrink-0 text-[#172C21] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-              </div>
-              {/* Description */}
-              <p className="mt-2 text-sm font-light leading-6 text-[#424844] line-clamp-2">
-                {category.description}
-              </p>
-
-              {/* Gold underline on hover */}
-              <div className="mt-4 h-px w-0 bg-[#D4AF37] transition-all duration-500 group-hover:w-full" />
-            </Link>
-          ))}
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-forest)]/90 via-[var(--color-forest)]/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="mb-4 inline-flex items-center justify-center rounded-full bg-[var(--color-accent-green)] p-2.5 text-white shadow-lg">
+                      <Compass className="h-5 w-5" />
+                    </div>
+                    
+                    <h3 className="mb-2 font-serif text-3xl text-white">
+                      {category.title}
+                    </h3>
+                    
+                    <p className="mb-6 text-sm font-light leading-relaxed text-white/80 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {category.description}
+                    </p>
+                    
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-wide text-[var(--color-accent-green)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      Discover {category.title}
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

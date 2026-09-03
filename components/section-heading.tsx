@@ -57,7 +57,7 @@ export function SectionHeading({
         <motion.p
           variants={itemVariants}
           className="mb-4 text-xs font-semibold uppercase tracking-[0.18em]"
-          style={{ color: eyebrowColor ?? "#172C21" }}
+          style={{ color: eyebrowColor ?? "var(--color-forest-band)" }}
         >
           {eyebrow}
         </motion.p>
