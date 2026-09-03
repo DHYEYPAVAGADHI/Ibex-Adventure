@@ -64,14 +64,16 @@ function parseJSON<T>(raw: string | null | undefined, fallback: T): T {
 
 export async function Footer() {
   const [contactInfo, settings, destinations] = await Promise.all([
-    prisma.contactInformation.findFirst(),
-    prisma.websiteSetting.findFirst(),
-    prisma.destination.findMany({
-      where: { published: true },
-      orderBy: { displayOrder: "asc" },
-      take: 8,
-      select: { title: true, slug: true },
-    }),
+    prisma.contactInformation.findFirst().catch(() => null),
+    prisma.websiteSetting.findFirst().catch(() => null),
+    prisma.destination
+      .findMany({
+        where: { published: true },
+        orderBy: { displayOrder: "asc" },
+        take: 8,
+        select: { title: true, slug: true },
+      })
+      .catch(() => [] as { title: string; slug: string }[]),
   ]);
 
   const address = contactInfo?.address || "Ahmedabad, Gujarat, India";

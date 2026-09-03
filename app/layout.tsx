@@ -115,7 +115,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const contactInfo = await getContactInfo();
-  const settings = await prisma.websiteSetting.findFirst();
+  let settings: Awaited<ReturnType<typeof prisma.websiteSetting.findFirst>> = null;
+  try {
+    settings = await prisma.websiteSetting.findFirst();
+  } catch (err) {
+    console.warn("[RootLayout] websiteSetting unavailable:", (err as Error).message);
+  }
   const pathname = (await headers()).get("x-pathname") ?? "";
   const isAdmin = pathname.startsWith("/admin");
 
